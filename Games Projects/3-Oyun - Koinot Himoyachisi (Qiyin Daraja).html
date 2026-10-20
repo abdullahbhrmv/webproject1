@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8" />
+<title>3-Oyun — Koinot Himoyachisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Nunito',sans-serif;background:#0F172A;color:#F8FAFC;-webkit-font-smoothing:antialiased}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+  @keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  ::selection{background:#38BDF8; color:#0F172A}
+  a{color:#38BDF8}
+  a:hover{color:#0284C7}
+  .press{transition:transform .1s}
+  .press:active{transform:scale(.9)}
+  code{font-family:'JetBrains Mono',monospace}
+
+  header.hero{position:relative;background:linear-gradient(120deg,#1E1B4B 0%,#312E81 55%,#4C1D95 100%);background-size:200% 200%;animation:rainbow 9s ease infinite;padding:64px 24px 90px;text-align:center;color:#fff;overflow:hidden; border-bottom:4px solid #8B5CF6}
+  header.hero .fl{position:absolute;font-size:38px}
+  header.hero .fl.f1{top:18px;left:6%;font-size:40px;animation:bounce 2.4s ease-in-out infinite}
+  header.hero .fl.f2{top:18px;right:7%;font-size:36px;animation:wiggle 2s ease-in-out infinite}
+  header.hero .fl.f3{bottom:20px;left:10%;animation:floaty 2.6s ease-in-out infinite}
+  header.hero .fl.f4{bottom:20px;right:9%;animation:floaty 3s ease-in-out infinite}
+  header.hero .eyebrow{display:inline-block;white-space:nowrap;background:rgba(255,255,255,.22);padding:8px 20px;border-radius:30px;font-weight:700;letter-spacing:.5px;font-size:16px;margin-bottom:18px}
+  header.hero h1{font-family:'Fredoka',sans-serif;font-weight:700;font-size:52px;margin:0 0 14px;line-height:1.1;text-shadow:0 4px 16px rgba(0,0,0,.35)}
+  header.hero p{max-width:720px;margin:0 auto;font-size:20px;font-weight:600;opacity:.97;line-height:1.5; color:#CBD5E1}
+  header.hero p b{color:#fff}
+  header.hero .chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  header.hero .chip{font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);color:#fff;font-weight:700;padding:8px 18px;border-radius:30px;font-size:15px}
+
+  nav.tabs{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.93);backdrop-filter:blur(10px);border-bottom:2px solid #334155;padding:12px 14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  nav.tabs a{text-decoration:none;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid transparent;background:#1E293B;color:#38BDF8;border-color:#334155}
+
+  main{max-width:1080px;margin:0 auto;padding:40px 22px 80px}
+
+  .intro-bar{background:#1E293B;border-radius:20px;padding:20px 26px;box-shadow:0 8px 24px rgba(0,0,0,.2);margin-bottom:36px;border:2px solid #334155;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .intro-bar .ic{font-size:34px}
+  .intro-bar p{margin:0;font-size:17px;line-height:1.55;flex:1;min-width:240px; color:#E2E8F0}
+
+  .s-head{scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px}
+  .s-head:first-of-type{margin-top:8px}
+  .s-head .badge{width:60px;height:60px;flex:none;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:30px;font-family:'Fredoka',sans-serif;font-weight:700;color:#fff;background:linear-gradient(135deg,#6366F1,#8B5CF6);box-shadow:0 8px 20px rgba(139,92,246,.35)}
+  .s-head h2{font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#F8FAFC}
+  .s-head .kicker{font-weight:800;font-size:14px;letter-spacing:1px;display:block;margin-bottom:2px;color:#A78BFA}
+
+  section.card{background:#1E293B;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(0,0,0,.3);margin-bottom:28px;border:2px solid #334155}
+  section.card p{font-size:18px;line-height:1.65;margin:0 0 20px; color:#CBD5E1}
+  section.card p:last-child{margin-bottom:0}
+  section.card h3{font-family:'Fredoka',sans-serif;font-size:24px;margin:28px 0 14px;color:#F8FAFC}
+  section.card h3:first-child{margin-top:0}
+  .kw-hl{background:#334155;padding:2px 8px;border-radius:6px;color:#38BDF8}
+
+  .term{background:#0F172A;border-radius:14px;overflow:hidden;margin:18px 0; border:1px solid #334155}
+  .term .bar{display:flex;gap:7px;padding:12px 16px;background:#1E293B;align-items:center; border-bottom:1px solid #334155}
+  .term .bar span{width:11px;height:11px;border-radius:50%}
+  .term .bar span.r{background:#FF5F57}
+  .term .bar span.y{background:#FEBC2E}
+  .term .bar span.g{background:#28C840}
+  .term .bar .fname{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#94A3B8}
+  .term pre{margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.7;color:#C9D7FF;overflow-x:auto;white-space:pre}
+  .term .kw{color:#F472B6}
+  .term .st{color:#34D399}
+  .term .num{color:#60A5FA}
+  .term .cm{color:#64748B}
+  .term .fn{color:#38BDF8}
+  .term .tag{color:#F87171}
+
+  .tip{border-radius:14px;padding:14px 18px;display:flex;gap:12px;align-items:center;margin-top:16px;background:#172554;border:2px solid #1E3A8A}
+  .tip .ic{font-size:24px}
+  .tip p{margin:0;font-size:16px;line-height:1.5; color:#DBEAFE}
+
+  details.code-toggle{margin-top:16px;background:#1E293B;border:2px solid #334155;border-radius:16px;overflow:hidden}
+  details.code-toggle summary{cursor:pointer;list-style:none;font-weight:800;font-size:17px;padding:16px 20px;background:#334155;color:#F8FAFC}
+  details.code-toggle summary::-webkit-details-marker{display:none}
+  .explain{padding:18px 22px;background:#0F172A;border-top:2px solid #334155}
+  .explain b.h{font-size:15px;color:#38BDF8;display:block;margin-bottom:10px}
+  .explain .row{display:flex;gap:10px;font-size:15px;line-height:1.55;color:#94A3B8;margin-bottom:9px}
+  .explain .row:last-child{margin-bottom:0}
+  .explain .row code{flex:none;background:#334155;color:#38BDF8;padding:2px 8px;border-radius:6px;height:fit-content}
+
+  .copy-btn{margin-left:auto;background:#8B5CF6;color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+
+  /* ===== game demo ===== */
+  .game-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .game-hud{display:flex;gap:16px}
+  .hud-box{background:#1E293B;border:2px solid #334155;border-radius:14px;padding:10px 26px;text-align:center;min-width:90px}
+  .hud-box span{display:block;font-size:12px;font-weight:800;color:#94A3B8;letter-spacing:.5px;text-transform:uppercase}
+  .hud-box b{font-family:'Fredoka',sans-serif;font-size:28px;color:#F8FAFC}
+  .hud-box b.hearts{font-size:20px}
+  .game-field{position:relative;width:100%;max-width:480px;height:420px;background:#020617;border-radius:20px;border:3px solid #334155;overflow:hidden;box-shadow:inset 0 0 40px rgba(0,0,0,0.8)}
+  .stars{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));background-size:200px 200px;animation:starMove 10s linear infinite}
+  @keyframes starMove{from{transform:translateY(0)}to{transform:translateY(200px)}}
+  .g3-ship{position:absolute;width:40px;height:40px;font-size:36px;line-height:1;display:flex;align-items:center;justify-content:center;user-select:none;transition:transform 0.1s; z-index:10;}
+  .g3-enemy{position:absolute;width:40px;height:40px;font-size:32px;display:flex;align-items:center;justify-content:center;user-select:none; z-index:9;}
+  .g3-laser{position:absolute;width:6px;height:20px;border-radius:4px; z-index:8;}
+  .game-field.zarba{animation:g3Qizarish .25s}
+  @keyframes g3Qizarish{from{box-shadow:inset 0 0 70px rgba(239,68,68,.9)}to{box-shadow:inset 0 0 40px rgba(0,0,0,.8)}}
+  .game-over{position:absolute;inset:0;background:rgba(2,6,23,.85);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;z-index:20}
+  .game-over p{margin:0;font-size:18px}
+  .game-over p.big{font-family:'Fredoka',sans-serif;font-size:24px;color:#EF4444}
+  .game-hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:13px;color:#94A3B8;font-weight:700;opacity:.8;pointer-events:none; z-index:15;}
+  .game-btn{font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:#8B5CF6;border:none;padding:14px 30px;border-radius:14px;cursor:pointer}
+  .game-btn.small{font-size:16px;padding:10px 22px}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}
+  @media (max-width:640px){.compare{grid-template-columns:1fr}}
+  .compare .col{border-radius:16px;padding:20px 22px}
+  .compare .good{background:#1E293B;border:2px solid #334155}
+  .compare .col b{display:block;font-family:'Fredoka',sans-serif;font-size:18px;margin-bottom:10px;color:#38BDF8}
+  .compare .col p{font-size:15px;line-height:1.55;margin:0;color:#CBD5E1}
+
+  .tree{font-family:'JetBrains Mono',monospace;font-size:17px;line-height:2;background:#0F172A;border:2px solid #334155;border-radius:16px;padding:22px 26px;display:inline-block;color:#F8FAFC}
+  .tree .file{color:#38BDF8;font-weight:700}
+  .tree .comment{color:#64748B}
+
+  footer{text-align:center;padding:40px 20px 10px}
+  footer p.big{font-size:22px;font-family:'Fredoka',sans-serif;color:#A78BFA;margin:0 0 6px}
+  footer p.small{font-size:18px;color:#94A3B8;margin:0;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="fl f1">🚀</div>
+  <div class="fl f2">☄️</div>
+  <div class="fl f3">👾</div>
+  <div class="fl f4">💥</div>
+  <div class="eyebrow">🕹️ 3-o'yin / 3 tadan — Qiyin daraja</div>
+  <h1>Uchinchi o'yinimiz: Koinot Himoyachisi!</h1>
+  <p>1-o'yinda emojini bosdik, 2-o'yinda tushayotgan mevalarni tutdik. Endi esa <b>haqiqiy jang!</b> Kema <b>4 tomonga</b> erkin uchadi, <b>Space</b> bilan lazer otadi, dushmanlar esa <b>zikzak qilib qochadi</b> va <b>senga nishon olib qizil lazer otadi</b>. Ekranda bir vaqtning o'zida o'nlab obyekt harakatlanadi — endi biz haqiqiy o'yin dvigatelini yozamiz. 👇</p>
+  <div class="chips">
+    <span class="chip">3 ta Massiv</span>
+    <span class="chip">AABB Collision</span>
+    <span class="chip">Math.sin()</span>
+    <span class="chip">Vektor + Math.hypot()</span>
+    <span class="chip">requestAnimationFrame</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <a href="#nega">🎯 Nega bu o'yin qiyin?</a>
+  <a href="#qanday">🧠 Qanday ishlaydi?</a>
+  <a href="#sinab-kor">🎮 Sinab ko'r</a>
+  <a href="#html-qism">1️⃣ HTML</a>
+  <a href="#css-qism">2️⃣ CSS</a>
+  <a href="#js-qism">3️⃣ JS</a>
+  <a href="#tuliqkod">📄 To'liq kod</a>
+  <a href="#uyvazifa">📒 Uy vazifasi</a>
+</nav>
+
+<main>
+
+  <div class="intro-bar">
+    <div class="ic">🚀</div>
+    <p>Bu o'yin <b>Ko'p obyektli boshqaruv</b>ni o'rgatadi: bitta nishon emas, <b>o'nlab obyekt</b> bir vaqtda yashaydi, harakatlanadi, to'qnashadi va o'ladi. Bularning hammasini boshqarish uchun bizga <b>massivlar</b>, <b>o'yin sikli</b> va bir oz <b>matematika</b> kerak bo'ladi.</p>
+  </div>
+
+  <div id="nega" class="s-head" style="margin-top:0">
+    <div class="badge">🎯</div>
+    <div><span class="kicker">QISM 1</span><h2>Nega bu o'yin "Qiyin" daraja?</h2></div>
+  </div>
+  <section class="card">
+    <h3>Bir emas — uchta harakatlanuvchi guruh</h3>
+    <p>Oldingi o'yinlarda ekranda bitta turdagi narsa tushardi. Bu safar <b>3 ta alohida massiv</b> bir vaqtda yashaydi:</p>
+    <ul>
+      <li><code class="kw-hl">lazerlar = []</code> — kemangdan chiqib <b>tepaga</b> uchuvchi ko'k lazerlar.</li>
+      <li><code class="kw-hl">dushmanlar = []</code> — osmondan <b>zikzak</b> qilib tushuvchi kelgindilar va asteroidlar.</li>
+      <li><code class="kw-hl">dushmanLazerlari = []</code> — dushman <b>senga nishon olib</b> otadigan qizil lazerlar.</li>
+    </ul>
+
+    <h3>Uchta xil to'qnashuv (kolliziya)</h3>
+    <p>Har bir kadrda kompyuter uchta savolga javob berishi kerak:</p>
+    <div class="compare" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="col good">
+        <b>🔵 Lazer → Dushman</b>
+        <p>Tegdi? Unda <b>+10 ball</b>, dushman 💥 ga aylanadi va ikkalasi ham o'chiriladi.</p>
+      </div>
+      <div class="col good">
+        <b>🔴 Qizil lazer → Kema</b>
+        <p>Tegdi? Unda <b>−1 jon</b> va lazer yo'q qilinadi.</p>
+      </div>
+      <div class="col good">
+        <b>👾 Dushman → Kema</b>
+        <p>Ustidan uchib o'tdi? Bu ham <b>−1 jon</b> — eng ko'p shu holatda o'lasan!</p>
+      </div>
+    </div>
+
+    <h3>Va yana...</h3>
+    <p>Dushman <b>tasodifiy</b> paytda otadi, kema <b>4 tomonga</b> yuradi, otish tezligiga <b>cheklov</b> qo'yiladi, maydondan chiqqan har bir element <b>xotiradan o'chiriladi</b>. Mana shu narsalar oddiy mashqni haqiqiy o'yinga aylantiradi.</p>
+  </section>
+
+  <div id="qanday" class="s-head">
+    <div class="badge">🧠</div>
+    <div><span class="kicker">QISM 2</span><h2>O'yin "miyasi" qanday ishlaydi?</h2></div>
+  </div>
+  <section class="card">
+    <h3>1. Koordinatalar tizimi — nol qayerda?</h3>
+    <p>Brauzerda <b>(0, 0) nuqta — chap yuqori burchak</b>. <code class="kw-hl">x</code> o'nga qarab, <code class="kw-hl">y</code> esa <b>pastga</b> qarab o'sadi. Shuning uchun kemani tepaga ko'tarish uchun <code>kemaY -= 5</code> deb <b>ayiramiz</b>, pastga tushirish uchun esa <code>+=</code> qilamiz. Matematika darsidagidan teskari — buni yodda tut!</p>
+    <p>Har bir obyekt shunchaki ikkita son: <code class="kw-hl">x</code> va <code class="kw-hl">y</code>. Biz JavaScriptda shu sonlarni o'zgartiramiz, keyin CSS'ning <code>left</code> va <code>top</code> xossalariga yozamiz. Ekrandagi harakat — aslida shu.</p>
+
+    <h3>2. O'yin sikli (Game Loop) — o'yinning yuragi</h3>
+    <p>O'yin "bir marta ishlab to'xtaydigan" dastur emas. U <b>sekundiga ~60 marta</b> qayta-qayta ishlaydigan bitta funksiya. Har bir aylanish <b>kadr (frame)</b> deb ataladi — xuddi multfilmdagi kabi:</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="kw">function</span> <span class="fn">oyinSikli</span>() {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;   <span class="cm">// o&#x27;yin tugagan bo&#x27;lsa — to&#x27;xtaymiz</span>
+
+  <span class="cm">// 1) Bosilgan tugmalarga qarab kemani suramiz</span>
+  <span class="cm">// 2) Ko&#x27;k lazerlarni tepaga suramiz</span>
+  <span class="cm">// 3) Qizil lazerlarni kemaga qarab suramiz + tegdimi deb tekshiramiz</span>
+  <span class="cm">// 4) Dushmanlarni zikzak tushiramiz + 3 xil to&#x27;qnashuvni tekshiramiz</span>
+  <span class="cm">// 5) Maydondan chiqib ketganlarni o&#x27;chiramiz</span>
+
+  <span class="fn">requestAnimationFrame</span>(oyinSikli);  <span class="cm">// va yana o&#x27;zini chaqiradi!</span>
+}</pre>
+      </div>
+    <div class="tip"><div class="ic">💡</div><p><b>setInterval</b> emas, <b>requestAnimationFrame</b>! Farqi: <code>setInterval</code> ekran tayyormi-yo'qmi baribir ishlayveradi, <code>requestAnimationFrame</code> esa brauzer ekranni yangilaydigan aniq paytda chaqiriladi. Natijada harakat <b>silliq</b> bo'ladi va boshqa tabda turganda batareyani yemaydi.</p></div>
+
+    <h3>3. Tugmalar holati — nega obyekt?</h3>
+    <div class="compare">
+      <div class="col good">
+        <b>❌ Eski usul</b>
+        <p>Har bir tugma uchun alohida o'zgaruvchi: <code>chapBosildi</code>, <code>ongBosildi</code>, <code>tepaBosildi</code>... 5 ta tugma = 5 ta o'zgaruvchi va 10 ta <code>if</code>.</p>
+      </div>
+      <div class="col good">
+        <b>✅ Yangi usul</b>
+        <p>Bitta obyekt: <code class="kw-hl">tugmalar = {}</code>. Bosilganda <code>tugmalar["ArrowLeft"] = true</code>, qo'yib yuborilganda <code>false</code>. Nechta tugma bo'lsa ham kod uzunligi o'zgarmaydi.</p>
+      </div>
+    </div>
+    <p>Bu usulning yana bitta kuchli tomoni bor: <b>bir vaqtda bir nechta tugmani</b> ushlab turish mumkin. <code>↑</code> va <code>→</code> ni birga bossang, kema diagonal uchadi — chunki sikl ichida ikkala <code>if</code> ham bajariladi.</p>
+
+    <h3>4. Zikzak harakat — matematika o'yinni "tirik" qiladi</h3>
+    <p>Dushman shunchaki <code>y += 2.5</code> qilib tushsa, o'yin zerikarli bo'ladi. Biz uning <b>X koordinatasini sinus to'lqini</b> bilan tebratamiz. <code class="kw-hl">Math.sin()</code> har doim <b>−1</b> bilan <b>+1</b> orasida son qaytaradi — xuddi arg'imchoq kabi oldinga-orqaga.</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre>d.x = d.baseX + Math.<span class="fn">sin</span>(d.y / <span class="num">30</span>) * <span class="num">40</span>;
+<span class="cm">//    |         |                |    |</span>
+<span class="cm">//    |         |                |    +-- 40 = tebranish KENGLIGI (piksel)</span>
+<span class="cm">//    |         |                +------- 30 = to&#x27;lqin UZUNLIGI (katta son = yumshoq)</span>
+<span class="cm">//    |         +------------------------ y o&#x27;zgargani sari sinus aylanadi</span>
+<span class="cm">//    +---------------------------------- baseX = tug&#x27;ilgan paytdagi joyi</span></pre>
+      </div>
+    <div class="tip"><div class="ic">🧪</div><p>Ikkala sonni o'zgartirib ko'r: <code>40</code> ni <code>90</code> qilsang dushman ekranni kesib o'tadi; <code>30</code> ni <code>8</code> qilsang esa u titraydigan bo'lib qoladi.</p></div>
+
+    <h3>5. Nishonga otish — vektor nima?</h3>
+    <p>Dushman lazerini shunchaki pastga tushirish oson. Ammo biz uni <b>kemaga qarab</b> uchirmoqchimiz. Buning uchun dushmandan kemagacha bo'lgan <b>yo'nalishni</b> topamiz va uni <b>normallashtiramiz</b> (uzunligini 1 ga keltiramiz), so'ng kerakli tezlikka ko'paytiramiz:</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="kw">const</span> dx = kemaX - x;              <span class="cm">// gorizontal farq</span>
+<span class="kw">const</span> dy = kemaY - y;              <span class="cm">// vertikal farq</span>
+<span class="kw">const</span> uzunlik = Math.<span class="fn">hypot</span>(dx, dy); <span class="cm">// to&#x27;g&#x27;ri masofa (Pifagor teoremasi!)</span>
+
+<span class="kw">const</span> vx = dx / uzunlik * <span class="num">4</span>;       <span class="cm">// 1 kadrda X bo&#x27;yicha necha piksel</span>
+<span class="kw">const</span> vy = dy / uzunlik * <span class="num">4</span>;       <span class="cm">// 1 kadrda Y bo&#x27;yicha necha piksel</span></pre>
+      </div>
+    <p><code class="kw-hl">Math.hypot(dx, dy)</code> — bu maktabdagi <b>a² + b² = c²</b> formulasining tayyor ko'rinishi. <code>dx</code> va <code>dy</code> ni shu masofaga bo'lsak, yo'nalish saqlanadi, lekin uzunlik 1 ga tushadi. Keyin <code>* 4</code> qilsak — lazer qaysi tomonga uchmasin, <b>doim bir xil tezlikda</b> uchadi.</p>
+
+    <h3>6. To'qnashuv — AABB usuli</h3>
+    <p>Kompyuter 🚀 va 👾 rasmlarini "ko'rmaydi". U faqat <b>to'rtburchaklar</b>ni biladi. Ikkita to'rtburchak kesishganini tekshirishning eng oson yo'li — <b>AABB</b> (Axis-Aligned Bounding Box):</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="kw">function</span> <span class="fn">toqnashuv</span>(x1, y1, w1, h1, x2, y2, w2, h2) {
+  <span class="kw">return</span> x1 &lt; x2 + w2 &amp;&amp;   <span class="cm">// 1-chi 2-chining o&#x27;ng chetidan chapdami?</span>
+         x1 + w1 &gt; x2 &amp;&amp;   <span class="cm">// 1-chi 2-chining chap chetidan o&#x27;ngdami?</span>
+         y1 &lt; y2 + h2 &amp;&amp;   <span class="cm">// 1-chi 2-chining pastidan tepadami?</span>
+         y1 + h1 &gt; y2;     <span class="cm">// 1-chi 2-chining tepasidan pastdami?</span>
+}</pre>
+      </div>
+    <p>To'rttala shart <b>birdaniga</b> bajarilsa — to'qnashuv bor. Bitta shart yolg'on bo'lsa — ular tegmagan.</p>
+    <div class="tip"><div class="ic">⚠️</div><p>Emoji 40×40 katakda tursa ham, uning <b>chizilgan qismi</b> ancha kichik. Agar 40×40 ni to'liq ishlatsak, o'yinchi "tegmagan" lazerdan o'ladi va bu <b>adolatsiz</b> tuyuladi. Shuning uchun biz to'qnashuv uchun <b>24×24</b> lik kichikroq "tana" ishlatamiz. O'yin dasturchilari buni <b>hitbox</b> deb ataydi.</p></div>
+  </section>
+
+  <div id="sinab-kor" class="s-head">
+    <div class="badge">🎮</div>
+    <div><span class="kicker">TANAFFUS</span><h2>Sinab ko'r — o'yin shu yerda ishlaydi!</h2></div>
+  </div>
+  <section class="card">
+    <p><b>▶ O'yinni boshlash</b>ni bos. Kemani <code class="kw-hl">↑ ↓ ← →</code> bilan 4 tomonga boshqar, <code class="kw-hl">Space</code> bilan lazer ot.</p>
+    <p style="margin-bottom:14px">Uchta narsaga e'tibor ber: 👾 dushmanlar <b>zikzak</b> qilib tushadi, 🔴 qizil lazerlar <b>seni ta'qib qiladi</b> (to'g'ri pastga emas — kemang qayerda bo'lsa o'sha tomonga uchadi), va Space ni bosib tursang ham lazer <b>chorak sekundda bir marta</b> chiqadi. Jon kamayganda maydon qizil chaqnaydi.</p>
+    <div class="game-wrap">
+      <div class="game-hud">
+        <div class="hud-box"><span>⭐ Ball</span><b id="g3Score">0</b></div>
+        <div class="hud-box"><span>❤️ Jon</span><b class="hearts" id="g3Lives">❤️❤️❤️</b></div>
+      </div>
+      <div class="game-field" id="g3Field">
+        <div class="stars"></div>
+        <div class="g3-ship" id="g3Ship" style="display:none">🚀</div>
+        <p class="game-hint" id="g3Hint">Strelkalar bilan yur, SPACE bilan ot!</p>
+        <div class="game-over" id="g3Over">
+          <p class="big">💥 Kema Parcalandi!</p>
+          <p>Natijang: <b id="g3Final">0</b> ball</p>
+          <button class="game-btn small" onclick="g3Start()">🔄 Qayta boshlash</button>
+        </div>
+      </div>
+      <button class="game-btn press" id="g3StartBtn" onclick="g3Start()">▶ O'yinni boshlash</button>
+    </div>
+  </section>
+
+  <div id="html-qism" class="s-head">
+    <div class="badge">1</div>
+    <div><span class="kicker">QISM 3</span><h2>HTML — kosmos maydonini quramiz</h2></div>
+  </div>
+  <section class="card">
+    <p>HTML — o'yinning <b>skeleti</b>. Bu yerda faqat <b>doimiy</b> narsalar yoziladi: panel, maydon, kema va o'yin tugadi oynasi. Lazerlar va dushmanlar HTML'da yo'q — chunki ular o'yin davomida <b>JavaScript tomonidan yaratiladi</b> va o'chiriladi.</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">index.html</span></div>
+        <pre>&lt;<span class="tag">!DOCTYPE</span> html&gt;
+&lt;<span class="tag">html</span> <span class="fn">lang</span>=<span class="st">&quot;uz&quot;</span>&gt;
+&lt;<span class="tag">head</span>&gt;
+  &lt;<span class="tag">meta</span> <span class="fn">charset</span>=<span class="st">&quot;UTF-8&quot;</span>&gt;
+  &lt;<span class="tag">meta</span> <span class="fn">name</span>=<span class="st">&quot;viewport&quot;</span> <span class="fn">content</span>=<span class="st">&quot;width=device-width, initial-scale=1&quot;</span>&gt;
+  &lt;<span class="tag">title</span>&gt;Koinot Himoyachisi&lt;/<span class="tag">title</span>&gt;
+  &lt;<span class="tag">link</span> <span class="fn">rel</span>=<span class="st">&quot;stylesheet&quot;</span> <span class="fn">href</span>=<span class="st">&quot;style.css&quot;</span>&gt;
+&lt;/<span class="tag">head</span>&gt;
+&lt;<span class="tag">body</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;hud&quot;</span>&gt;
+    &lt;<span class="tag">span</span>&gt;Ball: &lt;<span class="tag">b</span> <span class="fn">id</span>=<span class="st">&quot;ball&quot;</span>&gt;0&lt;/<span class="tag">b</span>&gt;&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span>&gt;Jon: &lt;<span class="tag">b</span> <span class="fn">id</span>=<span class="st">&quot;jon&quot;</span>&gt;❤️❤️❤️&lt;/<span class="tag">b</span>&gt;&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;maydon&quot;</span> <span class="fn">id</span>=<span class="st">&quot;maydon&quot;</span>&gt;
+    &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;yulduzlar&quot;</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;kema&quot;</span> <span class="fn">id</span>=<span class="st">&quot;kema&quot;</span>&gt;🚀&lt;/<span class="tag">div</span>&gt;
+
+    <span class="cm">&lt;!-- O&#x27;yin tugagach ustidan chiqadigan oyna --&gt;</span>
+    &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;tugadi&quot;</span> <span class="fn">id</span>=<span class="st">&quot;tugadi&quot;</span>&gt;
+      &lt;<span class="tag">p</span> <span class="fn">class</span>=<span class="st">&quot;katta&quot;</span>&gt;💥 Kema parchalandi!&lt;/<span class="tag">p</span>&gt;
+      &lt;<span class="tag">p</span>&gt;Natijang: &lt;<span class="tag">b</span> <span class="fn">id</span>=<span class="st">&quot;natija&quot;</span>&gt;0&lt;/<span class="tag">b</span>&gt; ball&lt;/<span class="tag">p</span>&gt;
+      &lt;<span class="tag">button</span> <span class="fn">onclick</span>=<span class="st">&quot;boshla()&quot;</span>&gt;🔄 Qayta boshlash&lt;/<span class="tag">button</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">button</span> <span class="fn">id</span>=<span class="st">&quot;boshlaBtn&quot;</span> <span class="fn">onclick</span>=<span class="st">&quot;boshla()&quot;</span>&gt;▶ Boshlash&lt;/<span class="tag">button</span>&gt;
+
+  &lt;<span class="tag">script</span> <span class="fn">src</span>=<span class="st">&quot;script.js&quot;</span>&gt;&lt;/<span class="tag">script</span>&gt;
+&lt;/<span class="tag">body</span>&gt;
+&lt;/<span class="tag">html</span>&gt;</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>class=&quot;hud&quot;</code><span>Ball va jon ko'rsatiladigan panel. <code>b</code> teglariga <code>id</code> berdik — JS ularning ichidagi matnni almashtiradi.</span></div>
+        <div class="row"><code>id=&quot;maydon&quot;</code><span>O'yin sodir bo'ladigan quti. Barcha uchuvchi obyektlar <b>shu elementning ichiga</b> qo'shiladi.</span></div>
+        <div class="row"><code>class=&quot;yulduzlar&quot;</code><span>Fon uchun bezak. U hech qanday mantiqda ishtirok etmaydi — faqat CSS animatsiyasi bilan pastga suriladi.</span></div>
+        <div class="row"><code>id=&quot;kema&quot;</code><span>Yagona doimiy o'yinchi obyekti. JS uning <code>left</code> va <code>top</code> qiymatini o'zgartiradi.</span></div>
+        <div class="row"><code>id=&quot;tugadi&quot;</code><span>O'yin tugaganda maydonning <b>ustidan</b> chiqadigan oyna. Boshida CSS'da <code>display: none</code>.</span></div>
+        <div class="row"><code>&amp;lt;script&amp;gt;</code><span>Skript <b>&lt;/body&gt; dan oldin</b> turadi. Sababi: shu paytgacha barcha elementlar tayyor bo'ladi va <code>getElementById</code> <code>null</code> qaytarmaydi.</span></div>
+      </div>
+    <div class="tip"><div class="ic">📱</div><p><code>&lt;meta name="viewport"&gt;</code> qatorini unutma — usiz sahifa telefonda kichraytirilgan holda ochiladi va o'yin maydoni juda kichik ko'rinadi.</p></div>
+  </section>
+
+  <div id="css-qism" class="s-head">
+    <div class="badge">2</div>
+    <div><span class="kicker">QISM 4</span><h2>CSS — koinot ko'rinishi va joylashuv</h2></div>
+  </div>
+  <section class="card">
+    <p>Bu o'yinda CSS <b>faqat bezak emas</b> — u obyektlarni joylashtirish tizimini ham beradi. Agar CSS noto'g'ri bo'lsa, JavaScript qanchalik to'g'ri yozilmasin, kema ekranning allaqayeriga uchib ketadi.</p>
+
+    <h3>1. Eng muhim juftlik: <code>relative</code> va <code>absolute</code></h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">style.css</span></div>
+        <pre><span class="cm">/* --- O&#x27;yin maydoni ---
+   position: relative -&gt; ichidagi barcha obyektlar
+   SHU quticha ichida joylashadi.
+   overflow: hidden  -&gt; chetdan chiqqani ko&#x27;rinmaydi. */</span>
+.maydon {
+  position: relative;
+  width: <span class="num">100</span>%;
+  height: 420px;
+  background: <span class="num">#020617</span>;
+  border: 3px solid <span class="num">#334155</span>;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset <span class="num">0</span> <span class="num">0</span> 40px rgba(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.8</span>);
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>position: relative</code><span>Bu <b>eng muhim qator</b>. U maydonni "tayanch nuqta" qilib belgilaydi. Ichidagi <code>absolute</code> elementlar endi sahifaga emas, <b>shu quticha chetiga</b> nisbatan o'lchanadi.</span></div>
+        <div class="row"><code>overflow: hidden</code><span>Maydondan chiqib ketgan obyekt kesib tashlanadi. Dushman tepadan <code>-40px</code> da tug'iladi — busiz u panel ustida ko'rinib qolardi.</span></div>
+        <div class="row"><code>height: 420px</code><span>Balandlik <b>aniq son</b>. JS <code>maydon.clientHeight</code> orqali shu sonni o'qiydi va chegara sifatida ishlatadi.</span></div>
+        <div class="row"><code>inset ... box-shadow</code><span>Ichkariga tushadigan soya — koinot chuqurligi hissini beradi.</span></div>
+      </div>
+
+    <h3>2. Cheksiz yulduzlar — bitta hiyla</h3>
+    <p>Yulduzlar aslida <b>bitta div</b>. Uning foni 200×200 px li naqsh bo'lib, cheksiz takrorlanadi. Animatsiya uni aynan 200px pastga suradi — naqsh qaytadan boshlangani uchun ko'z <b>uzilishni sezmaydi</b>:</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">style.css</span></div>
+        <pre><span class="cm">/* --- Cheksiz harakatlanuvchi yulduzlar --- */</span>
+.yulduzlar {
+  position: absolute;
+  inset: <span class="num">0</span>;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, <span class="num">#fff</span>, transparent),
+    radial-gradient(1px 1px at 40px 70px, <span class="num">#fff</span>, transparent),
+    radial-gradient(2px 2px at 90px 40px, <span class="num">#fff</span>, transparent);
+  background-size: 200px 200px;
+  animation: starMove 10s linear infinite;
+}
+@keyframes starMove {
+  from { transform: translateY(<span class="num">0</span>); }
+  to   { transform: translateY(200px); }
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>inset: 0</code><span><code>top/right/bottom/left: 0</code> ning qisqa yozuvi — maydonni to'liq qoplaydi.</span></div>
+        <div class="row"><code>radial-gradient</code><span>Har biri bitta kichik oq nuqta chizadi. Uchtasi birga — tasodifiy yulduzlar tuyg'usi.</span></div>
+        <div class="row"><code>background-size: 200px</code><span>Naqshning takrorlanish qadami. Animatsiyadagi 200px <b>aynan shu songa teng</b> bo'lishi shart.</span></div>
+        <div class="row"><code>linear infinite</code><span>Tezlik bir tekis va cheksiz takrorlanadi.</span></div>
+      </div>
+
+    <h3>3. Uchuvchi obyektlar va <code>z-index</code></h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">style.css</span></div>
+        <pre><span class="cm">/* --- Uchuvchi obyektlar ---
+   Hammasi position: absolute, chunki ularning
+   left/top qiymatini JavaScript boshqaradi. */</span>
+.kema {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  z-index: <span class="num">10</span>;
+}
+
+.dushman {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+  z-index: <span class="num">9</span>;
+}
+
+.lazer {
+  position: absolute;
+  width: 6px;
+  height: 20px;
+  border-radius: 4px;
+  z-index: <span class="num">8</span>;
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>position: absolute</code><span>Uchalasi ham. Endi ularning joyini faqat JS'dagi <code>left</code>/<code>top</code> belgilaydi.</span></div>
+        <div class="row"><code>z-index: 10 / 9 / 8</code><span>Kim kimning ustida turadi: <b>kema (10)</b> → <b>dushman (9)</b> → <b>lazer (8)</b>. Shuning uchun lazer kema orqasidan chiqayotgandek ko'rinadi.</span></div>
+        <div class="row"><code>width/height: 40px</code><span>Bu son JS'dagi <code>OLCHAM</code> o'zgaruvchisi bilan <b>bir xil</b> bo'lishi kerak, aks holda to'qnashuv noto'g'ri hisoblanadi.</span></div>
+        <div class="row"><code>line-height: 40px</code><span>Emojini katak ichida vertikal markazlashtiradi.</span></div>
+      </div>
+
+    <h3>4. O'yin tugadi oynasi va zarba effekti</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">style.css</span></div>
+        <pre><span class="cm">/* --- O&#x27;yin tugadi oynasi --- */</span>
+.tugadi {
+  position: absolute;
+  inset: <span class="num">0</span>;
+  display: none;              <span class="cm">/* JS uni flex ga o&#x27;zgartiradi */</span>
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(<span class="num">2</span>, <span class="num">6</span>, <span class="num">23</span>, <span class="num">0.85</span>);
+  z-index: <span class="num">20</span>;
+}
+.tugadi .katta {
+  font-size: 24px;
+  color: <span class="num">#EF4444</span>;
+  margin: <span class="num">0</span>;
+}
+
+<span class="cm">/* --- Jon kamayganda qizil chaqnash --- */</span>
+.zarba {
+  animation: qizarish <span class="num">0</span>.25s;
+}
+@keyframes qizarish {
+  from { box-shadow: inset <span class="num">0</span> <span class="num">0</span> 70px rgba(<span class="num">239</span>, <span class="num">68</span>, <span class="num">68</span>, <span class="num">0.9</span>); }
+  to   { box-shadow: inset <span class="num">0</span> <span class="num">0</span> 40px rgba(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.8</span>); }
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>display: none</code><span>Boshida yashirin. JS uni <code>"flex"</code> ga o'zgartirganda paydo bo'ladi — shuning uchun <code>flex-direction</code> oldindan yozilgan.</span></div>
+        <div class="row"><code>z-index: 20</code><span>Hammadan yuqorida — kema va dushmanlarni ham yopadi.</span></div>
+        <div class="row"><code>.zarba</code><span>Jon kamayganda JS bu klassni 250 ms ga qo'shadi va o'chiradi. Natijada maydon bir marta qizil chaqnaydi.</span></div>
+        <div class="row"><code>@keyframes qizarish</code><span>Qizil ichki soyadan odatdagi qora soyaga qaytish — "urildim!" hissi.</span></div>
+      </div>
+    <div class="tip"><div class="ic">🎬</div><p>Klass qo'shib-o'chirish orqali animatsiya berish — <b>professional usul</b>. JS animatsiyaning o'zini emas, faqat "qachon" ekanini boshqaradi; "qanday" ekani CSS'da qoladi.</p></div>
+  </section>
+
+  <div id="js-qism" class="s-head">
+    <div class="badge">3</div>
+    <div><span class="kicker">QISM 5</span><h2>JavaScript — o'yin dvigatelini yozamiz</h2></div>
+  </div>
+  <section class="card">
+    <p>Endi eng qiziq qism. Kodni <b>9 ta bo'lakka</b> bo'lib yozamiz. Har bir bo'lakning bitta vazifasi bor — bu <b>professional dasturchilar</b> ishlaydigan usul.</p>
+
+    <h3>1. O'yin holati (state) — barcha ma'lumot bir joyda</h3>
+    <p>Fayl boshida <b>o'yin haqidagi hamma narsa</b> e'lon qilinadi. Keyin xatolik bo'lsa, birinchi navbatda shu yerga qaraysan:</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 1. O&#x27;YIN HOLATI ======</span>
+<span class="kw">let</span> ball = <span class="num">0</span>;               <span class="cm">// to&#x27;plangan ball</span>
+<span class="kw">let</span> jon = <span class="num">3</span>;                <span class="cm">// qolgan jonlar</span>
+<span class="kw">let</span> ishlayapti = <span class="kw">false</span>;     <span class="cm">// o&#x27;yin hozir ketyaptimi?</span>
+
+<span class="kw">let</span> kemaX = <span class="num">220</span>;            <span class="cm">// kemaning chapdan masofasi (px)</span>
+<span class="kw">let</span> kemaY = <span class="num">360</span>;            <span class="cm">// kemaning tepadan masofasi (px)</span>
+
+<span class="kw">let</span> lazerlar = [];          <span class="cm">// bizning ko&#x27;k lazerlar</span>
+<span class="kw">let</span> dushmanlar = [];        <span class="cm">// tushayotgan dushmanlar</span>
+<span class="kw">let</span> dushmanLazerlari = [];  <span class="cm">// dushmanning qizil lazerlari</span>
+
+<span class="kw">let</span> tugmalar = {};          <span class="cm">// qaysi tugma hozir bosilgan?</span>
+<span class="kw">let</span> oxirgiOtish = <span class="num">0</span>;        <span class="cm">// oxirgi marta qachon otdik? (ms)</span>
+<span class="kw">let</span> taymer = <span class="kw">null</span>;          <span class="cm">// dushman yaratuvchi setInterval</span>
+<span class="kw">let</span> kadr = <span class="kw">null</span>;            <span class="cm">// requestAnimationFrame raqami</span>
+
+<span class="cm">// Sehrli sonlarni bitta joyda saqlaymiz</span>
+<span class="kw">const</span> OLCHAM = <span class="num">40</span>;          <span class="cm">// obyektning kvadrat o&#x27;lchami</span>
+<span class="kw">const</span> CHET = <span class="num">8</span>;             <span class="cm">// emoji atrofidagi bo&#x27;sh joy</span>
+<span class="kw">const</span> TANA = <span class="num">24</span>;            <span class="cm">// to&#x27;qnashuv uchun haqiqiy o&#x27;lcham</span>
+<span class="kw">const</span> PAUZA = <span class="num">250</span>;          <span class="cm">// ikki otish orasidagi minimal vaqt</span>
+
+<span class="kw">const</span> maydon = document.<span class="fn">getElementById</span>(<span class="st">&quot;maydon&quot;</span>);</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>let / const</code><span>O'zgaradiganlar <code>let</code>, hech qachon o'zgarmaydiganlar <code>const</code>. Bu kelajakdagi xatolarning yarmini oldini oladi.</span></div>
+        <div class="row"><code>ishlayapti</code><span>Butun o'yinning kaliti. <code>false</code> bo'lsa: sikl to'xtaydi, tugmalar ishlamaydi, yangi dushman tug'ilmaydi.</span></div>
+        <div class="row"><code>[] massivlar</code><span>Uchta bo'sh massiv — obyektlar shu yerga <code>push</code> qilinadi va <code>splice</code> bilan olib tashlanadi.</span></div>
+        <div class="row"><code>OLCHAM, CHET, TANA</code><span>"Sehrli sonlar" ni nomlab qo'ydik. Endi hitboxni o'zgartirish uchun bitta joyni tahrirlash yetarli.</span></div>
+        <div class="row"><code>maydon</code><span>Elementni bir marta topib, o'zgaruvchiga saqlaymiz. Har kadrda <code>getElementById</code> chaqirish — behuda ish.</span></div>
+      </div>
+
+    <h3>2. Tugmalarni kuzatish — ikkita hodisa, bitta obyekt</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 2. TUGMALARNI KUZATISH ======</span>
+document.<span class="fn">addEventListener</span>(<span class="st">&quot;keydown&quot;</span>, (e) =&gt; {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+
+  <span class="cm">// Brauzer strelka va Space bilan sahifani surmasin!</span>
+  <span class="kw">if</span> ([<span class="st">&quot;ArrowUp&quot;</span>, <span class="st">&quot;ArrowDown&quot;</span>, <span class="st">&quot;ArrowLeft&quot;</span>, <span class="st">&quot;ArrowRight&quot;</span>, <span class="st">&quot;Space&quot;</span>].<span class="fn">includes</span>(e.code)) {
+    e.<span class="fn">preventDefault</span>();
+  }
+
+  tugmalar[e.code] = <span class="kw">true</span>;
+  <span class="kw">if</span> (e.code === <span class="st">&quot;Space&quot;</span>) <span class="fn">bizningLazerOtish</span>();
+});
+
+document.<span class="fn">addEventListener</span>(<span class="st">&quot;keyup&quot;</span>, (e) =&gt; {
+  tugmalar[e.code] = <span class="kw">false</span>;
+});</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>e.preventDefault()</code><span><b>Busiz o'yin buziladi!</b> Brauzer sukut bo'yicha Space va strelkalar bilan sahifani pastga suradi. Otmoqchi bo'lasan — sahifa sakraydi.</span></div>
+        <div class="row"><code>e.code</code><span><code>"ArrowLeft"</code>, <code>"Space"</code> kabi <b>fizik tugma</b> nomi. <code>e.key</code> dan farqli o'laroq klaviatura tiliga bog'liq emas.</span></div>
+        <div class="row"><code>keydown → true</code><span>Tugma bosildi deb <b>belgilab qo'yamiz</b>, lekin kemani bu yerda surmaymiz — surish ishi o'yin siklida bajariladi.</span></div>
+        <div class="row"><code>keyup → false</code><span>Bu yerda <code>ishlayapti</code> tekshirilmaydi: o'yin tugagan payt tugma bosilgan bo'lsa, u "abadiy bosilgan" bo'lib qolmasligi kerak.</span></div>
+        <div class="row"><code>Space → otish</code><span>Otish esa darhol chaqiriladi, chunki u bir martalik hodisa (harakat emas).</span></div>
+      </div>
+    <div class="tip"><div class="ic">🤔</div><p><b>Nega kemani to'g'ridan-to'g'ri <code>keydown</code> ichida surmaymiz?</b> Chunki klaviatura tugmani takrorlashni ~0.5 sekunddan keyin boshlaydi va tezligi kompyuterga qarab har xil. Sikl ichida surganda esa harakat <b>doim bir tekis</b> bo'ladi.</p></div>
+
+    <h3>3. Bizning lazer + otish tezligiga cheklov</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 3. BIZNING KO&#x27;K LAZER ======</span>
+<span class="kw">function</span> <span class="fn">bizningLazerOtish</span>() {
+  <span class="kw">const</span> hozir = Date.<span class="fn">now</span>();
+  <span class="kw">if</span> (hozir - oxirgiOtish &lt; PAUZA) <span class="kw">return</span>;  <span class="cm">// juda tez otishga yo&#x27;l yo&#x27;q</span>
+  oxirgiOtish = hozir;
+
+  <span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="st">&quot;div&quot;</span>);
+  el.className = <span class="st">&quot;lazer&quot;</span>;
+  el.style.background = <span class="st">&quot;#38BDF8&quot;</span>;
+  el.style.boxShadow = <span class="st">&quot;0 0 10px #38BDF8&quot;</span>;
+
+  <span class="kw">const</span> x = kemaX + <span class="num">17</span>;   <span class="cm">// kemaning o&#x27;rtasi</span>
+  <span class="kw">const</span> y = kemaY - <span class="num">20</span>;   <span class="cm">// kemaning burni oldida</span>
+  el.style.left = x + <span class="st">&quot;px&quot;</span>;
+  el.style.top = y + <span class="st">&quot;px&quot;</span>;
+  maydon.<span class="fn">appendChild</span>(el);
+
+  lazerlar.<span class="fn">push</span>({ el, x, y });
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>Date.now()</code><span>Hozirgi vaqt (millisekundda). Oldingi otish vaqtidan farqi 250 ms dan kam bo'lsa — <code>return</code>, ya'ni otmaymiz.</span></div>
+        <div class="row"><code>createElement</code><span>Yangi <code>div</code> <b>noldan yaratiladi</b>. HTML faylida lazer yo'q — u faqat kerak bo'lganda tug'iladi.</span></div>
+        <div class="row"><code>appendChild</code><span>Element maydonning ichiga qo'shiladi. Shu paytdan boshlab u ekranda ko'rinadi.</span></div>
+        <div class="row"><code>push({ el, x, y })</code><span>Massivga <b>obyekt</b> saqlaymiz: <code>el</code> — ekrandagi div, <code>x/y</code> — uning aniq joyi. DOM'dan o'qish sekin, shuning uchun sonlarni <b>o'zimizda</b> saqlaymiz.</span></div>
+      </div>
+    <div class="tip"><div class="ic">⚡</div><p>Cheklovsiz o'yinni sinab ko'r: <code>PAUZA</code> ni <code>0</code> qil. Space ni bosib tursang ekran lazerga to'ladi, o'yin sekinlashadi va hech qanday qiyinchilik qolmaydi. Mana shuning uchun <b>cooldown</b> kerak.</p></div>
+
+    <h3>4. Dushman lazeri — nishonga olish matematikasi</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 4. DUSHMAN LAZERI — NISHONGA QARAB ======</span>
+<span class="kw">function</span> <span class="fn">dushmanLazerOtish</span>(ex, ey) {
+  <span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="st">&quot;div&quot;</span>);
+  el.className = <span class="st">&quot;lazer&quot;</span>;
+  el.style.background = <span class="st">&quot;#EF4444&quot;</span>;
+  el.style.boxShadow = <span class="st">&quot;0 0 10px #EF4444&quot;</span>;
+
+  <span class="kw">const</span> x = ex + <span class="num">17</span>;
+  <span class="kw">const</span> y = ey + OLCHAM;
+
+  <span class="cm">// Dushmandan kemaning markazigacha bo&#x27;lgan yo&#x27;nalish</span>
+  <span class="kw">const</span> dx = (kemaX + OLCHAM / <span class="num">2</span>) - x;
+  <span class="kw">const</span> dy = (kemaY + OLCHAM / <span class="num">2</span>) - y;
+  <span class="kw">const</span> uzunlik = Math.<span class="fn">hypot</span>(dx, dy) || <span class="num">1</span>;   <span class="cm">// 0 ga bo&#x27;lmaslik uchun</span>
+  <span class="kw">const</span> tezlik = <span class="num">4</span>;
+
+  el.style.left = x + <span class="st">&quot;px&quot;</span>;
+  el.style.top = y + <span class="st">&quot;px&quot;</span>;
+  <span class="cm">// lazerni uchish yo&#x27;nalishi bo&#x27;ylab burib qo&#x27;yamiz</span>
+  el.style.transform = <span class="st">&quot;rotate(&quot;</span> + Math.<span class="fn">atan2</span>(-dx, dy) + <span class="st">&quot;rad)&quot;</span>;
+  maydon.<span class="fn">appendChild</span>(el);
+
+  dushmanLazerlari.<span class="fn">push</span>({
+    el, x, y,
+    vx: dx / uzunlik * tezlik,   <span class="cm">// 1 kadrda X bo&#x27;yicha siljish</span>
+    vy: dy / uzunlik * tezlik    <span class="cm">// 1 kadrda Y bo&#x27;yicha siljish</span>
+  });
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>dx, dy</code><span>Dushmandan kemagacha bo'lgan <b>farq</b>. Manfiy bo'lishi mumkin — bu "chapga/tepaga" degani.</span></div>
+        <div class="row"><code>Math.hypot(dx, dy)</code><span>To'g'ri masofa: √(dx² + dy²). Pifagor teoremasining tayyor ko'rinishi.</span></div>
+        <div class="row"><code>|| 1</code><span>Himoya. Agar masofa 0 chiqsa (dushman aynan kema ustida), nolga bo'linish <code>NaN</code> beradi va lazer g'oyib bo'ladi.</span></div>
+        <div class="row"><code>dx / uzunlik * tezlik</code><span><b>Normallashtirish.</b> Yo'nalish saqlanadi, uzunlik esa aniq 4 pikselga tenglashadi — lazer qaysi tomonga uchmasin bir xil tez.</span></div>
+        <div class="row"><code>Math.atan2(-dx, dy)</code><span>Lazerni uchish yo'nalishi bo'ylab buradi. Busiz qizil chiziq yonboshga uchsa ham tik turaverardi.</span></div>
+        <div class="row"><code>vx, vy</code><span>Tezlik vektori obyekt ichida saqlanadi — sikl har kadrda shuni qo'shib boradi.</span></div>
+      </div>
+
+    <h3>5. Dushman yaratish</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 5. DUSHMAN YARATISH ======</span>
+<span class="kw">function</span> <span class="fn">dushmanYarat</span>() {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+
+  <span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="st">&quot;div&quot;</span>);
+  el.className = <span class="st">&quot;dushman&quot;</span>;
+  el.textContent = [<span class="st">&quot;☄️&quot;</span>, <span class="st">&quot;👽&quot;</span>, <span class="st">&quot;👾&quot;</span>][Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="num">3</span>)];
+
+  <span class="cm">// Maydonning haqiqiy kengligiga qarab tasodifiy joy</span>
+  <span class="kw">const</span> x = Math.<span class="fn">random</span>() * (maydon.clientWidth - OLCHAM);
+  el.style.left = x + <span class="st">&quot;px&quot;</span>;
+  el.style.top = <span class="st">&quot;-40px&quot;</span>;
+  maydon.<span class="fn">appendChild</span>(el);
+
+  <span class="cm">// baseX — zikzak shu nuqta atrofida tebranadi</span>
+  dushmanlar.<span class="fn">push</span>({ el, x, y: -<span class="num">40</span>, baseX: x });
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>if (!ishlayapti)</code><span>Taymer bir zumga kechikib ishga tushishi mumkin — o'yin tugagach dushman tug'ilib qolmasligi uchun himoya.</span></div>
+        <div class="row"><code>[...][Math.floor(...)]</code><span>Massivdan tasodifiy element tanlash klassikasi: <code>Math.random() * 3</code> → 0…2.99, <code>Math.floor</code> uni butun songa aylantiradi.</span></div>
+        <div class="row"><code>maydon.clientWidth</code><span><b>Sabit son emas!</b> Maydon telefonda tor, kompyuterda keng. Shuning uchun kenglikni har safar elementning o'zidan so'raymiz.</span></div>
+        <div class="row"><code>y: -40</code><span>Dushman ekranning <b>tepasidan tashqarida</b> tug'iladi va pastga suzib kiradi — shuning uchun paydo bo'lishi tabiiy ko'rinadi.</span></div>
+        <div class="row"><code>baseX</code><span>Zikzak shu nuqta atrofida tebranadi. Agar <code>d.x</code> ning o'zini o'zgartirsak, xato to'planib dushman chetga "sudralib" ketardi.</span></div>
+      </div>
+
+    <h3>6. To'qnashuv funksiyasi</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 6. TO&#x27;QNASHUV TEKSHIRUVI (AABB) ======</span>
+<span class="kw">function</span> <span class="fn">toqnashuv</span>(x1, y1, w1, h1, x2, y2, w2, h2) {
+  <span class="kw">return</span> x1 &lt; x2 + w2 &amp;&amp;
+         x1 + w1 &gt; x2 &amp;&amp;
+         y1 &lt; y2 + h2 &amp;&amp;
+         y1 + h1 &gt; y2;
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>8 ta parametr</code><span>Ikkita to'rtburchak: har biri uchun <code>x, y, kenglik, balandlik</code>.</span></div>
+        <div class="row"><code>&amp;&amp; (VA)</code><span>To'rttala shart <b>birga</b> bajarilishi shart. Bittasi yolg'on bo'lsa — tegmagan.</span></div>
+        <div class="row"><code>return</code><span>Funksiya <code>true</code> yoki <code>false</code> qaytaradi. Bitta funksiya — uchala to'qnashuv turi uchun ishlatiladi.</span></div>
+      </div>
+
+    <h3>7. O'yin sikli — eng katta funksiya</h3>
+    <p>Bu funksiya sekundiga ~60 marta chaqiriladi va <b>butun o'yin</b> shu yerda yashaydi. Uni bo'laklarga ajratib o'qi:</p>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 7. O&#x27;YIN SIKLI — sekundiga ~60 marta ======</span>
+<span class="kw">function</span> <span class="fn">oyinSikli</span>() {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+
+  <span class="cm">// Maydon o&#x27;lchami telefon va kompyuterda har xil bo&#x27;ladi,</span>
+  <span class="cm">// shuning uchun chegarani HAR KADRDA qaytadan hisoblaymiz.</span>
+  <span class="kw">const</span> engOng = maydon.clientWidth - OLCHAM;
+  <span class="kw">const</span> engPast = maydon.clientHeight - OLCHAM;
+
+  <span class="cm">// --- 7.1 Kema harakati ---</span>
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowLeft&quot;</span>])  kemaX -= <span class="num">5</span>;
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowRight&quot;</span>]) kemaX += <span class="num">5</span>;
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowUp&quot;</span>])    kemaY -= <span class="num">5</span>;
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowDown&quot;</span>])  kemaY += <span class="num">5</span>;
+
+  kemaX = Math.<span class="fn">max</span>(<span class="num">0</span>, Math.<span class="fn">min</span>(engOng, kemaX));
+  kemaY = Math.<span class="fn">max</span>(<span class="num">0</span>, Math.<span class="fn">min</span>(engPast, kemaY));
+
+  <span class="kw">const</span> kema = document.<span class="fn">getElementById</span>(<span class="st">&quot;kema&quot;</span>);
+  kema.style.left = kemaX + <span class="st">&quot;px&quot;</span>;
+  kema.style.top = kemaY + <span class="st">&quot;px&quot;</span>;
+
+  <span class="cm">// --- 7.2 Bizning lazerlar tepaga uchadi ---</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = lazerlar.length - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">const</span> l = lazerlar[i];
+    l.y -= <span class="num">8</span>;
+    l.el.style.top = l.y + <span class="st">&quot;px&quot;</span>;
+
+    <span class="kw">if</span> (l.y &lt; -<span class="num">20</span>) {                 <span class="cm">// ekrandan chiqib ketdi</span>
+      l.el.<span class="fn">remove</span>();
+      lazerlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+    }
+  }
+
+  <span class="cm">// --- 7.3 Qizil lazerlar kemaga qarab uchadi ---</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = dushmanLazerlari.length - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">const</span> dl = dushmanLazerlari[i];
+    dl.x += dl.vx;
+    dl.y += dl.vy;
+    dl.el.style.left = dl.x + <span class="st">&quot;px&quot;</span>;
+    dl.el.style.top = dl.y + <span class="st">&quot;px&quot;</span>;
+
+    <span class="kw">if</span> (<span class="fn">toqnashuv</span>(dl.x, dl.y, <span class="num">6</span>, <span class="num">20</span>,
+                  kemaX + CHET, kemaY + CHET, TANA, TANA)) {
+      dl.el.<span class="fn">remove</span>();
+      dushmanLazerlari.<span class="fn">splice</span>(i, <span class="num">1</span>);
+      <span class="fn">jonKamaytir</span>();
+      <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;       <span class="cm">// oxirgi jon edimi?</span>
+      <span class="kw">continue</span>;
+    }
+
+    <span class="kw">if</span> (dl.y &gt; maydon.clientHeight || dl.y &lt; -<span class="num">20</span> ||
+        dl.x &lt; -<span class="num">20</span> || dl.x &gt; maydon.clientWidth) {
+      dl.el.<span class="fn">remove</span>();
+      dushmanLazerlari.<span class="fn">splice</span>(i, <span class="num">1</span>);
+    }
+  }
+
+  <span class="cm">// --- 7.4 Dushmanlar zikzak tushadi ---</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = dushmanlar.length - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">const</span> d = dushmanlar[i];
+
+    d.y += <span class="num">2.5</span>;
+    d.x = d.baseX + Math.<span class="fn">sin</span>(d.y / <span class="num">30</span>) * <span class="num">40</span>;
+    d.x = Math.<span class="fn">max</span>(<span class="num">0</span>, Math.<span class="fn">min</span>(engOng, d.x));
+    d.el.style.top = d.y + <span class="st">&quot;px&quot;</span>;
+    d.el.style.left = d.x + <span class="st">&quot;px&quot;</span>;
+
+    <span class="cm">// har kadrda 2% ehtimol bilan otadi</span>
+    <span class="kw">if</span> (Math.<span class="fn">random</span>() &lt; <span class="num">0.02</span> &amp;&amp; d.y &gt; <span class="num">0</span> &amp;&amp; d.y &lt; maydon.clientHeight - <span class="num">120</span>) {
+      <span class="fn">dushmanLazerOtish</span>(d.x, d.y);
+    }
+
+    <span class="kw">if</span> (d.y &gt; maydon.clientHeight) {   <span class="cm">// pastga tushib ketdi</span>
+      d.el.<span class="fn">remove</span>();
+      dushmanlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+      <span class="kw">continue</span>;
+    }
+
+    <span class="cm">// (a) dushman kemaga urildimi?</span>
+    <span class="kw">if</span> (<span class="fn">toqnashuv</span>(d.x + CHET, d.y + CHET, TANA, TANA,
+                  kemaX + CHET, kemaY + CHET, TANA, TANA)) {
+      d.el.<span class="fn">remove</span>();
+      dushmanlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+      <span class="fn">jonKamaytir</span>();
+      <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+      <span class="kw">continue</span>;
+    }
+
+    <span class="cm">// (b) bizning lazer dushmanga tegdimi?</span>
+    <span class="kw">for</span> (<span class="kw">let</span> j = lazerlar.length - <span class="num">1</span>; j &gt;= <span class="num">0</span>; j--) {
+      <span class="kw">const</span> l = lazerlar[j];
+
+      <span class="kw">if</span> (<span class="fn">toqnashuv</span>(d.x + CHET, d.y + CHET, TANA, TANA, l.x, l.y, <span class="num">6</span>, <span class="num">20</span>)) {
+        ball += <span class="num">10</span>;
+        document.<span class="fn">getElementById</span>(<span class="st">&quot;ball&quot;</span>).textContent = ball;
+
+        <span class="kw">const</span> portlash = d.el;
+        portlash.textContent = <span class="st">&quot;💥&quot;</span>;
+        <span class="fn">setTimeout</span>(() =&gt; portlash.<span class="fn">remove</span>(), <span class="num">100</span>);
+        dushmanlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+
+        l.el.<span class="fn">remove</span>();
+        lazerlar.<span class="fn">splice</span>(j, <span class="num">1</span>);
+        <span class="kw">break</span>;                        <span class="cm">// bu dushman allaqachon o&#x27;ldi</span>
+      }
+    }
+  }
+
+  kadr = <span class="fn">requestAnimationFrame</span>(oyinSikli);
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>engOng / engPast</code><span>Chegaralar har kadrda qayta hisoblanadi — brauzer oynasi kattalashsa ham kod to'g'ri ishlayveradi.</span></div>
+        <div class="row"><code>Math.max(0, Math.min(...))</code><span>"Qisqichga olish" (clamp). Qiymat 0 dan kichik bo'lsa 0, chegaradan katta bo'lsa chegara. Kema hech qachon tashqariga chiqmaydi.</span></div>
+        <div class="row"><code>for (i = length-1; i--)</code><span><b>Massivni teskari aylanamiz!</b> Sababi pastda alohida tushuntirilgan — bu darsning eng muhim g'oyalaridan biri.</span></div>
+        <div class="row"><code>el.remove()</code><span>Elementni <b>DOM'dan</b> o'chiradi (ekrandan yo'qoladi).</span></div>
+        <div class="row"><code>splice(i, 1)</code><span>Elementni <b>massivdan</b> o'chiradi (endi hisoblanmaydi). Ikkalasi ham kerak — biri unutilsa xotira sizadi.</span></div>
+        <div class="row"><code>continue</code><span>Bu obyekt allaqachon o'chirilgan — qolgan tekshiruvlarga o'tmaymiz, aks holda <code>undefined</code> ustida ishlaymiz.</span></div>
+        <div class="row"><code>if (!ishlayapti) return</code><span>Jon tugagan bo'lishi mumkin. Darhol chiqamiz va yangi kadr <b>so'ramaymiz</b> — sikl shu yerda o'ladi.</span></div>
+        <div class="row"><code>break</code><span>Dushman bitta lazerdan o'ldi. Qolgan lazerlarni u bilan solishtirish — mantiqsiz va xavfli.</span></div>
+        <div class="row"><code>requestAnimationFrame</code><span>Eng oxirgi qator: brauzerdan <b>keyingi kadrni</b> so'raymiz. Sikl shunday aylanadi.</span></div>
+      </div>
+
+    <h3>❗ Nega massivni teskari aylanamiz?</h3>
+    <p>Bu eng ko'p xato qilinadigan joy. Tasavvur qil: massivda 3 ta lazer bor va biz <b>oddiy tartibda</b> yuramiz.</p>
+    <div class="compare">
+      <div class="col good">
+        <b>❌ To'g'ri tartib — xato</b>
+        <p><code>i = 0</code> dagi lazerni o'chirdik. Endi barcha elementlar <b>bittaga chapga suriladi</b>: eski 1-chi endi 0-chi bo'ldi. Ammo sikl <code>i = 1</code> ga o'tadi va o'sha element <b>butunlay o'tkazib yuboriladi</b>.</p>
+      </div>
+      <div class="col good">
+        <b>✅ Teskari tartib — to'g'ri</b>
+        <p>Oxiridan boshlaymiz. <code>i</code> dagi elementni o'chirsak, surilish faqat <b>o'ngdagi</b> (ya'ni allaqachon tekshirilgan) elementlarga ta'sir qiladi. Oldinda turganlarning indeksi o'zgarmaydi.</p>
+      </div>
+    </div>
+    <div class="tip"><div class="ic">🧠</div><p>Qoida: <b>massivni aylanayotib undan element o'chirsang — doim teskari yur.</b> Bu qoida faqat o'yinlarda emas, har qanday dasturda amal qiladi.</p></div>
+
+    <h3>8. Jon kamayishi</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 8. JON KAMAYISHI ======</span>
+<span class="kw">function</span> <span class="fn">jonKamaytir</span>() {
+  jon--;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;jon&quot;</span>).textContent = <span class="st">&quot;❤️&quot;</span>.<span class="fn">repeat</span>(Math.<span class="fn">max</span>(jon, <span class="num">0</span>));
+
+  maydon.classList.<span class="fn">add</span>(<span class="st">&quot;zarba&quot;</span>);                          <span class="cm">// qizil chaqnash</span>
+  <span class="fn">setTimeout</span>(() =&gt; maydon.classList.<span class="fn">remove</span>(<span class="st">&quot;zarba&quot;</span>), <span class="num">250</span>);
+
+  <span class="kw">if</span> (jon &lt;= <span class="num">0</span>) <span class="fn">tugat</span>();
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>&quot;❤️&quot;.repeat(...)</code><span>Qolgan jon soniga qarab yurakchalarni takrorlaydi. 3 → ❤️❤️❤️, 1 → ❤️.</span></div>
+        <div class="row"><code>Math.max(jon, 0)</code><span>Himoya: <code>repeat(-1)</code> dasturni <b>xato bilan to'xtatadi</b>.</span></div>
+        <div class="row"><code>classList.add</code><span>CSS animatsiyasini yoqadi. 250 ms dan keyin klass olib tashlanadi — shunda keyingi zarbada animatsiya <b>qaytadan</b> ishlaydi.</span></div>
+        <div class="row"><code>if (jon &lt;= 0)</code><span>Uchala to'qnashuv turi ham shu bitta funksiyani chaqiradi. Tugatish shartini bir joyda saqlash — kod takrorlanishining oldini oladi.</span></div>
+      </div>
+
+    <h3>9. Boshlash va tugatish — tozalash san'ati</h3>
+    <div class="term">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span></div>
+        <pre><span class="cm">// ====== 9. BOSHLASH VA TUGATISH ======</span>
+<span class="kw">function</span> <span class="fn">boshla</span>() {
+  ball = <span class="num">0</span>;
+  jon = <span class="num">3</span>;
+  ishlayapti = <span class="kw">true</span>;
+  kemaX = <span class="num">220</span>;
+  kemaY = <span class="num">360</span>;
+  tugmalar = {};
+  oxirgiOtish = <span class="num">0</span>;
+
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;ball&quot;</span>).textContent = <span class="num">0</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;jon&quot;</span>).textContent = <span class="st">&quot;❤️❤️❤️&quot;</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;tugadi&quot;</span>).style.display = <span class="st">&quot;none&quot;</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;boshlaBtn&quot;</span>).style.display = <span class="st">&quot;none&quot;</span>;
+
+  <span class="cm">// Eski o&#x27;yindan qolgan barcha elementlarni tozalaymiz</span>
+  [...lazerlar, ...dushmanlar, ...dushmanLazerlari].<span class="fn">forEach</span>(v =&gt; v.el.<span class="fn">remove</span>());
+  lazerlar = [];
+  dushmanlar = [];
+  dushmanLazerlari = [];
+
+  <span class="cm">// MUHIM: eski sikllarni to&#x27;xtatamiz.</span>
+  <span class="cm">// Aks holda ikkita sikl birga ishlab, o&#x27;yin 2 barobar tezlashadi!</span>
+  <span class="fn">clearInterval</span>(taymer);
+  <span class="fn">cancelAnimationFrame</span>(kadr);
+
+  taymer = <span class="fn">setInterval</span>(dushmanYarat, <span class="num">1200</span>);
+  <span class="fn">oyinSikli</span>();
+}
+
+<span class="kw">function</span> <span class="fn">tugat</span>() {
+  ishlayapti = <span class="kw">false</span>;
+  <span class="fn">clearInterval</span>(taymer);
+  <span class="fn">cancelAnimationFrame</span>(kadr);
+
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;natija&quot;</span>).textContent = ball;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;tugadi&quot;</span>).style.display = <span class="st">&quot;flex&quot;</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;boshlaBtn&quot;</span>).style.display = <span class="st">&quot;inline-block&quot;</span>;
+}</pre>
+      </div>
+    <div class="explain">
+        <b class="h">Kod nima qilyapti?</b>
+        <div class="row"><code>forEach(v =&gt; v.el.remove())</code><span>Oldingi o'yindan qolgan barcha divlarni ekrandan tozalaymiz. Busiz eski lazerlar ekranda muzlab qolardi.</span></div>
+        <div class="row"><code>lazerlar = []</code><span>Massivlarni ham bo'shatamiz. Element o'chirilgani bilan massivdagi yozuv o'z-o'zidan yo'qolmaydi.</span></div>
+        <div class="row"><code>clearInterval(taymer)</code><span>Eski dushman taymerini to'xtatamiz. Aks holda har "Qayta boshlash" da yana bitta taymer qo'shilib, dushmanlar <b>ikki barobar tez</b> tug'ila boshlaydi.</span></div>
+        <div class="row"><code>cancelAnimationFrame(kadr)</code><span><b>Eng ko'p unutiladigan qator.</b> Ikkita sikl birga ishlasa, obyektlar har kadrda ikki marta suriladi — o'yin tushunarsiz tarzda tezlashadi.</span></div>
+        <div class="row"><code>boshlaBtn.style.display</code><span>O'yin ketayotganda tugma yashiriladi — o'yinchi tasodifan bosib, o'yinni qayta boshlab yubormasligi uchun.</span></div>
+      </div>
+    <div class="tip"><div class="ic">🧹</div><p>Yaxshi <code>boshla()</code> funksiyasi <b>o'yinni boshlamaydi</b> — u avval <b>eski o'yinni tugatadi</b>, keyin yangisini boshlaydi. Shu tartibni yodda tut.</p></div>
+  </section>
+
+  <div id="tuliqkod" class="s-head">
+    <div class="badge">📄</div>
+    <div><span class="kicker">QISM 6</span><h2>To'liq loyiha — 3 faylga bo'lib</h2></div>
+  </div>
+  <section class="card">
+    <p>Kod qiyinlashgan sari tartib muhimroq bo'ladi. Hamma kodlarni bitta papkaga yig'ing:</p>
+    <div class="tree">📁 uzay-oyini/<br>&nbsp;&nbsp;├── <span class="file">index.html</span> <span class="comment">— asosiy fayl</span><br>&nbsp;&nbsp;├── <span class="file">style.css</span> <span class="comment">— qorong'u kosmos dizayni</span><br>&nbsp;&nbsp;└── <span class="file">script.js</span> <span class="comment">— barcha o'yin mantiqlari</span></div>
+
+    <details class="code-toggle">
+      <summary>📃 index.html</summary>
+      <div class="term" style="margin:0;border-radius:0">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">index.html</span><button class="press copy-btn" onclick="copyCode(this)">📋 Nusxalash</button></div>
+        <pre>&lt;<span class="tag">!DOCTYPE</span> html&gt;
+&lt;<span class="tag">html</span> <span class="fn">lang</span>=<span class="st">&quot;uz&quot;</span>&gt;
+&lt;<span class="tag">head</span>&gt;
+  &lt;<span class="tag">meta</span> <span class="fn">charset</span>=<span class="st">&quot;UTF-8&quot;</span>&gt;
+  &lt;<span class="tag">meta</span> <span class="fn">name</span>=<span class="st">&quot;viewport&quot;</span> <span class="fn">content</span>=<span class="st">&quot;width=device-width, initial-scale=1&quot;</span>&gt;
+  &lt;<span class="tag">title</span>&gt;Koinot Himoyachisi&lt;/<span class="tag">title</span>&gt;
+  &lt;<span class="tag">link</span> <span class="fn">rel</span>=<span class="st">&quot;stylesheet&quot;</span> <span class="fn">href</span>=<span class="st">&quot;style.css&quot;</span>&gt;
+&lt;/<span class="tag">head</span>&gt;
+&lt;<span class="tag">body</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;hud&quot;</span>&gt;
+    &lt;<span class="tag">span</span>&gt;Ball: &lt;<span class="tag">b</span> <span class="fn">id</span>=<span class="st">&quot;ball&quot;</span>&gt;0&lt;/<span class="tag">b</span>&gt;&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span>&gt;Jon: &lt;<span class="tag">b</span> <span class="fn">id</span>=<span class="st">&quot;jon&quot;</span>&gt;❤️❤️❤️&lt;/<span class="tag">b</span>&gt;&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;maydon&quot;</span> <span class="fn">id</span>=<span class="st">&quot;maydon&quot;</span>&gt;
+    &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;yulduzlar&quot;</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;kema&quot;</span> <span class="fn">id</span>=<span class="st">&quot;kema&quot;</span>&gt;🚀&lt;/<span class="tag">div</span>&gt;
+
+    <span class="cm">&lt;!-- O&#x27;yin tugagach ustidan chiqadigan oyna --&gt;</span>
+    &lt;<span class="tag">div</span> <span class="fn">class</span>=<span class="st">&quot;tugadi&quot;</span> <span class="fn">id</span>=<span class="st">&quot;tugadi&quot;</span>&gt;
+      &lt;<span class="tag">p</span> <span class="fn">class</span>=<span class="st">&quot;katta&quot;</span>&gt;💥 Kema parchalandi!&lt;/<span class="tag">p</span>&gt;
+      &lt;<span class="tag">p</span>&gt;Natijang: &lt;<span class="tag">b</span> <span class="fn">id</span>=<span class="st">&quot;natija&quot;</span>&gt;0&lt;/<span class="tag">b</span>&gt; ball&lt;/<span class="tag">p</span>&gt;
+      &lt;<span class="tag">button</span> <span class="fn">onclick</span>=<span class="st">&quot;boshla()&quot;</span>&gt;🔄 Qayta boshlash&lt;/<span class="tag">button</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">button</span> <span class="fn">id</span>=<span class="st">&quot;boshlaBtn&quot;</span> <span class="fn">onclick</span>=<span class="st">&quot;boshla()&quot;</span>&gt;▶ Boshlash&lt;/<span class="tag">button</span>&gt;
+
+  &lt;<span class="tag">script</span> <span class="fn">src</span>=<span class="st">&quot;script.js&quot;</span>&gt;&lt;/<span class="tag">script</span>&gt;
+&lt;/<span class="tag">body</span>&gt;
+&lt;/<span class="tag">html</span>&gt;</pre>
+      </div>
+    </details>
+
+    <details class="code-toggle">
+      <summary>🎨 style.css</summary>
+      <div class="term" style="margin:0;border-radius:0">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">style.css</span><button class="press copy-btn" onclick="copyCode(this)">📋 Nusxalash</button></div>
+        <pre>body {
+  font-family: sans-serif;
+  max-width: 480px;
+  margin: 40px auto;
+  text-align: center;
+  background: <span class="num">#0F172A</span>;
+  color: <span class="num">#F8FAFC</span>;
+}
+
+<span class="cm">/* --- Ball va jon paneli --- */</span>
+.hud {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+<span class="cm">/* --- O&#x27;yin maydoni ---
+   position: relative -&gt; ichidagi barcha obyektlar
+   SHU quticha ichida joylashadi.
+   overflow: hidden  -&gt; chetdan chiqqani ko&#x27;rinmaydi. */</span>
+.maydon {
+  position: relative;
+  width: <span class="num">100</span>%;
+  height: 420px;
+  background: <span class="num">#020617</span>;
+  border: 3px solid <span class="num">#334155</span>;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset <span class="num">0</span> <span class="num">0</span> 40px rgba(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.8</span>);
+}
+
+<span class="cm">/* --- Cheksiz harakatlanuvchi yulduzlar --- */</span>
+.yulduzlar {
+  position: absolute;
+  inset: <span class="num">0</span>;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, <span class="num">#fff</span>, transparent),
+    radial-gradient(1px 1px at 40px 70px, <span class="num">#fff</span>, transparent),
+    radial-gradient(2px 2px at 90px 40px, <span class="num">#fff</span>, transparent);
+  background-size: 200px 200px;
+  animation: starMove 10s linear infinite;
+}
+@keyframes starMove {
+  from { transform: translateY(<span class="num">0</span>); }
+  to   { transform: translateY(200px); }
+}
+
+<span class="cm">/* --- Uchuvchi obyektlar ---
+   Hammasi position: absolute, chunki ularning
+   left/top qiymatini JavaScript boshqaradi. */</span>
+.kema {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  z-index: <span class="num">10</span>;
+}
+
+.dushman {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+  z-index: <span class="num">9</span>;
+}
+
+.lazer {
+  position: absolute;
+  width: 6px;
+  height: 20px;
+  border-radius: 4px;
+  z-index: <span class="num">8</span>;
+}
+
+<span class="cm">/* --- O&#x27;yin tugadi oynasi --- */</span>
+.tugadi {
+  position: absolute;
+  inset: <span class="num">0</span>;
+  display: none;              <span class="cm">/* JS uni flex ga o&#x27;zgartiradi */</span>
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(<span class="num">2</span>, <span class="num">6</span>, <span class="num">23</span>, <span class="num">0.85</span>);
+  z-index: <span class="num">20</span>;
+}
+.tugadi .katta {
+  font-size: 24px;
+  color: <span class="num">#EF4444</span>;
+  margin: <span class="num">0</span>;
+}
+
+<span class="cm">/* --- Jon kamayganda qizil chaqnash --- */</span>
+.zarba {
+  animation: qizarish <span class="num">0</span>.25s;
+}
+@keyframes qizarish {
+  from { box-shadow: inset <span class="num">0</span> <span class="num">0</span> 70px rgba(<span class="num">239</span>, <span class="num">68</span>, <span class="num">68</span>, <span class="num">0.9</span>); }
+  to   { box-shadow: inset <span class="num">0</span> <span class="num">0</span> 40px rgba(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.8</span>); }
+}
+
+button {
+  margin-top: 18px;
+  font-size: 18px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  background: <span class="num">#8B5CF6</span>;
+  color: <span class="num">#fff</span>;
+  cursor: pointer;
+}</pre>
+      </div>
+    </details>
+
+    <details class="code-toggle">
+      <summary>⚙️ script.js (to'liq mantiq — 9 bo'lak)</summary>
+      <div class="term" style="margin:0;border-radius:0">
+        <div class="bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="fname">script.js</span><button class="press copy-btn" onclick="copyCode(this)">📋 Nusxalash</button></div>
+        <pre><span class="cm">// ====== 1. O&#x27;YIN HOLATI ======</span>
+<span class="kw">let</span> ball = <span class="num">0</span>;               <span class="cm">// to&#x27;plangan ball</span>
+<span class="kw">let</span> jon = <span class="num">3</span>;                <span class="cm">// qolgan jonlar</span>
+<span class="kw">let</span> ishlayapti = <span class="kw">false</span>;     <span class="cm">// o&#x27;yin hozir ketyaptimi?</span>
+
+<span class="kw">let</span> kemaX = <span class="num">220</span>;            <span class="cm">// kemaning chapdan masofasi (px)</span>
+<span class="kw">let</span> kemaY = <span class="num">360</span>;            <span class="cm">// kemaning tepadan masofasi (px)</span>
+
+<span class="kw">let</span> lazerlar = [];          <span class="cm">// bizning ko&#x27;k lazerlar</span>
+<span class="kw">let</span> dushmanlar = [];        <span class="cm">// tushayotgan dushmanlar</span>
+<span class="kw">let</span> dushmanLazerlari = [];  <span class="cm">// dushmanning qizil lazerlari</span>
+
+<span class="kw">let</span> tugmalar = {};          <span class="cm">// qaysi tugma hozir bosilgan?</span>
+<span class="kw">let</span> oxirgiOtish = <span class="num">0</span>;        <span class="cm">// oxirgi marta qachon otdik? (ms)</span>
+<span class="kw">let</span> taymer = <span class="kw">null</span>;          <span class="cm">// dushman yaratuvchi setInterval</span>
+<span class="kw">let</span> kadr = <span class="kw">null</span>;            <span class="cm">// requestAnimationFrame raqami</span>
+
+<span class="cm">// Sehrli sonlarni bitta joyda saqlaymiz</span>
+<span class="kw">const</span> OLCHAM = <span class="num">40</span>;          <span class="cm">// obyektning kvadrat o&#x27;lchami</span>
+<span class="kw">const</span> CHET = <span class="num">8</span>;             <span class="cm">// emoji atrofidagi bo&#x27;sh joy</span>
+<span class="kw">const</span> TANA = <span class="num">24</span>;            <span class="cm">// to&#x27;qnashuv uchun haqiqiy o&#x27;lcham</span>
+<span class="kw">const</span> PAUZA = <span class="num">250</span>;          <span class="cm">// ikki otish orasidagi minimal vaqt</span>
+
+<span class="kw">const</span> maydon = document.<span class="fn">getElementById</span>(<span class="st">&quot;maydon&quot;</span>);
+
+<span class="cm">// ====== 2. TUGMALARNI KUZATISH ======</span>
+document.<span class="fn">addEventListener</span>(<span class="st">&quot;keydown&quot;</span>, (e) =&gt; {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+
+  <span class="cm">// Brauzer strelka va Space bilan sahifani surmasin!</span>
+  <span class="kw">if</span> ([<span class="st">&quot;ArrowUp&quot;</span>, <span class="st">&quot;ArrowDown&quot;</span>, <span class="st">&quot;ArrowLeft&quot;</span>, <span class="st">&quot;ArrowRight&quot;</span>, <span class="st">&quot;Space&quot;</span>].<span class="fn">includes</span>(e.code)) {
+    e.<span class="fn">preventDefault</span>();
+  }
+
+  tugmalar[e.code] = <span class="kw">true</span>;
+  <span class="kw">if</span> (e.code === <span class="st">&quot;Space&quot;</span>) <span class="fn">bizningLazerOtish</span>();
+});
+
+document.<span class="fn">addEventListener</span>(<span class="st">&quot;keyup&quot;</span>, (e) =&gt; {
+  tugmalar[e.code] = <span class="kw">false</span>;
+});
+
+<span class="cm">// ====== 3. BIZNING KO&#x27;K LAZER ======</span>
+<span class="kw">function</span> <span class="fn">bizningLazerOtish</span>() {
+  <span class="kw">const</span> hozir = Date.<span class="fn">now</span>();
+  <span class="kw">if</span> (hozir - oxirgiOtish &lt; PAUZA) <span class="kw">return</span>;  <span class="cm">// juda tez otishga yo&#x27;l yo&#x27;q</span>
+  oxirgiOtish = hozir;
+
+  <span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="st">&quot;div&quot;</span>);
+  el.className = <span class="st">&quot;lazer&quot;</span>;
+  el.style.background = <span class="st">&quot;#38BDF8&quot;</span>;
+  el.style.boxShadow = <span class="st">&quot;0 0 10px #38BDF8&quot;</span>;
+
+  <span class="kw">const</span> x = kemaX + <span class="num">17</span>;   <span class="cm">// kemaning o&#x27;rtasi</span>
+  <span class="kw">const</span> y = kemaY - <span class="num">20</span>;   <span class="cm">// kemaning burni oldida</span>
+  el.style.left = x + <span class="st">&quot;px&quot;</span>;
+  el.style.top = y + <span class="st">&quot;px&quot;</span>;
+  maydon.<span class="fn">appendChild</span>(el);
+
+  lazerlar.<span class="fn">push</span>({ el, x, y });
+}
+
+<span class="cm">// ====== 4. DUSHMAN LAZERI — NISHONGA QARAB ======</span>
+<span class="kw">function</span> <span class="fn">dushmanLazerOtish</span>(ex, ey) {
+  <span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="st">&quot;div&quot;</span>);
+  el.className = <span class="st">&quot;lazer&quot;</span>;
+  el.style.background = <span class="st">&quot;#EF4444&quot;</span>;
+  el.style.boxShadow = <span class="st">&quot;0 0 10px #EF4444&quot;</span>;
+
+  <span class="kw">const</span> x = ex + <span class="num">17</span>;
+  <span class="kw">const</span> y = ey + OLCHAM;
+
+  <span class="cm">// Dushmandan kemaning markazigacha bo&#x27;lgan yo&#x27;nalish</span>
+  <span class="kw">const</span> dx = (kemaX + OLCHAM / <span class="num">2</span>) - x;
+  <span class="kw">const</span> dy = (kemaY + OLCHAM / <span class="num">2</span>) - y;
+  <span class="kw">const</span> uzunlik = Math.<span class="fn">hypot</span>(dx, dy) || <span class="num">1</span>;   <span class="cm">// 0 ga bo&#x27;lmaslik uchun</span>
+  <span class="kw">const</span> tezlik = <span class="num">4</span>;
+
+  el.style.left = x + <span class="st">&quot;px&quot;</span>;
+  el.style.top = y + <span class="st">&quot;px&quot;</span>;
+  <span class="cm">// lazerni uchish yo&#x27;nalishi bo&#x27;ylab burib qo&#x27;yamiz</span>
+  el.style.transform = <span class="st">&quot;rotate(&quot;</span> + Math.<span class="fn">atan2</span>(-dx, dy) + <span class="st">&quot;rad)&quot;</span>;
+  maydon.<span class="fn">appendChild</span>(el);
+
+  dushmanLazerlari.<span class="fn">push</span>({
+    el, x, y,
+    vx: dx / uzunlik * tezlik,   <span class="cm">// 1 kadrda X bo&#x27;yicha siljish</span>
+    vy: dy / uzunlik * tezlik    <span class="cm">// 1 kadrda Y bo&#x27;yicha siljish</span>
+  });
+}
+
+<span class="cm">// ====== 5. DUSHMAN YARATISH ======</span>
+<span class="kw">function</span> <span class="fn">dushmanYarat</span>() {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+
+  <span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="st">&quot;div&quot;</span>);
+  el.className = <span class="st">&quot;dushman&quot;</span>;
+  el.textContent = [<span class="st">&quot;☄️&quot;</span>, <span class="st">&quot;👽&quot;</span>, <span class="st">&quot;👾&quot;</span>][Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="num">3</span>)];
+
+  <span class="cm">// Maydonning haqiqiy kengligiga qarab tasodifiy joy</span>
+  <span class="kw">const</span> x = Math.<span class="fn">random</span>() * (maydon.clientWidth - OLCHAM);
+  el.style.left = x + <span class="st">&quot;px&quot;</span>;
+  el.style.top = <span class="st">&quot;-40px&quot;</span>;
+  maydon.<span class="fn">appendChild</span>(el);
+
+  <span class="cm">// baseX — zikzak shu nuqta atrofida tebranadi</span>
+  dushmanlar.<span class="fn">push</span>({ el, x, y: -<span class="num">40</span>, baseX: x });
+}
+
+<span class="cm">// ====== 6. TO&#x27;QNASHUV TEKSHIRUVI (AABB) ======</span>
+<span class="kw">function</span> <span class="fn">toqnashuv</span>(x1, y1, w1, h1, x2, y2, w2, h2) {
+  <span class="kw">return</span> x1 &lt; x2 + w2 &amp;&amp;
+         x1 + w1 &gt; x2 &amp;&amp;
+         y1 &lt; y2 + h2 &amp;&amp;
+         y1 + h1 &gt; y2;
+}
+
+<span class="cm">// ====== 7. O&#x27;YIN SIKLI — sekundiga ~60 marta ======</span>
+<span class="kw">function</span> <span class="fn">oyinSikli</span>() {
+  <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+
+  <span class="cm">// Maydon o&#x27;lchami telefon va kompyuterda har xil bo&#x27;ladi,</span>
+  <span class="cm">// shuning uchun chegarani HAR KADRDA qaytadan hisoblaymiz.</span>
+  <span class="kw">const</span> engOng = maydon.clientWidth - OLCHAM;
+  <span class="kw">const</span> engPast = maydon.clientHeight - OLCHAM;
+
+  <span class="cm">// --- 7.1 Kema harakati ---</span>
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowLeft&quot;</span>])  kemaX -= <span class="num">5</span>;
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowRight&quot;</span>]) kemaX += <span class="num">5</span>;
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowUp&quot;</span>])    kemaY -= <span class="num">5</span>;
+  <span class="kw">if</span> (tugmalar[<span class="st">&quot;ArrowDown&quot;</span>])  kemaY += <span class="num">5</span>;
+
+  kemaX = Math.<span class="fn">max</span>(<span class="num">0</span>, Math.<span class="fn">min</span>(engOng, kemaX));
+  kemaY = Math.<span class="fn">max</span>(<span class="num">0</span>, Math.<span class="fn">min</span>(engPast, kemaY));
+
+  <span class="kw">const</span> kema = document.<span class="fn">getElementById</span>(<span class="st">&quot;kema&quot;</span>);
+  kema.style.left = kemaX + <span class="st">&quot;px&quot;</span>;
+  kema.style.top = kemaY + <span class="st">&quot;px&quot;</span>;
+
+  <span class="cm">// --- 7.2 Bizning lazerlar tepaga uchadi ---</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = lazerlar.length - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">const</span> l = lazerlar[i];
+    l.y -= <span class="num">8</span>;
+    l.el.style.top = l.y + <span class="st">&quot;px&quot;</span>;
+
+    <span class="kw">if</span> (l.y &lt; -<span class="num">20</span>) {                 <span class="cm">// ekrandan chiqib ketdi</span>
+      l.el.<span class="fn">remove</span>();
+      lazerlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+    }
+  }
+
+  <span class="cm">// --- 7.3 Qizil lazerlar kemaga qarab uchadi ---</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = dushmanLazerlari.length - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">const</span> dl = dushmanLazerlari[i];
+    dl.x += dl.vx;
+    dl.y += dl.vy;
+    dl.el.style.left = dl.x + <span class="st">&quot;px&quot;</span>;
+    dl.el.style.top = dl.y + <span class="st">&quot;px&quot;</span>;
+
+    <span class="kw">if</span> (<span class="fn">toqnashuv</span>(dl.x, dl.y, <span class="num">6</span>, <span class="num">20</span>,
+                  kemaX + CHET, kemaY + CHET, TANA, TANA)) {
+      dl.el.<span class="fn">remove</span>();
+      dushmanLazerlari.<span class="fn">splice</span>(i, <span class="num">1</span>);
+      <span class="fn">jonKamaytir</span>();
+      <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;       <span class="cm">// oxirgi jon edimi?</span>
+      <span class="kw">continue</span>;
+    }
+
+    <span class="kw">if</span> (dl.y &gt; maydon.clientHeight || dl.y &lt; -<span class="num">20</span> ||
+        dl.x &lt; -<span class="num">20</span> || dl.x &gt; maydon.clientWidth) {
+      dl.el.<span class="fn">remove</span>();
+      dushmanLazerlari.<span class="fn">splice</span>(i, <span class="num">1</span>);
+    }
+  }
+
+  <span class="cm">// --- 7.4 Dushmanlar zikzak tushadi ---</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = dushmanlar.length - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">const</span> d = dushmanlar[i];
+
+    d.y += <span class="num">2.5</span>;
+    d.x = d.baseX + Math.<span class="fn">sin</span>(d.y / <span class="num">30</span>) * <span class="num">40</span>;
+    d.x = Math.<span class="fn">max</span>(<span class="num">0</span>, Math.<span class="fn">min</span>(engOng, d.x));
+    d.el.style.top = d.y + <span class="st">&quot;px&quot;</span>;
+    d.el.style.left = d.x + <span class="st">&quot;px&quot;</span>;
+
+    <span class="cm">// har kadrda 2% ehtimol bilan otadi</span>
+    <span class="kw">if</span> (Math.<span class="fn">random</span>() &lt; <span class="num">0.02</span> &amp;&amp; d.y &gt; <span class="num">0</span> &amp;&amp; d.y &lt; maydon.clientHeight - <span class="num">120</span>) {
+      <span class="fn">dushmanLazerOtish</span>(d.x, d.y);
+    }
+
+    <span class="kw">if</span> (d.y &gt; maydon.clientHeight) {   <span class="cm">// pastga tushib ketdi</span>
+      d.el.<span class="fn">remove</span>();
+      dushmanlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+      <span class="kw">continue</span>;
+    }
+
+    <span class="cm">// (a) dushman kemaga urildimi?</span>
+    <span class="kw">if</span> (<span class="fn">toqnashuv</span>(d.x + CHET, d.y + CHET, TANA, TANA,
+                  kemaX + CHET, kemaY + CHET, TANA, TANA)) {
+      d.el.<span class="fn">remove</span>();
+      dushmanlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+      <span class="fn">jonKamaytir</span>();
+      <span class="kw">if</span> (!ishlayapti) <span class="kw">return</span>;
+      <span class="kw">continue</span>;
+    }
+
+    <span class="cm">// (b) bizning lazer dushmanga tegdimi?</span>
+    <span class="kw">for</span> (<span class="kw">let</span> j = lazerlar.length - <span class="num">1</span>; j &gt;= <span class="num">0</span>; j--) {
+      <span class="kw">const</span> l = lazerlar[j];
+
+      <span class="kw">if</span> (<span class="fn">toqnashuv</span>(d.x + CHET, d.y + CHET, TANA, TANA, l.x, l.y, <span class="num">6</span>, <span class="num">20</span>)) {
+        ball += <span class="num">10</span>;
+        document.<span class="fn">getElementById</span>(<span class="st">&quot;ball&quot;</span>).textContent = ball;
+
+        <span class="kw">const</span> portlash = d.el;
+        portlash.textContent = <span class="st">&quot;💥&quot;</span>;
+        <span class="fn">setTimeout</span>(() =&gt; portlash.<span class="fn">remove</span>(), <span class="num">100</span>);
+        dushmanlar.<span class="fn">splice</span>(i, <span class="num">1</span>);
+
+        l.el.<span class="fn">remove</span>();
+        lazerlar.<span class="fn">splice</span>(j, <span class="num">1</span>);
+        <span class="kw">break</span>;                        <span class="cm">// bu dushman allaqachon o&#x27;ldi</span>
+      }
+    }
+  }
+
+  kadr = <span class="fn">requestAnimationFrame</span>(oyinSikli);
+}
+
+<span class="cm">// ====== 8. JON KAMAYISHI ======</span>
+<span class="kw">function</span> <span class="fn">jonKamaytir</span>() {
+  jon--;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;jon&quot;</span>).textContent = <span class="st">&quot;❤️&quot;</span>.<span class="fn">repeat</span>(Math.<span class="fn">max</span>(jon, <span class="num">0</span>));
+
+  maydon.classList.<span class="fn">add</span>(<span class="st">&quot;zarba&quot;</span>);                          <span class="cm">// qizil chaqnash</span>
+  <span class="fn">setTimeout</span>(() =&gt; maydon.classList.<span class="fn">remove</span>(<span class="st">&quot;zarba&quot;</span>), <span class="num">250</span>);
+
+  <span class="kw">if</span> (jon &lt;= <span class="num">0</span>) <span class="fn">tugat</span>();
+}
+
+<span class="cm">// ====== 9. BOSHLASH VA TUGATISH ======</span>
+<span class="kw">function</span> <span class="fn">boshla</span>() {
+  ball = <span class="num">0</span>;
+  jon = <span class="num">3</span>;
+  ishlayapti = <span class="kw">true</span>;
+  kemaX = <span class="num">220</span>;
+  kemaY = <span class="num">360</span>;
+  tugmalar = {};
+  oxirgiOtish = <span class="num">0</span>;
+
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;ball&quot;</span>).textContent = <span class="num">0</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;jon&quot;</span>).textContent = <span class="st">&quot;❤️❤️❤️&quot;</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;tugadi&quot;</span>).style.display = <span class="st">&quot;none&quot;</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;boshlaBtn&quot;</span>).style.display = <span class="st">&quot;none&quot;</span>;
+
+  <span class="cm">// Eski o&#x27;yindan qolgan barcha elementlarni tozalaymiz</span>
+  [...lazerlar, ...dushmanlar, ...dushmanLazerlari].<span class="fn">forEach</span>(v =&gt; v.el.<span class="fn">remove</span>());
+  lazerlar = [];
+  dushmanlar = [];
+  dushmanLazerlari = [];
+
+  <span class="cm">// MUHIM: eski sikllarni to&#x27;xtatamiz.</span>
+  <span class="cm">// Aks holda ikkita sikl birga ishlab, o&#x27;yin 2 barobar tezlashadi!</span>
+  <span class="fn">clearInterval</span>(taymer);
+  <span class="fn">cancelAnimationFrame</span>(kadr);
+
+  taymer = <span class="fn">setInterval</span>(dushmanYarat, <span class="num">1200</span>);
+  <span class="fn">oyinSikli</span>();
+}
+
+<span class="kw">function</span> <span class="fn">tugat</span>() {
+  ishlayapti = <span class="kw">false</span>;
+  <span class="fn">clearInterval</span>(taymer);
+  <span class="fn">cancelAnimationFrame</span>(kadr);
+
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;natija&quot;</span>).textContent = ball;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;tugadi&quot;</span>).style.display = <span class="st">&quot;flex&quot;</span>;
+  document.<span class="fn">getElementById</span>(<span class="st">&quot;boshlaBtn&quot;</span>).style.display = <span class="st">&quot;inline-block&quot;</span>;
+}</pre>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" id="uyvazifa">
+    <h3 style="margin-top:0">📒 Uy vazifasi</h3>
+    <p>Vazifalarni <b>tartib bilan</b> bajar — har biri oldingisidan qiyinroq.</p>
+
+    <p><b>1. Zikzak kengligi.</b> <code>Math.sin(d.y / 30) * 40</code> dagi <code class="kw-hl">40</code> ni <code class="kw-hl">90</code> qil. Dushman qanday harakatlanadi? Endi <code class="kw-hl">30</code> ni <code class="kw-hl">8</code> qilib ko'r — nima o'zgardi?</p>
+
+    <p><b>2. Qiyinlikni oshir.</b> <code>Math.random() &lt; 0.02</code> dagi sonni <code class="kw-hl">0.05</code> ga almashtir. Necha sekund chiday olding?</p>
+
+    <p><b>3. Otish tezligi.</b> <code>PAUZA</code> ni <code class="kw-hl">80</code> qil, keyin <code class="kw-hl">600</code> qil. Qaysi qiymat o'yinni eng qiziqarli qiladi? Javobingni izohla.</p>
+
+    <p><b>4. Hitboxni ko'rish.</b> <code>.kema</code> va <code>.dushman</code> ga vaqtincha <code class="kw-hl">outline: 1px solid lime;</code> qo'sh. Endi 40×40 katak ko'rinadi — emoji undan qanchalik kichik ekanini o'z ko'zing bilan ko'r.</p>
+
+    <p><b>5. Daraja tizimi (o'rta).</b> Har 50 ballda dushmanlar tezroq tug'ilsin. Maslahat: <code>ball</code> o'zgarganda <code>clearInterval(taymer)</code> qilib, kichikroq vaqt bilan <code>setInterval</code> ni qaytadan yoqing.</p>
+
+    <p><b>6. Qalqon bonusi (qiyin).</b> Har 10 sekundda 🛡️ emoji tushsin. Kema uni ushlab olsa, 3 sekund davomida jon kamaymasin. Maslahat: <code>let qalqon = false;</code> qo'shib, <code>jonKamaytir()</code> boshida <code>if (qalqon) return;</code> yozing.</p>
+
+    <p style="margin-bottom:0"><b>7. Boss (eng qiyin).</b> 100 ballga yetganda bitta katta dushman chiqsin: u 10 marta otilishi kerak, o'ngga-chapga yurib tursin va tez-tez otsin. Maslahat: unga <code>jon: 10</code> maydonini qo'shing va lazer tekkanda o'chirish o'rniga <code>d.jon--</code> qiling.</p>
+  </section>
+  <footer>
+    <p class="big">🎮 3-o'yin tayyor! Endi sen to'liq O'yin Dasturchisisan!</p>
+    <p class="small">Shu 3 ta o'yin (Emojini tut, Mevalarni yig', Koinot himoyachisi) orqali sen massivlar, obyektlar, o'yin sikli, to'qnashuv va vektor matematikasini o'rganding.<br>Bu bilimlar bilan endi <b>o'z o'yiningni</b> noldan yozishing mumkin. 🚀</p>
+  </footer>
+
+</main>
+
+<script>
+  function copyCode(btn){
+    const pre = btn.closest('.term').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(()=>{
+      const old = btn.textContent;
+      btn.textContent = '✅ Nusxalandi!';
+      setTimeout(()=>{ btn.textContent = old; }, 1500);
+    });
+  }
+
+  // ===== Sinab ko'r bo'limidagi jonli o'yin =====
+  // Bu kod pastdagi "To'liq kod" bo'limidagi script.js bilan
+  // bir xil mantiqda ishlaydi (faqat nomlarda g3 prefiksi bor).
+
+  let g3Score = 0, g3Lives = 3, g3Running = false;
+  let g3ShipX = 220, g3ShipY = 360;
+  let g3Lasers = [], g3Enemies = [], g3EnemyLasers = [];
+  let g3Keys = {};
+  let g3LastShot = 0;
+  let g3RAF = null, g3EnemyTimer = null;
+
+  const G3_SIZE = 40, G3_PAD = 8, G3_BODY = 24, G3_COOLDOWN = 250;
+
+  document.addEventListener('keydown', (e) => {
+    if(!g3Running) return;
+    if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Space"].includes(e.code)){
+      e.preventDefault();
+    }
+    g3Keys[e.code] = true;
+    if(e.code === 'Space') g3Shoot();
+  });
+  document.addEventListener('keyup', (e) => {
+    g3Keys[e.code] = false;
+  });
+
+  function g3Shoot(){
+    const now = Date.now();
+    if(now - g3LastShot < G3_COOLDOWN) return;
+    g3LastShot = now;
+
+    const field = document.getElementById('g3Field');
+    const el = document.createElement('div');
+    el.className = 'g3-laser';
+    el.style.background = '#38BDF8';
+    el.style.boxShadow = '0 0 10px #38BDF8';
+    const x = g3ShipX + 17;
+    const y = g3ShipY - 20;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    field.appendChild(el);
+    g3Lasers.push({ el, x, y });
+  }
+
+  function g3EnemyShoot(ex, ey){
+    const field = document.getElementById('g3Field');
+    const el = document.createElement('div');
+    el.className = 'g3-laser';
+    el.style.background = '#EF4444';
+    el.style.boxShadow = '0 0 10px #EF4444';
+
+    const x = ex + 17;
+    const y = ey + G3_SIZE;
+
+    // kemaning markaziga qarab yo'nalish vektori
+    const dx = (g3ShipX + G3_SIZE / 2) - x;
+    const dy = (g3ShipY + G3_SIZE / 2) - y;
+    const len = Math.hypot(dx, dy) || 1;
+    const speed = 4;
+
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.transform = 'rotate(' + Math.atan2(-dx, dy) + 'rad)';
+    field.appendChild(el);
+
+    g3EnemyLasers.push({ el, x, y, vx: dx / len * speed, vy: dy / len * speed });
+  }
+
+  function g3Spawn(){
+    if(!g3Running) return;
+    const field = document.getElementById('g3Field');
+    const el = document.createElement('div');
+    el.className = 'g3-enemy';
+    el.textContent = ['☄️','👽','👾'][Math.floor(Math.random()*3)];
+    const x = Math.random() * (field.clientWidth - G3_SIZE);
+    el.style.left = x + 'px';
+    el.style.top = '-40px';
+    field.appendChild(el);
+    g3Enemies.push({ el, x, y: -40, baseX: x });
+  }
+
+  function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2) {
+    return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
+  }
+
+  function g3Hurt(){
+    g3Lives--;
+    document.getElementById('g3Lives').textContent = '❤️'.repeat(Math.max(g3Lives, 0));
+    const field = document.getElementById('g3Field');
+    field.classList.add('zarba');
+    setTimeout(() => field.classList.remove('zarba'), 250);
+    if(g3Lives <= 0) g3End();
+  }
+
+  function g3Loop(){
+    if(!g3Running) return;
+    const field = document.getElementById('g3Field');
+    const ship = document.getElementById('g3Ship');
+
+    const maxX = field.clientWidth - G3_SIZE;
+    const maxY = field.clientHeight - G3_SIZE;
+
+    if(g3Keys['ArrowLeft'])  g3ShipX -= 5;
+    if(g3Keys['ArrowRight']) g3ShipX += 5;
+    if(g3Keys['ArrowUp'])    g3ShipY -= 5;
+    if(g3Keys['ArrowDown'])  g3ShipY += 5;
+
+    g3ShipX = Math.max(0, Math.min(maxX, g3ShipX));
+    g3ShipY = Math.max(0, Math.min(maxY, g3ShipY));
+    ship.style.left = g3ShipX + 'px';
+    ship.style.top = g3ShipY + 'px';
+
+    // bizning lazerlar
+    for(let i = g3Lasers.length - 1; i >= 0; i--){
+      const l = g3Lasers[i];
+      l.y -= 8;
+      l.el.style.top = l.y + 'px';
+      if(l.y < -20){ l.el.remove(); g3Lasers.splice(i, 1); }
+    }
+
+    // dushman lazerlari
+    for(let i = g3EnemyLasers.length - 1; i >= 0; i--){
+      const dl = g3EnemyLasers[i];
+      dl.x += dl.vx;
+      dl.y += dl.vy;
+      dl.el.style.left = dl.x + 'px';
+      dl.el.style.top = dl.y + 'px';
+
+      if(checkCollision(dl.x, dl.y, 6, 20,
+                        g3ShipX + G3_PAD, g3ShipY + G3_PAD, G3_BODY, G3_BODY)){
+        dl.el.remove(); g3EnemyLasers.splice(i, 1);
+        g3Hurt();
+        if(!g3Running) return;
+        continue;
+      }
+
+      if(dl.y > field.clientHeight || dl.y < -20 ||
+         dl.x < -20 || dl.x > field.clientWidth){
+        dl.el.remove(); g3EnemyLasers.splice(i, 1);
+      }
+    }
+
+    // dushmanlar
+    for(let i = g3Enemies.length - 1; i >= 0; i--){
+      const d = g3Enemies[i];
+      d.y += 2.5;
+      d.x = d.baseX + Math.sin(d.y / 30) * 40;
+      d.x = Math.max(0, Math.min(maxX, d.x));
+      d.el.style.top = d.y + 'px';
+      d.el.style.left = d.x + 'px';
+
+      if(Math.random() < 0.02 && d.y > 0 && d.y < field.clientHeight - 120) {
+        g3EnemyShoot(d.x, d.y);
+      }
+
+      if(d.y > field.clientHeight){ d.el.remove(); g3Enemies.splice(i, 1); continue; }
+
+      if(checkCollision(d.x + G3_PAD, d.y + G3_PAD, G3_BODY, G3_BODY,
+                        g3ShipX + G3_PAD, g3ShipY + G3_PAD, G3_BODY, G3_BODY)){
+        d.el.remove(); g3Enemies.splice(i, 1);
+        g3Hurt();
+        if(!g3Running) return;
+        continue;
+      }
+
+      for(let j = g3Lasers.length - 1; j >= 0; j--){
+        const l = g3Lasers[j];
+        if(checkCollision(d.x + G3_PAD, d.y + G3_PAD, G3_BODY, G3_BODY, l.x, l.y, 6, 20)){
+          g3Score += 10;
+          document.getElementById('g3Score').textContent = g3Score;
+
+          const boom = d.el;
+          boom.textContent = '💥';
+          setTimeout(() => boom.remove(), 100);
+          g3Enemies.splice(i, 1);
+
+          l.el.remove(); g3Lasers.splice(j, 1);
+          break;
+        }
+      }
+    }
+
+    g3RAF = requestAnimationFrame(g3Loop);
+  }
+
+  function g3Start(){
+    g3Score = 0; g3Lives = 3; g3Running = true;
+    g3ShipX = 220; g3ShipY = 360; g3Keys = {}; g3LastShot = 0;
+
+    document.getElementById('g3Score').textContent = 0;
+    document.getElementById('g3Lives').textContent = '❤️❤️❤️';
+    document.getElementById('g3Over').style.display = 'none';
+    document.getElementById('g3Ship').style.display = 'flex';
+    document.getElementById('g3Hint').style.display = 'none';
+    document.getElementById('g3StartBtn').style.display = 'none';
+
+    [...g3Lasers, ...g3Enemies, ...g3EnemyLasers].forEach(item => item.el.remove());
+    g3Lasers = []; g3Enemies = []; g3EnemyLasers = [];
+
+    clearInterval(g3EnemyTimer);
+    cancelAnimationFrame(g3RAF);
+
+    g3EnemyTimer = setInterval(g3Spawn, 1200);
+    g3Loop();
+  }
+
+  function g3End(){
+    g3Running = false;
+    clearInterval(g3EnemyTimer);
+    cancelAnimationFrame(g3RAF);
+    document.getElementById('g3Ship').style.display = 'none';
+    document.getElementById('g3Final').textContent = g3Score;
+    document.getElementById('g3Over').style.display = 'flex';
+    document.getElementById('g3StartBtn').style.display = 'inline-block';
+  }
+</script>
+</body>
+</html>

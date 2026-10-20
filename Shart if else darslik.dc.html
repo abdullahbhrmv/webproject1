@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Nunito',sans-serif;background:#FFF1F7;color:#2B2540;-webkit-font-smoothing:antialiased}
+  a{color:#C2348A}
+  a:hover{color:#A2286F}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+  @keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+  details>summary{cursor:pointer;list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  input[type=range]{accent-color:#E84CA0;width:100%}
+  ::selection{background:#FFE3A8}
+  .press{transition:transform .12s}
+  .press:active{transform:scale(.92)}
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" fill="#7B2FCB"/>
+    <text x="200" y="150" font-family="monospace" font-size="70" font-weight="700" fill="#fff" text-anchor="middle">if</text>
+    <text x="200" y="240" font-family="monospace" font-size="46" font-weight="700" fill="#FFC44D" text-anchor="middle">else</text>
+    <text x="200" y="320" font-family="sans-serif" font-size="30" font-weight="900" fill="#fff" text-anchor="middle">🤔 Agar...</text>
+  </svg>
+</template>
+
+<div style="overflow:hidden">
+
+  <!-- ===== HERO ===== -->
+  <header style="position:relative;background:linear-gradient(120deg,#7B2FCB 0%,#A24CE8 50%,#4C7DE8 100%);background-size:200% 200%;animation:rainbow 8s ease infinite;padding:64px 24px 90px;text-align:center;color:#fff">
+    <div style="position:absolute;top:34px;left:9%;font-size:46px;animation:wiggle 2.4s ease-in-out infinite">🤔</div>
+    <div style="position:absolute;top:80px;right:11%;font-size:38px;animation:floaty 3s ease-in-out infinite">☂️</div>
+    <div style="position:absolute;bottom:48px;left:14%;font-size:36px;animation:bounce 2.4s ease-in-out infinite">🚦</div>
+    <div style="position:absolute;bottom:60px;right:13%;font-size:34px;animation:pulse 2s ease-in-out infinite">🔀</div>
+    <div style="display:inline-block;background:rgba(255,255,255,.22);padding:8px 20px;border-radius:30px;font-weight:700;letter-spacing:.5px;font-size:16px;margin-bottom:18px">🧠 Kompyuter qanday "qaror" qabul qiladi?</div>
+    <h1 style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:60px;margin:0 0 14px;line-height:1.05;text-shadow:0 4px 16px rgba(0,0,0,.15)">Agar... — if / else</h1>
+    <p style="max-width:700px;margin:0 auto;font-size:21px;font-weight:600;opacity:.97;line-height:1.45">Biz har kuni <b>qaror</b> qilamiz: <i>"Agar yomg'ir yog'sa, soyabon olaman."</i> Kompyuter ham xuddi shunday o'ylaydi — <code style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace">if</code> va <code style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace">else</code> bilan. Kel, kompyuterga fikrlashni o'rgatamiz! 🎉</p>
+  </header>
+
+  <!-- ===== STICKY NAV ===== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,241,247,.93);backdrop-filter:blur(10px);border-bottom:2px solid #FAD2E5;padding:12px 14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <a href="#agar" style="text-decoration:none;background:#EDE2FB;color:#7B2FCB;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #DDC8F5">🤔 Agar (if)</a>
+    <a href="#aksholda" style="text-decoration:none;background:#FCE0EE;color:#C2348A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F8C0DC">🔀 Aks holda (else)</a>
+    <a href="#belgilar" style="text-decoration:none;background:#E0F7EC;color:#16A34A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5EFD5">⚖️ Belgilar</a>
+    <a href="#elseif" style="text-decoration:none;background:#E0EAFC;color:#3A6FD9;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5D8F5">🏅 else if</a>
+    <a href="#val_yoki" style="text-decoration:none;background:#FFF0DC;color:#B45309;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #FBDFB6">🔗 VA / YOKI</a>
+    <a href="#uyvazifasi" style="text-decoration:none;background:#EDE2FB;color:#7B2FCB;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #DDC8F5">📒 Uy vazifasi</a>
+  </nav>
+
+  <main style="max-width:1080px;margin:0 auto;padding:40px 22px 80px">
+
+    <div style="background:#fff;border-radius:20px;padding:20px 26px;box-shadow:0 8px 24px rgba(123,47,203,.1);margin-bottom:36px;border:2px solid #E8DBFA;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <div style="font-size:34px">🧭</div>
+      <p style="margin:0;font-size:17px;line-height:1.55;flex:1;min-width:240px">Bu darslik <b>faqat "qaror qilish"</b> haqida! <code style="font-family:'JetBrains Mono',monospace;color:#7B2FCB">if</code> — <b>Agar</b> degani. Kompyuterga aytamiz: <b>"AGAR bu to'g'ri bo'lsa — buni qil, AKS HOLDA — buni qil."</b> Har tugmani bos va slayderni sur — o'zing sinab ko'r! 👆</p>
+    </div>
+
+    <!-- ============ 1. AGAR (if) ============ -->
+    <div id="agar" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:8px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#7B2FCB,#B57AF0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(123,47,203,.35)">🤔</div>
+      <div>
+        <div style="font-weight:800;color:#7B2FCB;font-size:13px;letter-spacing:1px">1-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#7B2FCB">Agar... (if) — shart nima?</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #E8DBFA">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Hayotda biz shunday o'ylaymiz: <b>"AGAR yomg'ir yog'sa → soyabon olaman."</b> Bu yerda <b>"yomg'ir yog'sa"</b> — <b>shart</b> (to'g'ri yoki noto'g'ri bo'lishi mumkin). JavaScript'da buni <code style="background:#EDE2FB;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#7B2FCB">if</code> bilan yozamiz. Shart <b>to'g'ri (true)</b> bo'lsa — <b>{ }</b> ichidagi kod ishlaydi. Noto'g'ri bo'lsa — hech narsa bo'lmaydi! 🪄</p>
+
+      <!-- Formula -->
+      <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);margin-bottom:26px">
+        <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+        <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">if (shart) {
+  // AGAR shart TO'G'RI bo'lsa,
+  // faqat shu yer ishlaydi 👇
+}</pre>
+      </div>
+
+      <!-- Misol: yomg'ir tugmasi -->
+      <div style="font-weight:800;color:#7B2FCB;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL — yomg'ir bormi?</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function tekshir() {
+  let yomgir = true;   // yomg'ir yog'yapti
+
+  if (yomgir) {
+    javob = "☂️ Soyabon ol!";
+  }
+  // agar yomgir = false bo'lsa,
+  // bu yer umuman ishlamaydi
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#F4EEFC;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🌦️ HAVO QANDAY?</div>
+          <div style="font-size:64px;line-height:1;animation:pop .3s">{{ rainSky }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:22px;color:#7B2FCB;text-align:center;min-height:30px">{{ rainMsg }}</div>
+          <button onClick="{{ onRain }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;color:#fff;background:linear-gradient(135deg,#7B2FCB,#B57AF0);border:none;padding:13px 24px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(123,47,203,.32)">{{ rainBtn }}</button>
+          <p style="margin:0;font-size:14px;color:#7A7088;text-align:center">Yomg'ir <b>bor</b> bo'lgandagina soyabon xabari chiqadi!</p>
+        </div>
+      </div>
+
+      <div style="background:#EDE2FB;border:2px solid #DDC8F5;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#7B2FCB;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">if ( )</code><span><b>"Agar"</b> degani. Qavs ichidagi <b>shart</b>ni tekshiradi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">true / false</code><span>Shart <b>to'g'ri (true)</b> yoki <b>noto'g'ri (false)</b> bo'ladi — ha yoki yo'q!</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">{ }</code><span>Shart to'g'ri bo'lsagina, <b>shu qavs ichidagi</b> kod ishlaydi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. AKS HOLDA (else) ============ -->
+    <div id="aksholda" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(232,76,160,.35)">🔀</div>
+      <div>
+        <div style="font-weight:800;color:#C2348A;font-size:13px;letter-spacing:1px">2-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#C2348A">Aks holda (else) — ikkinchi yo'l</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FAD8E8">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Ko'pincha bizga <b>ikkita yo'l</b> kerak: "Agar shart to'g'ri bo'lsa — <b>buni</b>, <b>aks holda</b> — <b>buni</b>." <code style="background:#FCE0EE;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">else</code> — <b>"aks holda"</b> degani. U <b>if</b> yolg'iz qolmasin, ikkinchi yo'lni ko'rsatadi. Yoshni surib ko'r — kompyuter qaror qiladi! 👇</p>
+
+      <!-- Formula -->
+      <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);margin-bottom:26px">
+        <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+        <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">if (shart) {
+  // shart TO'G'RI bo'lsa — bu
+} else {
+  // AKS HOLDA — bu ishlaydi
+}</pre>
+      </div>
+
+      <!-- Misol: yosh -->
+      <div style="font-weight:800;color:#C2348A;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL — maktabga tayyormisan?</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function tekshir() {
+  let yosh = 7;
+
+  if (yosh &gt;= 7) {
+    javob = "🎒 Maktabga!";
+  } else {
+    javob = "🧸 Bog'chaga!";
+  }
+  document.getElementById("j").textContent = javob;
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center;background:#FCEFF6;border-radius:16px;padding:24px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🎂 YOSHNI TANLA</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:44px;color:#C2348A;line-height:1">{{ age }} yosh</div>
+          <input type="range" min="1" max="15" value="{{ age }}" onChange="{{ onAge }}" onInput="{{ onAge }}">
+          <div style="font-size:60px;line-height:1;animation:pop .3s">{{ schoolEmoji }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:24px;color:#C2348A;text-align:center">{{ schoolText }}</div>
+          <p style="margin:0;font-size:14px;color:#7A7088;text-align:center"><b>7 yosh</b> — chegara. Sur va ikkala yo'lni ko'r!</p>
+        </div>
+      </div>
+
+      <div style="background:#FCE0EE;border:2px solid #F8C0DC;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#C2348A;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">yosh &gt;= 7</code><span>Shart: yosh <b>7 dan katta yoki teng</b>mi? (ha / yo'q)</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">if</code><span>To'g'ri bo'lsa → <b>🎒 Maktabga</b>.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">else</code><span>Aks holda (7 dan kichik) → <b>🧸 Bog'chaga</b>. Doim <b>bittasi</b> ishlaydi!</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. TAQQOSLASH BELGILARI ============ -->
+    <div id="belgilar" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#16A34A,#4ADE80);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(22,163,74,.35)">⚖️</div>
+      <div>
+        <div style="font-weight:800;color:#15803D;font-size:13px;letter-spacing:1px">3-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#15803D">Taqqoslash belgilari</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #CFEEDB">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 20px">Shart yozish uchun <b>taqqoslash belgilari</b> kerak. Ular ikkita sonni solishtiradi va <b>true</b> yoki <b>false</b> qaytaradi. Eng muhimi: <b>tekshirish</b> uchun <code style="background:#E0F7EC;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#15803D">===</code> (uchta teng!) ishlatamiz. 👀</p>
+
+      <!-- Belgilar jadvali -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px">
+        <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#15803D">&gt;</div><div style="font-size:15px;font-weight:700;margin-top:4px">katta</div></div>
+        <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#15803D">&lt;</div><div style="font-size:15px;font-weight:700;margin-top:4px">kichik</div></div>
+        <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#15803D">&gt;=</div><div style="font-size:15px;font-weight:700;margin-top:4px">katta yoki teng</div></div>
+        <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#15803D">&lt;=</div><div style="font-size:15px;font-weight:700;margin-top:4px">kichik yoki teng</div></div>
+        <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#15803D">===</div><div style="font-size:15px;font-weight:700;margin-top:4px">teng (bir xil)</div></div>
+        <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#15803D">!==</div><div style="font-size:15px;font-weight:700;margin-top:4px">teng emas</div></div>
+      </div>
+
+      <!-- Interaktiv: son vs 10 -->
+      <div style="font-weight:800;color:#15803D;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ SINAB KO'R — sonni <b>10</b> bilan solishtir</div>
+      <div style="background:#F1FBF5;border-radius:16px;padding:24px 26px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px">
+          <div style="font-family:'Fredoka',sans-serif;font-size:40px;color:#15803D;min-width:64px;text-align:center">{{ cmp }}</div>
+          <input type="range" min="0" max="20" value="{{ cmp }}" onChange="{{ onCmp }}" onInput="{{ onCmp }}" style="flex:1;min-width:200px;max-width:420px">
+          <span style="font-size:16px;font-weight:700;color:#7A8875">🎚️ Sonni sur (0–20)</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">
+          <div style="background:#fff;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border:2px solid {{ gtBorder }}"><code style="font-family:'JetBrains Mono',monospace;font-size:16px;color:#2B2540">{{ cmp }} &gt; 10</code><span style="font-weight:800;font-size:14px;color:{{ gtColor }}">{{ gtText }}</span></div>
+          <div style="background:#fff;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border:2px solid {{ ltBorder }}"><code style="font-family:'JetBrains Mono',monospace;font-size:16px;color:#2B2540">{{ cmp }} &lt; 10</code><span style="font-weight:800;font-size:14px;color:{{ ltColor }}">{{ ltText }}</span></div>
+          <div style="background:#fff;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border:2px solid {{ eqBorder }}"><code style="font-family:'JetBrains Mono',monospace;font-size:16px;color:#2B2540">{{ cmp }} === 10</code><span style="font-weight:800;font-size:14px;color:{{ eqColor }}">{{ eqText }}</span></div>
+        </div>
+      </div>
+
+      <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#15803D;display:block;margin-bottom:10px">🔍 Diqqat — juda muhim!</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F1FBF5;color:#15803D;padding:2px 8px;border-radius:6px;height:fit-content">===</code><span>Tekshirish uchun <b>uchta</b> teng belgisi! "Bir xilmi?" deb <b>so'raydi</b>.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F1FBF5;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">=</code><span><b>Bitta</b> teng — bu tekshirmaydi, <b>qiymat beradi</b> (masalan <code style="font-family:'JetBrains Mono',monospace">let x = 5</code>). Adashtirma!</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F1FBF5;color:#15803D;padding:2px 8px;border-radius:6px;height:fit-content">true / false</code><span>Har taqqoslash <b>faqat</b> shu ikkitasidan birini beradi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. ELSE IF ============ -->
+    <div id="elseif" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#3A6FD9,#7AA7F0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(58,111,217,.35)">🏅</div>
+      <div>
+        <div style="font-weight:800;color:#2C5BB8;font-size:13px;letter-spacing:1px">4-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#2C5BB8">else if — ko'p yo'l</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #CFDCF7">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Ba'zan <b>ikkita emas, ko'p</b> yo'l kerak: 5, 4, 3 yoki 2 baho. Buning uchun o'rtaga <code style="background:#E0EAFC;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#2C5BB8">else if</code> ("aks holda agar") qo'shamiz. Kompyuter <b>yuqoridan pastga</b> tekshiradi va <b>birinchi to'g'ri</b> yo'lda to'xtaydi. Ballni surib bahoni ko'r! 🏅</p>
+
+      <!-- Misol: baho -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function baho(ball) {
+  if (ball &gt;= 90) {
+    return "5 — A'lo 🌟";
+  } else if (ball &gt;= 70) {
+    return "4 — Yaxshi 😊";
+  } else if (ball &gt;= 50) {
+    return "3 — O'rta 🙂";
+  } else {
+    return "Harakat qil 💪";
+  }
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center;background:#EEF3FC;border-radius:16px;padding:24px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">📝 BALLNI TANLA</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:44px;color:#2C5BB8;line-height:1">{{ score }} ball</div>
+          <input type="range" min="0" max="100" value="{{ score }}" onChange="{{ onScore }}" onInput="{{ onScore }}">
+          <div style="font-size:56px;line-height:1;animation:pop .3s">{{ gradeEmoji }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:26px;text-align:center;color:{{ gradeColor }}">{{ gradeText }}</div>
+        </div>
+      </div>
+
+      <div style="background:#E0EAFC;border:2px solid #C5D8F5;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#2C5BB8;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF3FC;color:#2C5BB8;padding:2px 8px;border-radius:6px;height:fit-content">if</code><span>Avval eng <b>yuqori</b> shartni tekshiradi (90+).</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF3FC;color:#2C5BB8;padding:2px 8px;border-radius:6px;height:fit-content">else if</code><span>To'g'ri kelmasa, <b>keyingisini</b> sinaydi (70+, keyin 50+).</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF3FC;color:#2C5BB8;padding:2px 8px;border-radius:6px;height:fit-content">else</code><span>Hech biri to'g'ri kelmasa — <b>oxirgi</b> yo'l ishlaydi.</span></div>
+          <div style="display:flex;gap:10px"><span style="flex:none;font-size:18px">🛑</span><span>Kompyuter <b>birinchi to'g'ri</b> yo'lni topib <b>to'xtaydi</b> — qolganini o'qimaydi!</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. VA / YOKI ============ -->
+    <div id="val_yoki" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#EA9A0B,#F7C948);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(234,154,11,.35)">🔗</div>
+      <div>
+        <div style="font-weight:800;color:#B45309;font-size:13px;letter-spacing:1px">5-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#B45309">VA (&amp;&amp;) va YOKI (||)</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FBE6BE">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Ba'zan <b>ikkita shart</b> birga kerak: <i>"AGAR havo issiq <b>VA</b> dam olish kuni bo'lsa → plyajga!"</i>. <code style="background:#FFF0DC;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#B45309">&amp;&amp;</code> = <b>VA</b> (ikkalasi ham to'g'ri bo'lishi shart). <code style="background:#FFF0DC;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#B45309">||</code> = <b>YOKI</b> (bittasi yetarli). Ikkala tugmani bosib sinab ko'r! 🏖️</p>
+
+      <!-- Misol: plyaj -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function reja() {
+  // ikkala shart ham TO'G'RI bo'lishi kerak
+  if (issiq &amp;&amp; damOlish) {
+    javob = "🏖️ Plyajga boramiz!";
+  } else {
+    javob = "🏠 Uyda qolamiz.";
+  }
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center;background:#FFF7E8;border-radius:16px;padding:24px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🧩 SHARTLARNI YOQ</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <button onClick="{{ onHot }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;color:#fff;background:{{ hotBg }};border:none;padding:11px 18px;border-radius:14px;cursor:pointer;box-shadow:0 6px 14px rgba(234,154,11,.28)">{{ hotLabel }}</button>
+            <button onClick="{{ onWeekend }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;color:#fff;background:{{ weekendBg }};border:none;padding:11px 18px;border-radius:14px;cursor:pointer;box-shadow:0 6px 14px rgba(234,154,11,.28)">{{ weekendLabel }}</button>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:15px;color:#8A6A2A;background:#fff;border-radius:10px;padding:8px 14px">issiq={{ hotVal }} &amp;&amp; damOlish={{ weekendVal }}</div>
+          <div style="font-size:60px;line-height:1;animation:pop .3s">{{ beachEmoji }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:22px;text-align:center;color:#B45309">{{ beachText }}</div>
+        </div>
+      </div>
+
+      <div style="background:#FFF0DC;border:2px solid #FBDFB6;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#B45309;display:block;margin-bottom:10px">🔍 VA / YOKI farqi</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FFF7E8;color:#B45309;padding:2px 8px;border-radius:6px;height:fit-content">&amp;&amp; (VA)</code><span><b>Ikkalasi ham</b> to'g'ri bo'lsagina — true. Bittasi yolg'on bo'lsa — false.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FFF7E8;color:#B45309;padding:2px 8px;border-radius:6px;height:fit-content">|| (YOKI)</code><span><b>Bittasi</b> to'g'ri bo'lsa yetarli — true. Ikkalasi ham yolg'on bo'lsagina false.</span></div>
+        </div>
+      </div>
+
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq if/else kodi — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">baho.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body style="text-align:center;font-family:sans-serif"&gt;
+
+  &lt;h1 id="j"&gt;?&lt;/h1&gt;
+  &lt;button onclick="baho()"&gt;Bahoni ko'r 📝&lt;/button&gt;
+
+  &lt;script&gt;
+    function baho() {
+      let ball = 85;   // ballni o'zgartirib ko'r!
+
+      if (ball &gt;= 90) {
+        document.getElementById("j").textContent = "5 — A'lo 🌟";
+      } else if (ball &gt;= 70) {
+        document.getElementById("j").textContent = "4 — Yaxshi 😊";
+      } else if (ball &gt;= 50) {
+        document.getElementById("j").textContent = "3 — O'rta 🙂";
+      } else {
+        document.getElementById("j").textContent = "Harakat qil 💪";
+      }
+    }
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ 6. UY VAZIFASI ============ -->
+    <div id="uyvazifasi" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#7B2FCB,#E84CA0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(123,47,203,.35)">📒</div>
+      <div>
+        <div style="font-weight:800;color:#7B2FCB;font-size:13px;letter-spacing:1px">MASHQ QILAMIZ</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#7B2FCB">Uy vazifasi 🏠</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:20px;border:2px solid #E8DBFA">
+      <p style="font-size:17px;line-height:1.6;margin:0 0 22px;color:#4A4560">Har birini yangi <code style="font-family:'JetBrains Mono',monospace;color:#7B2FCB">index.html</code> faylga yozib, brauzerda och. <b>if</b> va <b>else</b> ni o'zing yoz! 💪</p>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start;background:#F4EEFC;border-radius:16px;padding:20px 24px">
+          <div style="flex:none;width:40px;height:40px;background:#7B2FCB;color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700">1</div>
+          <div><b style="font-size:18px;color:#7B2FCB">🎂 Yosh tekshiruvchi</b><p style="margin:6px 0 0;font-size:16px;line-height:1.55;color:#4A4560">Bir <code style="font-family:'JetBrains Mono',monospace">yosh</code> o'zgaruvchisi yoz. <b>Agar</b> 18 dan katta yoki teng bo'lsa "Kattasan 🧑", <b>aks holda</b> "Hali kichiksan 🧒" chiqarsin.</p></div>
+        </div>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;background:#FCEFF6;border-radius:16px;padding:20px 24px">
+          <div style="flex:none;width:40px;height:40px;background:#C2348A;color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700">2</div>
+          <div><b style="font-size:18px;color:#C2348A">🔐 Sirli parol</b><p style="margin:6px 0 0;font-size:16px;line-height:1.55;color:#4A4560">Tugma bosilganda parolni tekshir. <b>Agar</b> parol <code style="font-family:'JetBrains Mono',monospace">=== 1234</code> bo'lsa "🔓 Ochildi!", <b>aks holda</b> "🔒 Xato parol!" chiqarsin.</p></div>
+        </div>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;background:#EEF3FC;border-radius:16px;padding:20px 24px">
+          <div style="flex:none;width:40px;height:40px;background:#2C5BB8;color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700">3</div>
+          <div><b style="font-size:18px;color:#2C5BB8">🚦 Svetofor (else if)</b><p style="margin:6px 0 0;font-size:16px;line-height:1.55;color:#4A4560">Bir <code style="font-family:'JetBrains Mono',monospace">rang</code> o'zgaruvchisi yoz. <b>Agar</b> "qizil" → "To'xta! 🛑", <b>aks holda agar</b> "sariq" → "Tayyorlan! ⏳", <b>aks holda</b> "Yur! ✅".</p></div>
+        </div>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;background:#FFF7E8;border-radius:16px;padding:20px 24px">
+          <div style="flex:none;width:40px;height:40px;background:#B45309;color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700">4</div>
+          <div><b style="font-size:18px;color:#B45309">⭐ Juft yoki toq (qiyin!)</b><p style="margin:6px 0 0;font-size:16px;line-height:1.55;color:#4A4560">Bir son yoz. <b>Agar</b> <code style="font-family:'JetBrains Mono',monospace">son % 2 === 0</code> bo'lsa "Juft son 🟢", <b>aks holda</b> "Toq son 🔵" chiqarsin. <br><span style="font-size:14px;color:#9A8FA8">💡 <code style="font-family:'JetBrains Mono',monospace">%</code> — bo'lishdan qolgan qoldiqni beradi.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <div style="text-align:center;padding:30px 20px 10px">
+      <div style="font-size:44px;margin-bottom:10px;animation:bounce 2s ease-in-out infinite">🧠✨</div>
+      <p style="font-family:'Fredoka',sans-serif;font-size:24px;color:#7B2FCB;margin:0">Endi kompyuter <b>SEN</b> o'rgatgandek o'ylaydi!</p>
+      <p style="font-size:16px;color:#9A8FA8;margin:8px 0 0">Keyingi darsda: <b>Math.random()</b> bilan qo'shib, aqlli o'yin yasaymiz! 🎲</p>
+    </div>
+
+  </main>
+
+  <footer style="background:#2B2540;color:#B8AECD;text-align:center;padding:26px 20px;font-size:14px">JavaScript sehrlari · <b style="color:#fff">Agar... (if / else)</b> darsligi 🤔</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    rain: false,
+    age: 7,
+    cmp: 10,
+    score: 85,
+    hot: false,
+    weekend: false
+  };
+
+  renderVals() {
+    const s = this.state;
+
+    // ---- 1. if (rain) ----
+    // ---- 3. comparison helpers ----
+    const yes = { text: "✅ TO'G'RI", color: "#15803D", border: "#8FD9AE" };
+    const no  = { text: "❌ NOTO'G'RI", color: "#C2348A", border: "#F4B8D6" };
+    const gt = s.cmp > 10 ? yes : no;
+    const lt = s.cmp < 10 ? yes : no;
+    const eq = s.cmp === 10 ? yes : no;
+
+    // ---- 4. grade (else if) ----
+    let grade;
+    if (s.score >= 90) grade = { emoji: "🌟", text: "5 — A'lo!", color: "#15803D" };
+    else if (s.score >= 70) grade = { emoji: "😊", text: "4 — Yaxshi", color: "#2C5BB8" };
+    else if (s.score >= 50) grade = { emoji: "🙂", text: "3 — O'rta", color: "#B45309" };
+    else grade = { emoji: "💪", text: "Harakat qil!", color: "#C2348A" };
+
+    // ---- 5. && / || ----
+    const beach = (s.hot && s.weekend)
+      ? { emoji: "🏖️", text: "Plyajga boramiz!" }
+      : { emoji: "🏠", text: "Uyda qolamiz." };
+
+    return {
+      // 1
+      rainSky: s.rain ? "🌧️" : "☀️",
+      rainMsg: s.rain ? "☂️ Soyabon ol!" : "",
+      rainBtn: s.rain ? "Yomg'irni to'xtat ☀️" : "Yomg'ir yog'sin 🌧️",
+      onRain: () => this.setState({ rain: !s.rain }),
+
+      // 2
+      age: s.age,
+      onAge: (e) => this.setState({ age: +e.target.value }),
+      schoolEmoji: s.age >= 7 ? "🎒" : "🧸",
+      schoolText: s.age >= 7 ? "Maktabga!" : "Bog'chaga!",
+
+      // 3
+      cmp: s.cmp,
+      onCmp: (e) => this.setState({ cmp: +e.target.value }),
+      gtText: gt.text, gtColor: gt.color, gtBorder: gt.border,
+      ltText: lt.text, ltColor: lt.color, ltBorder: lt.border,
+      eqText: eq.text, eqColor: eq.color, eqBorder: eq.border,
+
+      // 4
+      score: s.score,
+      onScore: (e) => this.setState({ score: +e.target.value }),
+      gradeEmoji: grade.emoji,
+      gradeText: grade.text,
+      gradeColor: grade.color,
+
+      // 5
+      hotVal: s.hot ? "true" : "false",
+      weekendVal: s.weekend ? "true" : "false",
+      hotLabel: s.hot ? "🔥 Issiq: HA" : "❄️ Issiq: yo'q",
+      weekendLabel: s.weekend ? "🎉 Dam kuni: HA" : "📚 Dam kuni: yo'q",
+      hotBg: s.hot ? "linear-gradient(135deg,#EA9A0B,#F7C948)" : "#C4B7A0",
+      weekendBg: s.weekend ? "linear-gradient(135deg,#EA9A0B,#F7C948)" : "#C4B7A0",
+      onHot: () => this.setState({ hot: !s.hot }),
+      onWeekend: () => this.setState({ weekend: !s.weekend }),
+      beachEmoji: beach.emoji,
+      beachText: beach.text
+    };
+  }
+}
+</script>
+</body>
+</html>

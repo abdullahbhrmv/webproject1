@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Nunito',sans-serif;background:#FFF6EC;color:#2D2B3A;-webkit-font-smoothing:antialiased}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes wiggle{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+  details>summary{cursor:pointer;list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  textarea{font-family:'JetBrains Mono',monospace}
+  ::selection{background:#FFD27D}
+</style>
+</helmet>
+
+<div style="overflow:hidden">
+
+  <!-- ===== HERO ===== -->
+  <header style="position:relative;background:linear-gradient(135deg,#FF6B4A 0%,#FF9E5E 45%,#FFC444 100%);padding:64px 24px 90px;text-align:center;color:#fff">
+    <div style="position:absolute;top:30px;left:8%;font-size:46px;animation:floaty 4s ease-in-out infinite">🌐</div>
+    <div style="position:absolute;top:70px;right:10%;font-size:40px;animation:floaty 5s ease-in-out infinite">✨</div>
+    <div style="position:absolute;bottom:40px;left:14%;font-size:38px;animation:wiggle 3s ease-in-out infinite">🎨</div>
+    <div style="display:inline-block;background:rgba(255,255,255,.22);padding:8px 20px;border-radius:30px;font-weight:700;letter-spacing:.5px;font-size:16px;margin-bottom:18px">🚀 Veb-sayt skeletini yasaymiz</div>
+    <h1 style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:62px;margin:0 0 14px;line-height:1.05;text-shadow:0 4px 16px rgba(0,0,0,.12)">HTML asoslari</h1>
+    <p style="max-width:640px;margin:0 auto;font-size:21px;font-weight:600;opacity:.96;line-height:1.45">Python'ni allaqachon bilasiz — endi veb-sahifaning skeletini yasashni o'rganamiz! Bezash (CSS) — alohida darsda. 🐍 ➜ 🧱</p>
+  </header>
+
+  <!-- ===== STICKY NAV ===== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,246,236,.92);backdrop-filter:blur(10px);border-bottom:2px solid #FFE3C7;padding:12px 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <a href="#boshlash" style="text-decoration:none;background:#E4EEFF;color:#2A6FDB;font-weight:800;padding:9px 18px;border-radius:30px;font-size:15px;border:2px solid #C5DBFF">💻 Faylni ochish</a>
+    <a href="#html" style="text-decoration:none;background:#FFEBE2;color:#E8552E;font-weight:800;padding:9px 18px;border-radius:30px;font-size:15px;border:2px solid #FFD2C2">🧱 HTML qismi</a>
+    <a href="#chuqur" style="text-decoration:none;background:#FFE3D2;color:#D9560A;font-weight:800;padding:9px 18px;border-radius:30px;font-size:15px;border:2px solid #FBC9A8">🧰 Chuqurroq</a>
+    <a href="#playground" style="text-decoration:none;background:#E5F8EC;color:#16A34A;font-weight:800;padding:9px 18px;border-radius:30px;font-size:15px;border:2px solid #C5EFD5">🧪 O'yin maydoni</a>
+    <a href="#uyvazifasi" style="text-decoration:none;background:#FFF3DB;color:#D97706;font-weight:800;padding:9px 18px;border-radius:30px;font-size:15px;border:2px solid #FBE3B0">📒 Uy vazifasi</a>
+  </nav>
+
+  <main style="max-width:1080px;margin:0 auto;padding:40px 22px 80px">
+
+    <!-- ============ FAYL OCHISH ============ -->
+    <div id="boshlash" style="scroll-margin-top:70px;background:linear-gradient(135deg,#2A6FDB,#5B9BFF);border-radius:28px;padding:34px 38px;box-shadow:0 16px 40px rgba(42,111,219,.22);margin:8px 0 36px;color:#fff">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px">
+        <div style="font-size:36px">💻</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:32px;margin:0">HTML faylni qanday ochish va ishga tushirish?</h2>
+      </div>
+      <p style="font-size:18px;line-height:1.55;margin:0 0 24px;opacity:.95">Hech qanday maxsus dastur o'rnatish shart emas! Faqat <b>matn muharriri</b> va <b>brauzer</b> (Chrome, Edge...) yetarli. 5 ta oddiy qadam:</p>
+
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:250px;background:rgba(255,255,255,.14);border-radius:16px;padding:20px 22px;backdrop-filter:blur(4px)">
+          <div style="font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px">1️⃣</div>
+          <h3 style="font-family:'Fredoka',sans-serif;font-size:19px;margin:0 0 6px">Matn muharririni och</h3>
+          <p style="font-size:16px;line-height:1.5;margin:0;opacity:.95">Windows'da <b>Bloknot</b> (Notepad), yoki bepul <b>VS Code</b> dasturi. Hattoki telefon notepadi ham bo'ladi.</p>
+        </div>
+        <div style="flex:1;min-width:250px;background:rgba(255,255,255,.14);border-radius:16px;padding:20px 22px;backdrop-filter:blur(4px)">
+          <div style="font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px">2️⃣</div>
+          <h3 style="font-family:'Fredoka',sans-serif;font-size:19px;margin:0 0 6px">Kodingni yoz</h3>
+          <p style="font-size:16px;line-height:1.5;margin:0;opacity:.95">Yuqorida o'rgangan teglaringni yoz. Quyidagi to'liq namunadan boshlasang bo'ladi.</p>
+        </div>
+        <div style="flex:1;min-width:250px;background:rgba(255,255,255,.14);border-radius:16px;padding:20px 22px;backdrop-filter:blur(4px)">
+          <div style="font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px">3️⃣</div>
+          <h3 style="font-family:'Fredoka',sans-serif;font-size:19px;margin:0 0 6px">.html bilan saqla</h3>
+          <p style="font-size:16px;line-height:1.5;margin:0;opacity:.95">Faylni <b>index.html</b> deb saqla. <b>Diqqat:</b> nom oxiri albatta <b>.html</b> bilan tugashi kerak (.txt emas!).</p>
+        </div>
+        <div style="flex:1;min-width:250px;background:rgba(255,255,255,.14);border-radius:16px;padding:20px 22px;backdrop-filter:blur(4px)">
+          <div style="font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px">4️⃣</div>
+          <h3 style="font-family:'Fredoka',sans-serif;font-size:19px;margin:0 0 6px">Faylni och = ishga tushir!</h3>
+          <p style="font-size:16px;line-height:1.5;margin:0;opacity:.95">Faylga <b>ikki marta bos</b> — u to'g'ridan-to'g'ri brauzerda ochiladi. Tamom, sahifang ishga tushdi! 🎉</p>
+        </div>
+        <div style="flex:1;min-width:250px;background:rgba(255,255,255,.14);border-radius:16px;padding:20px 22px;backdrop-filter:blur(4px)">
+          <div style="font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px">5️⃣</div>
+          <h3 style="font-family:'Fredoka',sans-serif;font-size:19px;margin:0 0 6px">O'zgartir va yangila</h3>
+          <p style="font-size:16px;line-height:1.5;margin:0;opacity:.95">Kodni o'zgartirsang — faylni <b>saqla</b> (Ctrl+S), keyin brauzerda <b>F5</b> bos. Yangi natijani ko'rasan!</p>
+        </div>
+      </div>
+
+      <div style="margin-top:22px">
+        <div style="font-weight:800;font-size:13px;letter-spacing:1px;margin-bottom:8px;opacity:.9">📋 SHU KODNI NUSXALAB BOSHLA — to'liq tayyor fayl</div>
+        <div style="background:#1F2140;border-radius:14px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto;white-space:pre">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Mening birinchi sahifam&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1 style="color:#6C5CE7"&gt;Salom dunyo! 🌍&lt;/h1&gt;
+    &lt;p&gt;Bu mening birinchi veb-sahifam.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</div>
+        <p style="font-size:15px;margin:12px 0 0;opacity:.9">💡 <b>Maslahat:</b> Birinchi qatordagi <b>&lt;!DOCTYPE html&gt;</b> brauzerga "bu HTML fayl" deb aytadi. Har doim shu bilan boshlash yaxshi odat.</p>
+      </div>
+    </div>
+
+    <!-- ============ HTML SECTION ============ -->
+    <div id="html" style="scroll-margin-top:70px;display:flex;align-items:center;gap:18px;margin:24px 0 30px">
+      <div style="width:64px;height:64px;flex:none;background:linear-gradient(135deg,#FF6B4A,#FF9E5E);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 8px 20px rgba(255,107,74,.35)">🧱</div>
+      <div>
+        <div style="font-weight:800;color:#FF6B4A;font-size:15px;letter-spacing:1px">1-QISM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:40px;margin:2px 0 0;color:#E8552E">HTML — sahifaning skeleti</h2>
+      </div>
+    </div>
+
+    <!-- Topic: HTML nima -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🏠 HTML nima va u nimaga kerak?</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px">Tasavvur qiling, siz uy quryapsiz. Avval uyning <b>skeleti</b> — devorlar, xonalar, eshik va derazalar kerak. <b>HTML</b> (HyperText Markup Language) — aynan veb-sahifaning skeletini yasaydi: sarlavhalar qayerda turishini, matn qayerda, rasm qayerda bo'lishini belgilaydi.</p>
+      <div style="background:#E9F9EE;border:2px solid #BFEBCD;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start">
+        <div style="font-size:26px;flex:none">🐍</div>
+        <p style="margin:0;font-size:17px;line-height:1.55"><b>Python bilan o'xshashlik:</b> Python kompyuterga <i>nima qilishni</i> buyuradi. HTML esa brauzerga <i>nimani ko'rsatishni</i> buyuradi. Ikkisi ham — kompyuter tushunadigan til!</p>
+      </div>
+      <div style="margin-top:18px;background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:16px 20px">
+        <b style="font-size:17px">🤔 Sinab ko'r:</b>
+        <p style="margin:8px 0 0;font-size:17px">Atrofingizdagi 3 ta veb-saytni eslang. Ularning hammasi HTML bilan yasalgan. Qaysi biri sizga ko'proq yoqadi va nega?</p>
+      </div>
+    </section>
+
+    <!-- Topic: Teglar -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🏷️ Teglar — HTML'ning g'ishtlari</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px">HTML <b>teglardan</b> (inglizcha <i>tag</i>) tashkil topadi. Teg burchakli qavslar ichida yoziladi: <code style="background:#F0EEFB;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#5B4BD6">&lt;p&gt;</code>. Ko'pchilik teglar <b>juft</b> bo'ladi — ochiluvchi va yopiluvchi.</p>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:center;margin:6px 0 18px">
+        <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;background:#E8FBEE;color:#16A34A;padding:10px 16px;border-radius:12px;font-weight:700">&lt;p&gt;</div><div style="margin-top:8px;font-weight:700;color:#16A34A">✅ Ochiluvchi</div></div>
+        <div style="font-size:24px">Matn shu yerda</div>
+        <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:26px;background:#FDEDEA;color:#E8552E;padding:10px 16px;border-radius:12px;font-weight:700">&lt;/p&gt;</div><div style="margin-top:8px;font-weight:700;color:#E8552E">🔒 Yopiluvchi</div></div>
+      </div>
+      <p style="font-size:17px;line-height:1.6;margin:0;background:#FFF0EA;border-radius:12px;padding:12px 16px">💡 Yopiluvchi tegda <b>/</b> (slash) belgisi bo'ladi. U brauzerga "shu teg shu yerda tugadi" deb aytadi.</p>
+    </section>
+
+    <!-- Topic: html/head/body -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🦴 Sahifaning asosiy tuzilishi</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Har bir HTML sahifa bir xil skeletdan boshlanadi. Uchta asosiy qism bor: <b>&lt;html&gt;</b> (butun sahifa), <b>&lt;head&gt;</b> (yashirin sozlamalar — sarlavha nomi), va <b>&lt;body&gt;</b> (ko'rinadigan hamma narsa).</p>
+
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.75;color:#C9D7FF;overflow-x:auto">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Mening sahifam&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Salom dunyo!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:18px;background:#fff;height:calc(100% - 26px)">
+            <div style="background:#F2F0FA;border-radius:8px;padding:6px 10px;font-size:13px;color:#8A8699;margin-bottom:14px;font-family:'JetBrains Mono',monospace">🔖 Mening sahifam</div>
+            <h1 style="font-size:30px;margin:0;color:#2D2B3A">Salom dunyo!</h1>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:16px;line-height:1.6;margin:16px 0 0;color:#6B6780"><b>Diqqat:</b> <i>title</i> ichidagi yozuv brauzer <b>chetidagi yorliqda</b> (tab) ko'rinadi, sahifa ichida emas!</p>
+    </section>
+
+    <!-- Topic: Sarlavhalar -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">📢 Sarlavhalar: &lt;h1&gt; dan &lt;h6&gt; gacha</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Sarlavhalar matnni <b>kattalik darajasiga</b> ajratadi. <b>&lt;h1&gt;</b> — eng katta va eng muhim (kitobning nomi kabi), <b>&lt;h6&gt;</b> — eng kichik.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.75;color:#C9D7FF;overflow-x:auto">&lt;h1&gt;Eng katta&lt;/h1&gt;
+&lt;h2&gt;Kattaroq&lt;/h2&gt;
+&lt;h3&gt;O'rta&lt;/h3&gt;
+&lt;h4&gt;Kichikroq&lt;/h4&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:8px 20px;background:#fff">
+            <h1 style="margin:14px 0;color:#FF6B4A">Eng katta</h1>
+            <h2 style="margin:14px 0;color:#FF8A4A">Kattaroq</h2>
+            <h3 style="margin:14px 0;color:#FFA94A">O'rta</h3>
+            <h4 style="margin:14px 0;color:#FFBE4A">Kichikroq</h4>
+          </div>
+        </div>
+      </div>
+      <details style="margin-top:18px;background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:16px 20px">
+        <summary style="font-weight:800;font-size:17px">🤔 Sinab ko'r: nega faqat bitta &lt;h1&gt; ishlatish kerak? <span style="color:#C99700">(javobni ko'rish)</span></summary>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.6">Chunki &lt;h1&gt; — sahifaning <b>asosiy nomi</b>. Kitobda ham faqat bitta sarlavha bo'lgani kabi, bir sahifada bitta &lt;h1&gt; bo'lgani yaxshi. Qolganlari uchun &lt;h2&gt;, &lt;h3&gt; ishlating.</p>
+      </details>
+    </section>
+
+    <!-- Topic: Paragraf -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">📄 Paragraf — &lt;p&gt;</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Oddiy matn yozish uchun <b>&lt;p&gt;</b> (paragraph = paragraf) tegidan foydalanamiz. Har bir &lt;p&gt; yangi qatordan boshlanadi.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.75;color:#C9D7FF;overflow-x:auto">&lt;p&gt;Men HTML o'rganyapman.&lt;/p&gt;
+&lt;p&gt;Bu juda qiziqarli! 🎉&lt;/p&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:8px 20px;background:#fff">
+            <p style="font-size:18px">Men HTML o'rganyapman.</p>
+            <p style="font-size:18px">Bu juda qiziqarli! 🎉</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic: Rasm va havola -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🖼️ Rasm &lt;img&gt; va havola &lt;a&gt;</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 8px"><b>&lt;img&gt;</b> — sahifaga rasm qo'yadi. <b>src</b> ichida rasmning manzili yoziladi. <b>&lt;a&gt;</b> — bosiladigan havola (link) yasaydi, <b>href</b> ichida qayerga olib borishi yoziladi.</p>
+      <p style="font-size:16px;line-height:1.6;margin:0 0 18px;color:#6B6780">💡 <b>src</b> va <b>href</b> — bular <i>atribut</i> (qo'shimcha ma'lumot) deyiladi. Ular tegga "qanaqa" degan savolga javob beradi.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.75;color:#C9D7FF;overflow-x:auto">&lt;img src="quyosh.png"&gt;
+
+&lt;a href="https://google.com"&gt;
+  Google'ga o'tish
+&lt;/a&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:18px 20px;background:#fff">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120'%3E%3Crect width='220' height='120' fill='%2387CEFA'/%3E%3Ccircle cx='170' cy='38' r='24' fill='%23FFD93D'/%3E%3Cpath d='M0 120 L0 80 Q60 50 120 78 T220 72 L220 120 Z' fill='%237ED957'/%3E%3C/svg%3E" alt="quyosh" style="width:100%;max-width:220px;border-radius:10px;display:block;margin-bottom:14px">
+            <a href="#html" style="color:#2A6FDB;font-weight:700;font-size:18px">🔗 Google'ga o'tish</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic: Ro'yxatlar -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 10px;color:#2D2B3A">📋 Ro'yxatlar: &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</h3>
+      <div style="background:#E9F9EE;border:2px solid #BFEBCD;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-bottom:18px">
+        <div style="font-size:26px;flex:none">🐍</div>
+        <p style="margin:0;font-size:17px;line-height:1.55"><b>Python bilan o'xshashlik:</b> Python'da <code style="background:#fff;padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">mevalar = ["olma", "banan"]</code> ro'yxat yasaganingiz kabi, HTML'da ham <b>&lt;ul&gt;</b> ro'yxat yasaydi! Har bir element — <b>&lt;li&gt;</b> (list item).</p>
+      </div>
+      <p style="font-size:17px;line-height:1.6;margin:0 0 18px"><b>&lt;ul&gt;</b> — tartibsiz ro'yxat (• nuqtalar bilan). <b>&lt;ol&gt;</b> — tartibli ro'yxat (1, 2, 3 raqamlar bilan).</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;ul&gt;
+  &lt;li&gt;Olma 🍎&lt;/li&gt;
+  &lt;li&gt;Banan 🍌&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Uyg'onish&lt;/li&gt;
+  &lt;li&gt;Nonushta&lt;/li&gt;
+&lt;/ol&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:8px 24px;background:#fff;font-size:18px">
+            <ul><li style="margin:6px 0">Olma 🍎</li><li style="margin:6px 0">Banan 🍌</li></ul>
+            <ol><li style="margin:6px 0">Uyg'onish</li><li style="margin:6px 0">Nonushta</li></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic: Tugma va input -->
+    <section style="background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 10px;color:#2D2B3A">🔘 Tugma &lt;button&gt; va kiritish maydoni &lt;input&gt;</h3>
+      <div style="background:#E9F9EE;border:2px solid #BFEBCD;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-bottom:18px">
+        <div style="font-size:26px;flex:none">🐍</div>
+        <p style="margin:0;font-size:17px;line-height:1.55"><b>Python bilan o'xshashlik:</b> Python'da <code style="background:#fff;padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">input()</code> foydalanuvchidan ma'lumot so'raydi. HTML'da ham <b>&lt;input&gt;</b> aynan shu ish uchun — yozish uchun maydon yasaydi!</p>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;input placeholder="Ismingiz"&gt;
+
+&lt;button&gt;Yuborish&lt;/button&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA (bosib ko'ring!)</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:22px 20px;background:#fff;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <input placeholder="Ismingiz" style="font-family:'Nunito',sans-serif;font-size:17px;padding:11px 16px;border:2px solid #D6D1E8;border-radius:12px;outline:none">
+            <button style="font-family:'Fredoka',sans-serif;font-size:17px;font-weight:600;padding:11px 22px;background:#FF6B4A;color:#fff;border:none;border-radius:12px;cursor:pointer;box-shadow:0 5px 14px rgba(255,107,74,.35)">Yuborish</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HTML CHUQUR ============ -->
+    <div id="chuqur" style="scroll-margin-top:70px;display:flex;align-items:center;gap:18px;margin:54px 0 30px">
+      <div style="width:64px;height:64px;flex:none;background:linear-gradient(135deg,#FF6B4A,#FF9E5E);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 8px 20px rgba(255,107,74,.35)">🧰</div>
+      <div>
+        <div style="font-weight:800;color:#FF6B4A;font-size:15px;letter-spacing:1px">2-QISM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:40px;margin:2px 0 0;color:#E8552E">HTML'ni chuqurroq o'rganamiz</h2>
+      </div>
+    </div>
+
+    <!-- Topic: DIV -->
+    <section id="div" style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">📦 &lt;div&gt; — HTML'ning eng muhim qutisi</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px"><b>&lt;div&gt;</b> — bu <b>quti</b> (inglizcha <i>division</i> = bo'lim). U o'zi hech narsa ko'rsatmaydi, lekin bir nechta elementni <b>bitta guruhga</b> yig'adi. Xuddi o'yinchoqlarni qutiga solib qo'ygandek! 📦</p>
+      <p style="font-size:17px;line-height:1.6;margin:0 0 18px;color:#6B6780">Nega kerak? Chunki guruhlangan elementlarni keyin <b>birga</b> harakatlantirish, bo'yash yoki joylash oson bo'ladi.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)"><div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;div&gt;
+  &lt;h3&gt;Mushuk 🐱&lt;/h3&gt;
+  &lt;p&gt;Yumshoq va sevimli&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;h3&gt;It 🐶&lt;/h3&gt;
+  &lt;p&gt;Sodiq do'st&lt;/p&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA — har bir div alohida quti</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="border:2px solid #FFD2C2;border-radius:14px;padding:14px 18px;background:#FFF6F2"><h3 style="margin:0 0 4px;font-size:20px">Mushuk 🐱</h3><p style="margin:0;font-size:16px">Yumshoq va sevimli</p></div>
+            <div style="border:2px solid #FFD2C2;border-radius:14px;padding:14px 18px;background:#FFF6F2"><h3 style="margin:0 0 4px;font-size:20px">It 🐶</h3><p style="margin:0;font-size:16px">Sodiq do'st</p></div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#E9F9EE;border:2px solid #BFEBCD;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-top:18px"><div style="font-size:26px;flex:none">🐍</div><p style="margin:0;font-size:17px;line-height:1.55"><b>Python bilan o'xshashlik:</b> Python'da bog'liq ma'lumotlarni <code style='background:#fff;padding:1px 7px;border-radius:5px;font-family:monospace'>dict</code> ichiga yig'asiz. <b>&lt;div&gt;</b> ham — bog'liq elementlarni bitta joyga yig'adi!</p></div>
+      <div style="margin-top:18px;background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:16px 20px"><b style="font-size:17px">🤔 Sinab ko'r:</b><p style="margin:8px 0 0;font-size:17px">O'zing haqingda bitta &lt;div&gt; yasa: ichiga &lt;h3&gt; bilan isming, &lt;p&gt; bilan sevimli rangingni yoz. O'yin maydonida bajar!</p></div>
+    </section>
+
+    <!-- Topic: SPAN va matn bezagi -->
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">✏️ Matnni bezash: &lt;span&gt;, &lt;b&gt;, &lt;i&gt;</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px">Ba'zan jumlaning <b>faqat bitta so'zini</b> ajratib ko'rsatmoqchi bo'lasan. Buning uchun maxsus teglar bor:</p>
+      <ul style="font-size:17px;line-height:1.9;margin:0 0 18px;padding-left:22px">
+        <li><b>&lt;b&gt;</b> yoki <b>&lt;strong&gt;</b> — so'zni <b>qalin</b> (qora) qiladi</li>
+        <li><b>&lt;i&gt;</b> yoki <b>&lt;em&gt;</b> — so'zni <i>qiyshiq</i> (kursiv) qiladi</li>
+        <li><b>&lt;span&gt;</b> — kichik matn bo'lagini ajratadi (div kabi, lekin <b>qator ichida</b>)</li>
+      </ul>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)"><div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;p&gt;
+  Men &lt;b&gt;HTML&lt;/b&gt;ni
+  &lt;i&gt;juda&lt;/i&gt; yaxshi
+  &lt;span&gt;ko'raman&lt;/span&gt;!
+&lt;/p&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:18px 20px;background:#fff"><p style="font-size:20px;margin:0">Men <b>HTML</b>ni <i>juda</i> yaxshi <span>ko'raman</span>!</p></div>
+        </div>
+      </div>
+      <div style="margin-top:18px;background:#FFF0EA;border-radius:12px;padding:14px 18px;font-size:16px;line-height:1.6"><b>📌 div vs span:</b> &lt;div&gt; — <b>katta quti</b> (yangi qatordan boshlanadi). &lt;span&gt; — <b>kichik bo'lak</b> (jumla ichida, qatorni buzmaydi).</div>
+    </section>
+
+    <!-- Topic: Sahifa bo'limlari (semantic) -->
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🏗️ Sahifaning bo'limlari</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px">Haqiqiy veb-sahifa bo'limlardan iborat: yuqorida <b>shapka</b>, o'rtada <b>asosiy qism</b>, pastda <b>futer</b>. Ular uchun maxsus, <b>"ma'noli"</b> teglar bor (oddiy div'dan ko'ra tushunarliroq):</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)"><div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;header&gt;Logotip va menyu&lt;/header&gt;
+
+&lt;nav&gt;Bo'limlar ro'yxati&lt;/nav&gt;
+
+&lt;main&gt;Asosiy matn&lt;/main&gt;
+
+&lt;footer&gt;Pastki ma'lumot&lt;/footer&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA — sahifa xaritasi</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;overflow:hidden">
+            <div style="background:#FFE0D2;color:#E8552E;font-weight:800;padding:14px;text-align:center">&lt;header&gt; — Shapka 🎩</div>
+            <div style="background:#FFEDE0;color:#D9730A;font-weight:800;padding:10px;text-align:center">&lt;nav&gt; — Menyu 🧭</div>
+            <div style="background:#FFF6F2;color:#6B6780;font-weight:800;padding:34px 14px;text-align:center">&lt;main&gt; — Asosiy qism 📄</div>
+            <div style="background:#FFE0D2;color:#E8552E;font-weight:800;padding:14px;text-align:center">&lt;footer&gt; — Futer 🦶</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:18px;background:#FFF0EA;border-radius:12px;padding:14px 18px;font-size:16px;line-height:1.6">💡 Ular aslida &lt;div&gt; kabi ishlaydi, lekin <b>nomi ma'noli</b> — kodni o'qigan odam (va Google!) sahifa tuzilishini darhol tushunadi.</div>
+
+      <div style="margin-top:24px">
+        <div style="font-weight:800;color:#16A34A;font-size:13px;letter-spacing:1px;margin-bottom:8px">✅ TO'LIQ NAMUNA — shu kodni nusxalab sinab ko'r</div>
+        <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#8A8FB5">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Mening saytim&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    <span style="color:#FF9E5E">&lt;header&gt;</span>
+      &lt;h1&gt;🍕 Pitssa Olami&lt;/h1&gt;
+    <span style="color:#FF9E5E">&lt;/header&gt;</span>
+
+    <span style="color:#7DE3A0">&lt;nav&gt;</span>
+      &lt;a href="#"&gt;Bosh sahifa&lt;/a&gt;
+      &lt;a href="#"&gt;Menyu&lt;/a&gt;
+      &lt;a href="#"&gt;Aloqa&lt;/a&gt;
+    <span style="color:#7DE3A0">&lt;/nav&gt;</span>
+
+    <span style="color:#FFD27D">&lt;main&gt;</span>
+      &lt;h2&gt;Bizning taomlar&lt;/h2&gt;
+      &lt;p&gt;Eng mazali pitssalar shu yerda!&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Margarita&lt;/li&gt;
+        &lt;li&gt;Pepperoni&lt;/li&gt;
+      &lt;/ul&gt;
+    <span style="color:#FFD27D">&lt;/main&gt;</span>
+
+    <span style="color:#C792EA">&lt;footer&gt;</span>
+      &lt;p&gt;© 2026 Pitssa Olami&lt;/p&gt;
+    <span style="color:#C792EA">&lt;/footer&gt;</span>
+
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 BRAUZERDA NATIJA</div>
+        <div style="border:2px solid #E6E2F0;border-radius:14px;overflow:hidden;background:#fff">
+          <div style="background:#FFE0D2;padding:16px 20px;border-bottom:1px solid #FFD0BC"><h1 style="margin:0;font-size:26px;color:#E8552E">🍕 Pitssa Olami</h1></div>
+          <div style="background:#FFEDE0;padding:12px 20px;display:flex;gap:18px;border-bottom:1px solid #FFD0BC"><a href="#div" style="color:#2A6FDB;font-weight:700;font-size:16px">Bosh sahifa</a><a href="#div" style="color:#2A6FDB;font-weight:700;font-size:16px">Menyu</a><a href="#div" style="color:#2A6FDB;font-weight:700;font-size:16px">Aloqa</a></div>
+          <div style="padding:18px 20px"><h2 style="margin:0 0 8px;font-size:21px;color:#2D2B3A">Bizning taomlar</h2><p style="margin:0 0 8px;font-size:17px">Eng mazali pitssalar shu yerda!</p><ul style="margin:0;padding-left:22px;font-size:17px"><li style="margin:4px 0">Margarita</li><li style="margin:4px 0">Pepperoni</li></ul></div>
+          <div style="background:#F2F0FA;padding:14px 20px;border-top:1px solid #E6E2F0"><p style="margin:0;font-size:15px;color:#6B6780">© 2026 Pitssa Olami</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;background:#EAF1FF;border-radius:12px;padding:14px 18px;font-size:16px;line-height:1.6">🎨 Skelet tayyor — endi uni <b>CSS</b> bilan bezaymiz. CSS'ni <code style="background:#fff;padding:2px 7px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#E8552E">&lt;head&gt;</code> ichidagi <code style="background:#fff;padding:2px 7px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#E8552E">&lt;style&gt;</code> tegi ichiga yozamiz.</div>
+
+      <div style="margin-top:18px">
+        <div style="font-weight:800;color:#2A6FDB;font-size:13px;letter-spacing:1px;margin-bottom:8px">🎨 CSS KODI — &lt;style&gt; ichiga yoz</div>
+        <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#8A8FB5">style.css</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto"><span style="color:#FFD27D">body</span> {
+  font-family: sans-serif;
+  background: <span style="color:#7DE3A0">#FFF6EC</span>;
+  margin: 0;
+}
+
+<span style="color:#FFD27D">header</span> {
+  background: <span style="color:#7DE3A0">#FF6B4A</span>;
+  color: white;
+  padding: 24px;
+  text-align: center;
+}
+
+<span style="color:#FFD27D">nav</span> {
+  background: <span style="color:#7DE3A0">#FFEDE0</span>;
+  padding: 12px 24px;
+}
+<span style="color:#FFD27D">nav a</span> {
+  color: <span style="color:#7DE3A0">#2A6FDB</span>;
+  font-weight: bold;
+  margin-right: 18px;
+  text-decoration: none;
+}
+
+<span style="color:#FFD27D">main</span> {
+  padding: 24px;
+}
+<span style="color:#FFD27D">main h2</span> {
+  color: <span style="color:#7DE3A0">#E8552E</span>;
+}
+
+<span style="color:#FFD27D">footer</span> {
+  background: <span style="color:#7DE3A0">#2D2B3A</span>;
+  color: white;
+  padding: 16px 24px;
+  text-align: center;
+}</pre>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">✨ CSS QO'SHILGANDAN KEYINGI NATIJA</div>
+        <div style="border:2px solid #E6E2F0;border-radius:14px;overflow:hidden;background:#fff;font-family:sans-serif">
+          <div style="background:#FF6B4A;padding:24px;text-align:center"><h1 style="margin:0;font-size:28px;color:#fff">🍕 Pitssa Olami</h1></div>
+          <div style="background:#FFEDE0;padding:12px 24px;display:flex;gap:18px"><a href="#div" style="color:#2A6FDB;font-weight:bold;font-size:16px;text-decoration:none">Bosh sahifa</a><a href="#div" style="color:#2A6FDB;font-weight:bold;font-size:16px;text-decoration:none">Menyu</a><a href="#div" style="color:#2A6FDB;font-weight:bold;font-size:16px;text-decoration:none">Aloqa</a></div>
+          <div style="padding:24px"><h2 style="margin:0 0 8px;font-size:22px;color:#E8552E">Bizning taomlar</h2><p style="margin:0 0 10px;font-size:17px;color:#2D2B3A">Eng mazali pitssalar shu yerda!</p><ul style="margin:0;padding-left:22px;font-size:17px;color:#2D2B3A"><li style="margin:4px 0">Margarita</li><li style="margin:4px 0">Pepperoni</li></ul></div>
+          <div style="background:#2D2B3A;padding:16px 24px;text-align:center"><p style="margin:0;font-size:15px;color:#fff">© 2026 Pitssa Olami</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic: Izohlar, br, hr -->
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">💬 Izohlar va foydali kichik teglar</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Bir nechta juda foydali kichik narsalar:</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)"><div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto"><span style="color:#FFB454">&lt;!-- Bu izoh, ko'rinmaydi --&gt;</span>
+
+&lt;p&gt;Birinchi qator&lt;br&gt;
+Ikkinchi qator&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Chiziqdan keyingi matn&lt;/p&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="border:2px solid #E6E2F0;border-radius:14px;padding:18px 20px;background:#fff"><p style="font-size:18px;margin:0 0 14px">Birinchi qator<br>Ikkinchi qator</p><hr style="border:none;border-top:2px solid #E6E2F0;margin:14px 0"><p style="font-size:18px;margin:0">Chiziqdan keyingi matn</p></div>
+        </div>
+      </div>
+      <ul style="font-size:17px;line-height:1.85;margin:18px 0 0;padding-left:22px">
+        <li><b>&lt;!-- ... --&gt;</b> — <b>izoh</b>. Faqat dasturchi ko'radi, brauzer ko'rsatmaydi. Kodga eslatma yozish uchun.</li>
+        <li><b>&lt;br&gt;</b> — <b>yangi qatorga</b> o'tkazadi (matn ichida)</li>
+        <li><b>&lt;hr&gt;</b> — gorizontal <b>ajratuvchi chiziq</b> chizadi</li>
+      </ul>
+      <div style="background:#E9F9EE;border:2px solid #BFEBCD;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-top:18px"><div style="font-size:26px;flex:none">🐍</div><p style="margin:0;font-size:17px;line-height:1.55"><b>Python bilan o'xshashlik:</b> Python'da <code style='background:#fff;padding:1px 7px;border-radius:5px;font-family:monospace'># izoh</code> yozasiz, HTML'da esa <code style='background:#fff;padding:1px 7px;border-radius:5px;font-family:monospace'>&lt;!-- izoh --&gt;</code>. Ikkalasi ham eslatma — kod ishlamaydi!</p></div>
+    </section>
+
+    <!-- Topic: TO'LIQ YAKUNIY NAMUNA -->
+    <section style="scroll-margin-top:70px;background:linear-gradient(135deg,#1F8A5B,#2DBE7E);border-radius:24px;padding:34px 38px;box-shadow:0 14px 36px rgba(31,138,91,.22);margin-bottom:28px;color:#fff">
+      <div style="display:inline-block;background:rgba(255,255,255,.2);padding:6px 16px;border-radius:30px;font-weight:800;letter-spacing:.5px;font-size:14px;margin-bottom:14px">🎁 HAMMASI BIRGA</div>
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:30px;margin:0 0 10px">📄 To'liq namuna — bitta faylda hammasi!</h3>
+      <p style="font-size:18px;line-height:1.6;margin:0 0 8px;opacity:.96">Bu kodda biz o'rgangan <b>hamma narsa</b> bor: bo'limlar (<code style="background:rgba(255,255,255,.18);padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">header, nav, main, footer</code>), qutilar (<code style="background:rgba(255,255,255,.18);padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">&lt;div&gt;</code>), matn bezash (<code style="background:rgba(255,255,255,.18);padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">&lt;span&gt; &lt;b&gt; &lt;i&gt;</code>), izoh, <code style="background:rgba(255,255,255,.18);padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">&lt;br&gt;</code> va <code style="background:rgba(255,255,255,.18);padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">&lt;hr&gt;</code>. Nusxalab, <b>index.html</b> ga saqla va brauzerda och! 🚀</p>
+    </section>
+
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <div style="font-weight:800;color:#16A34A;font-size:13px;letter-spacing:1px;margin-bottom:8px">✅ TO'LIQ KOD — index.html</div>
+      <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+        <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#8A8FB5">index.html</span></div>
+        <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Mening uy hayvonim&lt;/title&gt;
+
+    <span style="color:#FFB454">&lt;!-- CSS — sahifani bezaymiz --&gt;</span>
+    <span style="color:#FFD27D">&lt;style&gt;</span>
+      body   { font-family: sans-serif; background: #FFF6EC; margin: 0; }
+      header { background: #FF6B4A; color: white; padding: 20px; text-align: center; }
+      nav    { background: #FFEDE0; padding: 12px 20px; }
+      nav a  { color: #2A6FDB; font-weight: bold; margin-right: 16px; }
+      main   { padding: 20px; }
+      .karta { background: #FFF0EA; border-radius: 14px; padding: 18px; }
+      footer { background: #2D2B3A; color: white; padding: 14px; text-align: center; }
+    <span style="color:#FFD27D">&lt;/style&gt;</span>
+  &lt;/head&gt;
+
+  &lt;body&gt;
+
+    <span style="color:#FF9E5E">&lt;!-- ===== Yuqori qism ===== --&gt;</span>
+    <span style="color:#FF9E5E">&lt;header&gt;</span>
+      &lt;h1&gt;🐱 Mushugim Barsik&lt;/h1&gt;
+    <span style="color:#FF9E5E">&lt;/header&gt;</span>
+
+    <span style="color:#7DE3A0">&lt;!-- ===== Menyu ===== --&gt;</span>
+    <span style="color:#7DE3A0">&lt;nav&gt;</span>
+      &lt;a href="#"&gt;Bosh sahifa&lt;/a&gt;
+      &lt;a href="#"&gt;Suratlar&lt;/a&gt;
+      &lt;a href="#"&gt;Aloqa&lt;/a&gt;
+    <span style="color:#7DE3A0">&lt;/nav&gt;</span>
+
+    <span style="color:#FFD27D">&lt;!-- ===== Asosiy kontent ===== --&gt;</span>
+    <span style="color:#FFD27D">&lt;main&gt;</span>
+
+      <span style="color:#82AAFF">&lt;!-- div = quti, ichiga boshqa narsa joylaymiz --&gt;</span>
+      <span style="color:#82AAFF">&lt;div</span> class="karta"<span style="color:#82AAFF">&gt;</span>
+        &lt;h2&gt;Barsik haqida&lt;/h2&gt;
+
+        <span style="color:#C792EA">&lt;!-- span/b/i bilan matnni bezaymiz --&gt;</span>
+        &lt;p&gt;
+          Uning ismi <span style="color:#C792EA">&lt;b&gt;</span>Barsik<span style="color:#C792EA">&lt;/b&gt;</span>,
+          yoshi <span style="color:#C792EA">&lt;i&gt;</span>3 yosh<span style="color:#C792EA">&lt;/i&gt;</span> va u
+          <span style="color:#C792EA">&lt;span</span> style="color:orange"<span style="color:#C792EA">&gt;</span>juda quvnoq<span style="color:#C792EA">&lt;/span&gt;</span>!
+        &lt;/p&gt;
+
+        &lt;p&gt;Birinchi qator<span style="color:#FF9E5E">&lt;br&gt;</span>
+        Ikkinchi qator&lt;/p&gt;
+
+        <span style="color:#FF9E5E">&lt;hr&gt;</span>
+
+        &lt;h3&gt;Yaxshi ko'rgan narsalari:&lt;/h3&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Baliq 🐟&lt;/li&gt;
+          &lt;li&gt;Uxlash 😴&lt;/li&gt;
+          &lt;li&gt;O'ynash 🧶&lt;/li&gt;
+        &lt;/ul&gt;
+      <span style="color:#82AAFF">&lt;/div&gt;</span>
+
+    <span style="color:#FFD27D">&lt;/main&gt;</span>
+
+    <span style="color:#C792EA">&lt;!-- ===== Pastki qism ===== --&gt;</span>
+    <span style="color:#C792EA">&lt;footer&gt;</span>
+      &lt;p&gt;© 2026 Barsikning sahifasi&lt;/p&gt;
+    <span style="color:#C792EA">&lt;/footer&gt;</span>
+
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div style="margin-top:22px">
+        <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 BRAUZERDA SHUNDAY KO'RINADI</div>
+        <div style="border:2px solid #E6E2F0;border-radius:14px;overflow:hidden;background:#FFF6EC;font-family:sans-serif">
+          <div style="background:#FF6B4A;padding:20px;text-align:center"><h1 style="margin:0;font-size:26px;color:#fff">🐱 Mushugim Barsik</h1></div>
+          <div style="background:#FFEDE0;padding:12px 20px;display:flex;gap:16px"><a href="#div" style="color:#2A6FDB;font-weight:bold;font-size:16px;text-decoration:none">Bosh sahifa</a><a href="#div" style="color:#2A6FDB;font-weight:bold;font-size:16px;text-decoration:none">Suratlar</a><a href="#div" style="color:#2A6FDB;font-weight:bold;font-size:16px;text-decoration:none">Aloqa</a></div>
+          <div style="padding:20px">
+            <div style="background:#FFF0EA;border-radius:14px;padding:18px">
+              <h2 style="margin:0 0 8px;font-size:21px;color:#2D2B3A">Barsik haqida</h2>
+              <p style="font-size:17px;margin:0 0 12px;color:#2D2B3A">Uning ismi <b>Barsik</b>, yoshi <i>3 yosh</i> va u <span style="color:orange">juda quvnoq</span>!</p>
+              <p style="font-size:17px;margin:0 0 12px;color:#2D2B3A">Birinchi qator<br>Ikkinchi qator</p>
+              <hr style="border:none;border-top:2px solid #F0D9CC;margin:12px 0">
+              <h3 style="margin:0 0 8px;font-size:18px;color:#2D2B3A">Yaxshi ko'rgan narsalari:</h3>
+              <ul style="margin:0;padding-left:22px;font-size:17px;color:#2D2B3A"><li style="margin:3px 0">Baliq 🐟</li><li style="margin:3px 0">Uxlash 😴</li><li style="margin:3px 0">O'ynash 🧶</li></ul>
+            </div>
+          </div>
+          <div style="background:#2D2B3A;padding:14px;text-align:center"><p style="margin:0;font-size:15px;color:#fff">© 2026 Barsikning sahifasi</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;background:#E9F9EE;border:2px solid #BFEBCD;border-radius:14px;padding:14px 18px;font-size:16px;line-height:1.6">🎯 <b>Vazifa:</b> Bu kodni nusxalab, <code style="background:#fff;padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">Barsik</code> o'rniga <b>o'z uy hayvoningni</b> yoz — ism, yosh, yoqtirgan narsalarini o'zgartir! 🐶🐰🐹</div>
+    </section>
+
+    <!-- Topic: Bo'sh teglar -->
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">⚡ Yopilmaydigan ("bo'sh") teglar</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px">Ko'p teglar juft bo'ladi (&lt;p&gt;...&lt;/p&gt;). Lekin <b>ba'zilari yolg'iz</b> — ularning ichida hech narsa bo'lmaydi, shuning uchun <b>yopiluvchi tegi yo'q</b>!</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:6px 0">
+        <div style="background:#FDEDEA;color:#E8552E;font-family:'JetBrains Mono',monospace;font-weight:700;padding:12px 18px;border-radius:12px;font-size:17px">&lt;img&gt;</div>
+        <div style="background:#FDEDEA;color:#E8552E;font-family:'JetBrains Mono',monospace;font-weight:700;padding:12px 18px;border-radius:12px;font-size:17px">&lt;br&gt;</div>
+        <div style="background:#FDEDEA;color:#E8552E;font-family:'JetBrains Mono',monospace;font-weight:700;padding:12px 18px;border-radius:12px;font-size:17px">&lt;hr&gt;</div>
+        <div style="background:#FDEDEA;color:#E8552E;font-family:'JetBrains Mono',monospace;font-weight:700;padding:12px 18px;border-radius:12px;font-size:17px">&lt;input&gt;</div>
+      </div>
+      <div style="margin-top:16px;background:#FFF0EA;border-radius:12px;padding:14px 18px;font-size:16px;line-height:1.6">😅 <b>Eslab qol:</b> Bu teglarni yopishga urinma — <code style="background:#fff;padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace">&lt;/img&gt;</code> deb yozish <b>shart emas!</b></div>
+    </section>
+
+    <!-- Topic: Ichma-ich joylash -->
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🪆 Teglarni ichma-ich joylash (nesting)</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 16px">Teglar bir-birining <b>ichida</b> bo'lishi mumkin — xuddi matryoshka qo'g'irchoq kabi! 🪆 Eng muhim qoida: <b>oxirgi ochilgan teg birinchi yopiladi.</b></p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">✅ TO'G'RI</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)"><div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;div&gt;
+  &lt;p&gt;
+    &lt;b&gt;Salom&lt;/b&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</pre>
+          </div>
+          <p style="font-size:15px;color:#16A34A;font-weight:700;margin:10px 0 0;text-align:center">✓ Har bir teg to'g'ri yopilgan</p>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#8A8699;font-size:13px;letter-spacing:1px;margin-bottom:8px">❌ XATO</div>
+          <div style="background:#3A2530;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)"><div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;p&gt;
+  &lt;b&gt;Salom
+&lt;/p&gt;
+  &lt;/b&gt;</pre>
+          </div>
+          <p style="font-size:15px;color:#E8552E;font-weight:700;margin:10px 0 0;text-align:center">✗ Teglar chalkashib ketgan</p>
+        </div>
+      </div>
+      <div style="margin-top:18px;background:#FFF0EA;border-radius:12px;padding:14px 18px;font-size:16px;line-height:1.6">💡 <b>Maslahat:</b> Ichki teglarni biroz <b>ichkariroq</b> (probel bilan) yozsang, qaysi teg qaysining ichida ekani aniq ko'rinadi.</div>
+    </section>
+
+    <!-- Topic: Qisqa yo'llar / Emmet -->
+    <section style="scroll-margin-top:70px;background:linear-gradient(135deg,#FFF3E9,#FFEAD9);border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(255,107,74,.1);margin-bottom:28px;border:2px solid #FFD9C2">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">🚀 Qisqa yo'llar — tez yozish sirlari!</h3>
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px"><b>VS Code</b> dasturida sehrli qisqa yo'llar bor (ularga <b>Emmet</b> deyiladi). Qisqa yozasan, <b>Tab</b> tugmasini bosasan — to'liq kodga aylanadi! 🪄</p>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#fff;border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;border:2px solid #FFE3D0">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;background:#282A4A;color:#7DE3A0;padding:8px 14px;border-radius:10px;font-size:15px">!  + Tab</div>
+          <div style="font-size:22px;color:#FF9E5E">➜</div>
+          <p style="margin:0;font-size:16px;line-height:1.5;flex:1;min-width:180px">Butun HTML skeletini (&lt;html&gt;, &lt;head&gt;, &lt;body&gt;) <b>bir zumda</b> yozadi!</p>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;border:2px solid #FFE3D0">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;background:#282A4A;color:#7DE3A0;padding:8px 14px;border-radius:10px;font-size:15px">ul&gt;li*3 + Tab</div>
+          <div style="font-size:22px;color:#FF9E5E">➜</div>
+          <p style="margin:0;font-size:16px;line-height:1.5;flex:1;min-width:180px"><b>3 ta &lt;li&gt;</b> bo'lgan ro'yxatni avtomatik yasaydi! (<code style="background:#FFF0EA;padding:1px 6px;border-radius:5px;font-family:'JetBrains Mono',monospace">*3</code> = 3 marta)</p>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;border:2px solid #FFE3D0">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;background:#282A4A;color:#7DE3A0;padding:8px 14px;border-radius:10px;font-size:15px">h1 + Tab</div>
+          <div style="font-size:22px;color:#FF9E5E">➜</div>
+          <p style="margin:0;font-size:16px;line-height:1.5;flex:1;min-width:180px"><code style="background:#FFF0EA;padding:1px 6px;border-radius:5px;font-family:'JetBrains Mono',monospace">&lt;h1&gt;&lt;/h1&gt;</code> ni to'liq, yopiluvchi tegi bilan yasaydi</p>
+        </div>
+      </div>
+      <div style="background:#E9F9EE;border:2px solid #BFEBCD;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-top:18px"><div style="font-size:26px;flex:none">🐍</div><p style="margin:0;font-size:17px;line-height:1.55"><b>Python bilan o'xshashlik:</b> Python'da <code style='background:#fff;padding:1px 7px;border-radius:5px;font-family:monospace'>for i in range(3)</code> bilan ishni 3 marta takrorlaysiz. Emmet'dagi <code style='background:#fff;padding:1px 7px;border-radius:5px;font-family:monospace'>*3</code> ham xuddi shunday — 3 marta nusxa oladi!</p></div>
+      <div style="margin-top:16px;background:#FFFBEF;border:2px dashed #FFD873;border-radius:14px;padding:14px 18px;font-size:16px;line-height:1.6">⌨️ <b>Eng foydali tugma birikmalari:</b> saqlash — <b>Ctrl+S</b>, ortga qaytarish — <b>Ctrl+Z</b>, nusxa olish — <b>Ctrl+C</b>, qo'yish — <b>Ctrl+V</b>.</div>
+    </section>
+
+    <!-- Topic: Shpargalka -->
+    <section style="scroll-margin-top:70px;background:#fff;border-radius:24px;padding:34px 38px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:28px;border:2px solid #FFEFE6">
+      <h3 style="font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 12px;color:#2D2B3A">📒 Teglar shpargalkasi (hammasi bir joyda)</h3>
+      <p style="font-size:18px;line-height:1.6;margin:0 0 20px">O'rgangan barcha teglarimiz — bitta joyda. Eslab qolish uchun! 👇</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+        <div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#FF6B4A;margin-bottom:4px">&lt;h1&gt;–&lt;h6&gt;</div><div style="font-size:14px;color:#6B6780">Sarlavhalar</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#FF8A4A;margin-bottom:4px">&lt;p&gt;</div><div style="font-size:14px;color:#6B6780">Paragraf (matn)</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#FF9E5E;margin-bottom:4px">&lt;a&gt;</div><div style="font-size:14px;color:#6B6780">Havola (link)</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#FFA94A;margin-bottom:4px">&lt;img&gt;</div><div style="font-size:14px;color:#6B6780">Rasm</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#16A34A;margin-bottom:4px">&lt;ul&gt; &lt;li&gt;</div><div style="font-size:14px;color:#6B6780">Ro'yxat</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#7C3AED;margin-bottom:4px">&lt;button&gt;</div><div style="font-size:14px;color:#6B6780">Tugma</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#2A6FDB;margin-bottom:4px">&lt;input&gt;</div><div style="font-size:14px;color:#6B6780">Kiritish maydoni</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#E8552E;margin-bottom:4px">&lt;div&gt;</div><div style="font-size:14px;color:#6B6780">Quti (guruh)</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#D9730A;margin-bottom:4px">&lt;span&gt;</div><div style="font-size:14px;color:#6B6780">Matn bo'lagi</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#C2348A;margin-bottom:4px">&lt;b&gt; &lt;i&gt;</div><div style="font-size:14px;color:#6B6780">Qalin / qiyshiq</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#0EA5A5;margin-bottom:4px">&lt;br&gt;</div><div style="font-size:14px;color:#6B6780">Yangi qator</div></div><div style="background:#FBFAFF;border:2px solid #EFEAF7;border-radius:14px;padding:14px 16px"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:#6B6780;margin-bottom:4px">&lt;hr&gt;</div><div style="font-size:14px;color:#6B6780">Ajratuvchi chiziq</div></div>
+      </div>
+      <div style="margin-top:18px;background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:16px 20px"><b style="font-size:17px">🏆 Katta vazifa:</b><p style="margin:8px 0 0;font-size:17px">Endi hamma narsani bilasan! O'yin maydonida &lt;div&gt; ichiga sarlavha, paragraf, rasm va ro'yxat joylab — kichik 'men haqimda' sahifasi yasa!</p></div>
+    </section>
+
+    <!-- ============ PLAYGROUND ============ -->
+    <div id="playground" style="scroll-margin-top:70px;background:linear-gradient(135deg,#16A34A,#34D17C);border-radius:28px;padding:36px 38px;box-shadow:0 16px 40px rgba(22,163,74,.25);margin:54px 0 24px;color:#fff">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+        <div style="font-size:38px;animation:wiggle 2.5s ease-in-out infinite">🧪</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0">O'yin maydoni — o'zing sinab ko'r!</h2>
+      </div>
+      <p style="font-size:18px;line-height:1.55;margin:0 0 22px;opacity:.95">Pastdagi katakka HTML kodingni yoz — natijani darhol o'ng tomonda ko'rasan! Ranglarni, matnni o'zgartirib ko'r. 🚀</p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <div style="font-weight:800;font-size:13px;letter-spacing:1px;margin-bottom:8px;opacity:.9">✍️ BU YERGA YOZ</div>
+          <textarea value="{{ code }}" onChange="{{ onCode }}" spellcheck="false" style="width:100%;height:240px;border:none;border-radius:14px;padding:18px;font-size:15px;line-height:1.65;color:#C9D7FF;background:#282A4A;resize:vertical;outline:none;box-shadow:inset 0 2px 8px rgba(0,0,0,.2)"></textarea>
+        </div>
+        <div style="flex:1;min-width:300px">
+          <div style="font-weight:800;font-size:13px;letter-spacing:1px;margin-bottom:8px;opacity:.9">✨ NATIJA</div>
+          <div style="width:100%;height:240px;background:#fff;border-radius:14px;padding:18px;overflow:auto;color:#2D2B3A;box-shadow:inset 0 2px 8px rgba(0,0,0,.06)">{{ preview }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ UY VAZIFASI ============ -->
+    <div id="uyvazifasi" style="scroll-margin-top:70px;display:flex;align-items:center;gap:18px;margin:54px 0 26px">
+      <div style="width:64px;height:64px;flex:none;background:linear-gradient(135deg,#F59E0B,#FBBF24);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 8px 20px rgba(245,158,11,.35)">📒</div>
+      <div>
+        <div style="font-weight:800;color:#D97706;font-size:15px;letter-spacing:1px">VAQTI KELDI</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:40px;margin:2px 0 0;color:#D97706">Uy vazifasi</h2>
+      </div>
+    </div>
+    <p style="font-size:18px;line-height:1.6;margin:0 0 24px;color:#6B6780">Quyidagi vazifalarni yuqoridagi <b>🧪 O'yin maydoni</b>da bajar. Har birini bajargach, ✅ belgisini bos!</p>
+
+    <!-- Vazifa 1 -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:18px;border:2px solid #FFF0D6;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:#FFF3DB;color:#D97706;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">1</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2D2B3A">🪪 O'zing haqingda sahifa</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Bitta <b>&lt;h1&gt;</b> sarlavhaga ismingni yoz. Pastiga <b>&lt;p&gt;</b> bilan yoshing va sevimli mashg'ulotingni qo'sh.</p>
+        <div style="background:#FFFBF2;border:1.5px dashed #F4C770;border-radius:10px;padding:10px 14px;font-size:15px;color:#946200">🎯 <b>Maqsad:</b> &lt;h1&gt; va &lt;p&gt; teglarini ishlatish</div>
+      </div>
+    </section>
+
+    <!-- Vazifa 2 -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:18px;border:2px solid #FFF0D6;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:#FFF3DB;color:#D97706;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">2</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2D2B3A">🍕 Sevimli taomlar ro'yxati</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Eng yoqtirgan <b>3 ta taomingni</b> <b>&lt;ul&gt;</b> ro'yxatida yoz. Har birini emoji bilan bezat! 🍎🍌🍕</p>
+        <div style="background:#FFFBF2;border:1.5px dashed #F4C770;border-radius:10px;padding:10px 14px;font-size:15px;color:#946200">🎯 <b>Maqsad:</b> &lt;ul&gt; va &lt;li&gt; ishlatish <span style="color:#16A34A">(🐍 Python'dagi list kabi!)</span></div>
+      </div>
+    </section>
+
+    <!-- Vazifa 3 -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:18px;border:2px solid #FFF0D6;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:#FFF3DB;color:#D97706;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">3</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2D2B3A">📦 Qutiga joyla (div)</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Bitta <b>&lt;div&gt;</b> yasa va ichiga <b>&lt;h3&gt;</b> bilan sevimli hayvoning nomini, <b>&lt;p&gt;</b> bilan u haqida bir jumla yoz.</p>
+        <div style="background:#FFFBF2;border:1.5px dashed #F4C770;border-radius:10px;padding:10px 14px;font-size:15px;color:#946200">🎯 <b>Maqsad:</b> &lt;div&gt; ichiga elementlarni guruhlash</div>
+      </div>
+    </section>
+
+    <!-- Vazifa 4 (qiyinroq) -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(31,21,55,.06);margin-bottom:18px;border:2px solid #FFE0B0;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:linear-gradient(135deg,#F59E0B,#FBBF24);color:#fff;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">⭐</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2D2B3A">🎁 Qo'shimcha (qiyinroq!) — To'liq sahifa</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Sahifa bo'limlarini ishlat: <b>&lt;header&gt;</b> ichida &lt;h1&gt; bilan sayt nomi, <b>&lt;main&gt;</b> ichida paragraf va ro'yxat, <b>&lt;footer&gt;</b> ichida isming. Hammasini birga!</p>
+        <div style="background:#FFFBF2;border:1.5px dashed #F4C770;border-radius:10px;padding:10px 14px;font-size:15px;color:#946200">🎯 <b>Maqsad:</b> header + main + footer + nesting — hammasi birga!</div>
+      </div>
+    </section>
+
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:18px 22px;margin-bottom:8px">
+      <summary style="font-weight:800;font-size:18px">💡 Yordam kerakmi? Vazifa 1 uchun namuna kodni ko'rish</summary>
+      <div style="background:#282A4A;border-radius:12px;padding:16px 18px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;white-space:pre-wrap">&lt;h1 style="color:#FF6B4A"&gt;Ali&lt;/h1&gt;
+&lt;p&gt;Men 12 yoshdaman.&lt;/p&gt;
+&lt;p&gt;Sevimli mashg'ulotim — futbol ⚽&lt;/p&gt;</div>
+      <p style="margin:12px 0 0;font-size:16px;color:#6B6780">Buni nusxalab, O'yin maydoniga joylashtir va o'zingga moslab o'zgartir!</p>
+    </details>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:40px 20px 10px">
+      <p style="font-size:22px;font-family:'Fredoka',sans-serif;color:#FF6B4A;margin:0 0 6px">🎉 Tabriklaymiz!</p>
+      <p style="font-size:18px;color:#6B6780;margin:0;line-height:1.6">Endi sen HTML — veb sahifaning skeletini yaxshi bilasan.<br>Keyingi qadam — <b>CSS sehrlari</b> bilan uni bezash! 🎨</p>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    code: "<h1 style=\"color:#6C5CE7\">Salom dunyo! 🌍</h1>\n<p>Men o'z veb-sahifamni yasayapman.</p>\n\n<ul>\n  <li>HTML ✅</li>\n  <li>CSS ✅</li>\n</ul>\n\n<button style=\"background:#FF6B4A;color:white;\n  border:none;padding:12px 20px;\n  border-radius:10px;font-size:16px\">\n  Bos meni! 🎈\n</button>"
+  };
+  renderVals() {
+    return {
+      code: this.state.code,
+      onCode: (e) => this.setState({ code: e.target.value }),
+      preview: React.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.code } })
+    };
+  }
+}
+</script>
+</body>
+</html>

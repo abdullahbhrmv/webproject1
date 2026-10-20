@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Nunito',sans-serif;background:#FFF1F7;color:#2B2540;-webkit-font-smoothing:antialiased}
+  a{color:#C2348A}
+  a:hover{color:#A2286F}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+  @keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+  details>summary{cursor:pointer;list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  input[type=range]{accent-color:#E84CA0}
+  ::selection{background:#FFE3A8}
+  .press{transition:transform .12s}
+  .press:active{transform:scale(.92)}
+</style>
+</helmet>
+
+<div style="overflow:hidden">
+
+  <!-- ===== HERO ===== -->
+  <header style="position:relative;background:linear-gradient(120deg,#E84CA0 0%,#A24CE8 52%,#4C7DE8 100%);background-size:200% 200%;animation:rainbow 8s ease infinite;padding:64px 24px 90px;text-align:center;color:#fff">
+    <div style="position:absolute;top:34px;left:9%;font-size:46px;animation:spin 6s linear infinite">🎲</div>
+    <div style="position:absolute;top:80px;right:11%;font-size:38px;animation:wiggle 2s ease-in-out infinite">🌈</div>
+    <div style="position:absolute;bottom:48px;left:14%;font-size:36px;animation:bounce 2.4s ease-in-out infinite">🎰</div>
+    <div style="position:absolute;bottom:60px;right:13%;font-size:34px;animation:pulse 2s ease-in-out infinite">🔮</div>
+    <div style="display:inline-block;background:rgba(255,255,255,.22);padding:8px 20px;border-radius:30px;font-weight:700;letter-spacing:.5px;font-size:16px;margin-bottom:18px">🎲 Har safar boshqacha!</div>
+    <h1 style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:60px;margin:0 0 14px;line-height:1.05;text-shadow:0 4px 16px rgba(0,0,0,.15)">Tasodif — Math.random</h1>
+    <p style="max-width:680px;margin:0 auto;font-size:21px;font-weight:600;opacity:.97;line-height:1.45">Kompyuter <b>tanga tashlaydi</b>, <b>zar otadi</b>, <b>rang aralashtiradi</b> va sen bilan <b>o'yin o'ynaydi</b> — hammasi bitta sehrli buyruq bilan: <code style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace">Math.random()</code>. Kel, birga o'rganamiz! 🎉</p>
+  </header>
+
+  <!-- ===== STICKY NAV ===== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,241,247,.93);backdrop-filter:blur(10px);border-bottom:2px solid #FAD2E5;padding:12px 14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <a href="#asos" style="text-decoration:none;background:#EDE2FB;color:#7B2FCB;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #DDC8F5">🎯 Asoslari</a>
+    <a href="#zar" style="text-decoration:none;background:#FCE0EE;color:#C2348A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F8C0DC">🎲 Zar</a>
+    <a href="#massiv" style="text-decoration:none;background:#E0F7EC;color:#16A34A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5EFD5">🍎 Massivdan</a>
+    <a href="#rang" style="text-decoration:none;background:#E0EAFC;color:#3A6FD9;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5D8F5">🌈 Rang</a>
+    <a href="#shart" style="text-decoration:none;background:#FFF0DC;color:#B45309;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #FBDFB6">🍀 + Shart</a>
+    <a href="#oyin" style="text-decoration:none;background:#EDE2FB;color:#7B2FCB;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #DDC8F5">🎮 O'yin</a>
+    <a href="#uyvazifasi" style="text-decoration:none;background:#FCE0EE;color:#C2348A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F8C0DC">📒 Uy vazifasi</a>
+  </nav>
+
+  <main style="max-width:1080px;margin:0 auto;padding:40px 22px 80px">
+
+    <div style="background:#fff;border-radius:20px;padding:20px 26px;box-shadow:0 8px 24px rgba(232,76,160,.1);margin-bottom:36px;border:2px solid #FAD2E5;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <div style="font-size:34px">🎰</div>
+      <p style="margin:0;font-size:17px;line-height:1.55;flex:1;min-width:240px">Bu darslik <b>faqat tasodif</b> haqida! Biz <code style="font-family:'JetBrains Mono',monospace;color:#C2348A">Math.random()</code> ni <b>oddiydan murakkabga</b> qadam-baqadam o'rganamiz: sehrli sondan boshlab, to butun boshli <b>o'yin</b>gacha. Har tugma va slayderni o'zing bos! 👆</p>
+    </div>
+
+    <!-- ============ 1. ASOSLARI ============ -->
+    <div id="asos" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:8px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#7B2FCB,#B57AF0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(123,47,203,.35)">🎯</div>
+      <div>
+        <div style="font-weight:800;color:#7B2FCB;font-size:13px;letter-spacing:1px">1-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#7B2FCB">Math.random() nima qiladi?</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #E8DBFA">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px"><code style="background:#EDE2FB;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#7B2FCB">Math.random()</code> — kompyuterning <b>sehrli tugmasi</b>. Har chaqirilganda u <b>0 dan 1 gacha</b> tasodifiy <b>kasr son</b> beradi: masalan <code style="font-family:'JetBrains Mono',monospace">0.0374</code>, keyin <code style="font-family:'JetBrains Mono',monospace">0.8121</code>, keyin <code style="font-family:'JetBrains Mono',monospace">0.5567</code>… Hech qachon oldindan bilib bo'lmaydi! 🪄</p>
+
+      <!-- Misol 1: xom son -->
+      <div style="font-weight:800;color:#7B2FCB;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 1 — xom (kasr) son</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:26px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;button onclick="tashla()"&gt;Sehrli son 🪄&lt;/button&gt;
+&lt;h1 id="son"&gt;?&lt;/h1&gt;
+
+&lt;script&gt;
+  function tashla() {
+    let s = Math.random();   // 0 dan 1 gacha
+    document.getElementById("son").textContent = s;
+  }
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center;background:#F4EEFC;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">👀 SINAB KO'R</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:30px;color:#7B2FCB;font-weight:700;animation:pop .3s">{{ rawNum }}</div>
+          <button onClick="{{ onRaw }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#7B2FCB,#B57AF0);border:none;padding:14px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(123,47,203,.32)">Sehrli son 🪄</button>
+          <p style="margin:0;font-size:14px;color:#7A7088;text-align:center">Har bosishda <b>butunlay boshqa</b> kasr son chiqadi!</p>
+        </div>
+      </div>
+
+      <!-- Misol 2: foizga aylantirish -->
+      <div style="font-weight:800;color:#7B2FCB;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 2 — foizga aylantiramiz (× 100)</div>
+      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;color:#4A4560">Kasr sonni <b>× 100</b> qilsak — <b>0 dan 100 gacha</b> "baxt foizi" chiqadi. Baxt o'lchagichni sina! 👇</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function baxt() {
+  // 0-1 kasrni 0-100 ga cho'zamiz
+  let foiz = Math.random() * 100;
+  // pastga yaxlitlab butun son qilamiz
+  foiz = Math.floor(foiz);
+  document.getElementById("f").textContent = foiz + "%";
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#F4EEFC;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🔋 BUGUNGI BAXT</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:44px;color:#7B2FCB;line-height:1;animation:pop .3s">{{ luck }}%</div>
+          <div style="width:100%;height:16px;background:#E4D6F7;border-radius:10px;overflow:hidden"><div style="height:100%;width:{{ luckWidth }};background:linear-gradient(90deg,#E84CA0,#A24CE8);transition:width .35s;border-radius:10px"></div></div>
+          <button onClick="{{ onLuck }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#E84CA0,#A24CE8);border:none;padding:13px 26px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(232,76,160,.3)">Baxtni o'lcha! 🔋</button>
+        </div>
+      </div>
+
+      <div style="background:#EDE2FB;border:2px solid #DDC8F5;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#7B2FCB;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">Math.random()</code><span>Har chaqirilganda <b>0 (kiradi)</b> dan <b>1 (kirmaydi)</b> gacha tasodifiy kasr beradi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">* 100</code><span>Kasrni <b>100 baravar</b> kattalashtiradi — endi 0 dan 100 gacha.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">Math.floor(...)</code><span>Kasr qismini <b>tashlab</b>, pastga yaxlitlaydi (72.9 → 72). Toza butun son!</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#F4EEFC;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">foiz + "%"</code><span>Songa <b>"%"</b> matnini qo'shib, "72%" qilib ekranga chiqaradi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. ORALIQDA SON — ZAR ============ -->
+    <div id="zar" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(232,76,160,.35)">🎲</div>
+      <div>
+        <div style="font-weight:800;color:#C2348A;font-size:13px;letter-spacing:1px">2-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#C2348A">Ma'lum oraliqda son — zar tashlash</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FAD8E8">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Kasr son o'yinlarda kam ishlaydi — bizga <b>1, 2, 3…</b> kabi <b>butun sonlar</b> kerak. Sehrli formula: <code style="background:#FCE0EE;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">Math.floor(Math.random() * N) + boshi</code>. Avval eng oddiy holat — <b>tanga</b>! 🪙</p>
+
+      <!-- Misol 1: tanga -->
+      <div style="font-weight:800;color:#C2348A;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 1 — tanga (2 tomon)</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:26px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function tanga() {
+  // 0 yoki 1 (2 ta variant)
+  let n = Math.floor(Math.random() * 2);
+  if (n === 0) {
+    natija = "🦅 Burgut";
+  } else {
+    natija = "🔢 Raqam";
+  }
+  document.getElementById("t").textContent = natija;
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#FCEFF6;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🪙 TANGA TASHLA</div>
+          <div style="font-size:64px;line-height:1;animation:pop .3s">{{ coinEmoji }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:22px;color:#C2348A">{{ coinText }}</div>
+          <button onClick="{{ onCoin }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#E84CA0,#A24CE8);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(232,76,160,.3)">Tashla! 🪙</button>
+        </div>
+      </div>
+
+      <!-- Misol 2: zar 1-6 -->
+      <div style="font-weight:800;color:#C2348A;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 2 — haqiqiy zar (1 dan 6 gacha)</div>
+      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;color:#4A4560">Zarda 6 ta tomon bor, lekin u <b>0</b> dan emas, <b>1</b> dan boshlanadi. Shuning uchun oxirida <b>+ 1</b> qo'shamiz! 👇</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function zar() {
+  // 1 dan 6 gacha butun son
+  let son = Math.floor(Math.random() * 6) + 1;
+
+  // zar yuzlari (0-o'rin bo'sh)
+  let yuzlar = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
+
+  document.getElementById("z").textContent = yuzlar[son];
+  document.getElementById("s").textContent = son;
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center;background:#FCEFF6;border-radius:16px;padding:24px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🎲 ZAR TASHLA</div>
+          <div style="font-size:92px;line-height:1;animation:pop .3s">{{ diceFace }}</div>
+          <button onClick="{{ onDice }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#E84CA0,#A24CE8);border:none;padding:13px 30px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(232,76,160,.3)">Tashla! 🎲</button>
+          <div style="font-size:15px;color:#A03A6E;font-weight:700">Tushgan son: {{ dice }}</div>
+        </div>
+      </div>
+
+      <div style="background:#FCE0EE;border:2px solid #F8C0DC;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#C2348A;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">* 2</code><span>Tanga uchun <b>2 ta</b> variant: natija 0 yoki 1 bo'ladi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">* 6</code><span>Zar uchun <b>6 ta</b> variant: 0, 1, 2, 3, 4 yoki 5.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">+ 1</code><span>Natijani <b>bittaga suradi</b> — endi 0-5 emas, <b>1-6</b> chiqadi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FCEFF6;color:#C2348A;padding:2px 8px;border-radius:6px;height:fit-content">yuzlar[son]</code><span>Chiqqan songa mos zar <b>rasmini</b> tanlaydi (3 → ⚂).</span></div>
+        </div>
+      </div>
+
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq zar kodi — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">zar.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    body { text-align:center; font-family:sans-serif; }
+    #z   { font-size:90px; margin:6px; }
+    button { padding:12px 22px; font-size:18px; cursor:pointer; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div id="z"&gt;🎲&lt;/div&gt;
+  &lt;p&gt;Tushgan son: &lt;b id="s"&gt;-&lt;/b&gt;&lt;/p&gt;
+  &lt;button onclick="zar()"&gt;Zar tashla 🎲&lt;/button&gt;
+
+  &lt;script&gt;
+    function zar() {
+      let son = Math.floor(Math.random() * 6) + 1;
+      let yuzlar = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
+      document.getElementById("z").textContent = yuzlar[son];
+      document.getElementById("s").textContent = son;
+    }
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ 3. MASSIVDAN TANLASH ============ -->
+    <div id="massiv" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#16A34A,#4ADE80);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(22,163,74,.35)">🍎</div>
+      <div>
+        <div style="font-weight:800;color:#15803D;font-size:13px;letter-spacing:1px">3-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#15803D">Ro'yxatdan tasodifiy tanlash</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #CFEEDB">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Ko'pincha bizga son emas, <b>narsa</b> kerak: meva, emoji, javob… Ularni <b>massiv</b> (ro'yxat) ga solamiz, so'ng tasodifiy <b>o'rin raqami</b> bilan bittasini <b>ilib olamiz</b>. Sehr shu — <code style="background:#E0F7EC;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#15803D">royxat[tasodifiy_orin]</code>! 🎁</p>
+
+      <!-- Misol 1: meva -->
+      <div style="font-weight:800;color:#15803D;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 1 — tasodifiy meva</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:26px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">let mevalar = ["🍎","🍌","🍇","🍓","🍊"];
+
+function tanla() {
+  // 0 dan ro'yxat soniga qadar o'rin
+  let n = Math.floor(Math.random() * mevalar.length);
+  document.getElementById("m").textContent = mevalar[n];
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#EAF9F0;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🎁 TASODIFIY MEVA</div>
+          <div style="font-size:72px;line-height:1;animation:pop .3s">{{ fruit }}</div>
+          <button onClick="{{ onFruit }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#16A34A,#4ADE80);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(22,163,74,.3)">Tanla! 🎁</button>
+        </div>
+      </div>
+
+      <!-- Misol 2: maqtov -->
+      <div style="font-weight:800;color:#15803D;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 2 — tasodifiy maqtov (matnlar massivi)</div>
+      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;color:#4A4560">Massivga <b>matn</b> ham solsak bo'ladi. Bu — "sehrli maqtovchi": har bosishda senga yangi iliq gap aytadi! 💚</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">let gaplar = [
+  "Zo'rsan! 🌟",
+  "Ajoyib ish! 👏",
+  "Sen dahoing! 🧠",
+  "Davom et! 🚀"
+];
+
+function maqta() {
+  let n = Math.floor(Math.random() * gaplar.length);
+  document.getElementById("g").textContent = gaplar[n];
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#EAF9F0;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">💚 SEHRLI MAQTOVCHI</div>
+          <div style="background:#fff;border-radius:14px;padding:16px 20px;min-width:200px;text-align:center;font-family:'Fredoka',sans-serif;font-size:21px;color:#15803D;animation:pop .3s;box-shadow:0 4px 12px rgba(22,163,74,.12)">{{ praise }}</div>
+          <button onClick="{{ onPraise }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#16A34A,#4ADE80);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(22,163,74,.3)">Maqta! 💚</button>
+        </div>
+      </div>
+
+      <div style="background:#E0F7EC;border:2px solid #C5EFD5;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#15803D;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EAF9F0;color:#15803D;padding:2px 8px;border-radius:6px;height:fit-content">["🍎","🍌", ...]</code><span><b>Massiv</b> — bir nechta narsani bitta ro'yxatga jamlaydi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EAF9F0;color:#15803D;padding:2px 8px;border-radius:6px;height:fit-content">.length</code><span>Ro'yxatda <b>nechta</b> element borligini beradi (masalan 5).</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EAF9F0;color:#15803D;padding:2px 8px;border-radius:6px;height:fit-content">random * length</code><span>0 dan uzunlikkacha tasodifiy <b>o'rin raqami</b>ni beradi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EAF9F0;color:#15803D;padding:2px 8px;border-radius:6px;height:fit-content">mevalar[n]</code><span>Shu <b>o'rindagi</b> elementni oladi — o'rinlar <b>0 dan</b> sanaladi!</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. TASODIFIY RANG ============ -->
+    <div id="rang" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#3A6FD9,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(58,111,217,.35)">🌈</div>
+      <div>
+        <div style="font-weight:800;color:#2E5DC0;font-size:13px;letter-spacing:1px">4-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#2E5DC0">Tasodifiy rang yasash</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #D9E4FA">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Rang ham tasodifiy bo'lishi mumkin! Ikki yo'l bor: <b>1)</b> tayyor ranglar ro'yxatidan tanlash (3-bo'limdek), <b>2)</b> <b>butunlay yangi</b> rangni <b>HEX kod</b> yasab olish. Ikkalasini ham ko'ramiz! 🎨</p>
+
+      <!-- Misol 1: massivdan rang -->
+      <div style="font-weight:800;color:#2E5DC0;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 1 — tayyor ranglardan tanlash</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:26px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">let ranglar = ["tomato","deeppink",
+               "green","orange","purple"];
+
+function ozgar() {
+  let n = Math.floor(Math.random() * ranglar.length);
+  document.getElementById("q").style.background = ranglar[n];
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#EEF4FE;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🎨 TAYYOR RANGLAR</div>
+          <div style="width:120px;height:120px;border-radius:22px;background:{{ palColor }};box-shadow:0 10px 24px rgba(0,0,0,.18);transition:background .25s"></div>
+          <button onClick="{{ onPal }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#3A6FD9,#6FA0F0);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(58,111,217,.3)">Almashtir! 🎨</button>
+        </div>
+      </div>
+
+      <!-- Misol 2: HEX rang -->
+      <div style="font-weight:800;color:#2E5DC0;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 2 — butunlay yangi HEX rang</div>
+      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;color:#4A4560">HEX rang — <code style="font-family:'JetBrains Mono',monospace;color:#2E5DC0">#</code> va <b>6 ta belgi</b> (0-9, A-F). Har belgini tasodifan tanlab ulasak — <b>16 million</b> rangdan biri chiqadi! 🤯</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function yangiRang() {
+  let belgilar = "0123456789ABCDEF";
+  let rang = "#";
+  // 6 marta tasodifiy belgi qo'shamiz
+  for (let i = 0; i &lt; 6; i++) {
+    let n = Math.floor(Math.random() * 16);
+    rang = rang + belgilar[n];
+  }
+  document.getElementById("q").style.background = rang;
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#EEF4FE;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🌈 YANGI HEX RANG</div>
+          <div style="width:120px;height:120px;border-radius:22px;background:{{ hexColor }};box-shadow:0 10px 24px rgba(0,0,0,.18);transition:background .25s;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;text-shadow:0 1px 3px rgba(0,0,0,.4)">{{ hexColor }}</div>
+          <button onClick="{{ onHex }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#A24CE8,#4C7DE8);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(162,76,232,.3)">Yangi rang! 🌈</button>
+        </div>
+      </div>
+
+      <div style="background:#E0EAFC;border:2px solid #C5D8F5;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#2E5DC0;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF4FE;color:#2E5DC0;padding:2px 8px;border-radius:6px;height:fit-content">"0123...ABCDEF"</code><span>HEX ranglarda ishlatiladigan <b>16 ta belgi</b> — hammasi bitta matnda.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF4FE;color:#2E5DC0;padding:2px 8px;border-radius:6px;height:fit-content">for (i=0; i&lt;6; i++)</code><span><b>Sikl</b> — bir ishni <b>6 marta</b> takrorlaydi (6 ta belgi kerak).</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF4FE;color:#2E5DC0;padding:2px 8px;border-radius:6px;height:fit-content">rang = rang + belgi</code><span>Har aylanishda tanlangan belgini rangga <b>ulab</b> boradi (#A → #A3 → …).</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EEF4FE;color:#2E5DC0;padding:2px 8px;border-radius:6px;height:fit-content">.style.background = rang</code><span>Tayyor rangni qutining <b>fon rangi</b> qilib qo'yadi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. TASODIF + SHART ============ -->
+    <div id="shart" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#D9730A,#FBBF24);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(217,115,10,.35)">🍀</div>
+      <div>
+        <div style="font-weight:800;color:#B45309;font-size:13px;letter-spacing:1px">5-BO'LIM</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:34px;margin:0;color:#B45309">Tasodif + shart birga</h2>
+      </div>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FBE4C8">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 18px">Endi eng qiziq qismi: tasodifiy sonni <code style="background:#FFF0DC;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#B45309">if</code> bilan <b>tekshiramiz</b> va natijaga qarab <b>turlicha</b> javob beramiz. Mana shundan haqiqiy <b>o'yin</b> tug'iladi! 🎮</p>
+
+      <!-- Misol 1: omad -->
+      <div style="font-weight:800;color:#B45309;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 1 — omad sinovchisi (50/50)</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:26px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function omad() {
+  let s = Math.random();   // 0 dan 1 gacha
+  if (s &lt; 0.5) {
+    natija = "🍀 Omading keldi!";
+  } else {
+    natija = "😅 Keyingi safar!";
+  }
+  document.getElementById("o").textContent = natija;
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:{{ luckyBg }};border-radius:16px;padding:26px 20px;transition:background .3s">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🍀 OMADNI SINA</div>
+          <div style="font-size:60px;line-height:1;animation:pop .3s">{{ luckyEmoji }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:20px;color:{{ luckyColor }};text-align:center">{{ luckyText }}</div>
+          <button onClick="{{ onLucky }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#D9730A,#FBBF24);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(217,115,10,.3)">Sina! 🍀</button>
+        </div>
+      </div>
+
+      <!-- Misol 2: zar o'yini -->
+      <div style="font-weight:800;color:#B45309;font-size:14px;letter-spacing:.5px;margin:6px 0 12px">▸ MISOL 2 — zar o'yini (6 chiqsa — yutdi!)</div>
+      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;color:#4A4560">Zar tashla: agar <b>6</b> chiqsa — yutasan, aks holda yana urin. Bu yerda <b>tasodif</b>, <b>o'zgaruvchi</b> va <b>shart</b> — hammasi birga ishlaydi! 👇</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25);height:100%">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">function otish() {
+  let son = Math.floor(Math.random() * 6) + 1;
+  let x = document.getElementById("x");
+
+  if (son === 6) {
+    x.textContent = "🏆 " + son + " — YUTDING!";
+  } else {
+    x.textContent = "🎲 " + son + " — yana urin!";
+  }
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center;background:#FFF8EE;border-radius:16px;padding:26px 20px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px">🎲 6 CHIQARA OLASANMI?</div>
+          <div style="font-size:58px;line-height:1;animation:pop .3s">{{ gameFace }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:19px;color:{{ gameColor }};text-align:center">{{ gameText }}</div>
+          <button onClick="{{ onGameRoll }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:#fff;background:linear-gradient(135deg,#D9730A,#FBBF24);border:none;padding:13px 28px;border-radius:15px;cursor:pointer;box-shadow:0 8px 18px rgba(217,115,10,.3)">Otish! 🎲</button>
+        </div>
+      </div>
+
+      <div style="background:#FFF0DC;border:2px solid #FBDFB6;border-radius:14px;padding:18px 22px">
+        <b style="font-size:15px;color:#B45309;display:block;margin-bottom:10px">🔍 Kod qanday ishlaydi?</b>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FFF8EE;color:#B45309;padding:2px 8px;border-radius:6px;height:fit-content">s &lt; 0.5</code><span>Tasodifiy kasr <b>yarmidan kichikmi?</b> — bu 50% ehtimol degani.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FFF8EE;color:#B45309;padding:2px 8px;border-radius:6px;height:fit-content">son === 6</code><span>Zar aynan <b>6</b> gami? <code style="font-family:'JetBrains Mono',monospace">===</code> — "aynan teng" degani.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FFF8EE;color:#B45309;padding:2px 8px;border-radius:6px;height:fit-content">if { ... } else { ... }</code><span>Rost bo'lsa <b>birinchi</b>, yolg'on bo'lsa <b>ikkinchi</b> javobni beradi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#FFF8EE;color:#B45309;padding:2px 8px;border-radius:6px;height:fit-content">"🏆 " + son</code><span>Matn va sonni <b>ulab</b>, bitta xabar yasaydi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. MINI O'YIN: SONNI TOP ============ -->
+    <div id="oyin" style="scroll-margin-top:64px;background:linear-gradient(135deg,#C2348A,#7B2FCB);border-radius:28px;padding:34px 38px;box-shadow:0 16px 40px rgba(123,47,203,.28);margin:54px 0 10px;color:#fff">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+        <div style="font-size:38px;animation:wiggle 2.5s ease-in-out infinite">🎮</div>
+        <div>
+          <div style="font-weight:800;font-size:13px;letter-spacing:1px;opacity:.85">6-BO'LIM — HAMMASI BIRGA</div>
+          <h2 style="font-family:'Fredoka',sans-serif;font-size:32px;margin:0">Mini o'yin: Sonni top!</h2>
+        </div>
+      </div>
+      <p style="font-size:18px;line-height:1.55;margin:0 0 22px;opacity:.96">Kompyuter <b>1 dan 20 gacha</b> bir sonni yashirdi (<b>Math.random</b>). Slayderni surib taxminingni <b>Tekshir</b> — JS "kattaroq" yoki "kichikroq" deb yo'l ko'rsatadi (<b>if / else</b>). Nechta urinishda topasan? 🧠</p>
+      <div style="background:rgba(255,255,255,.14);border-radius:20px;padding:26px 24px;backdrop-filter:blur(4px)">
+        <div style="text-align:center;margin-bottom:18px">
+          <span style="font-size:15px;font-weight:800;letter-spacing:1px;opacity:.9">SENING TAXMINING</span>
+          <div style="font-family:'Fredoka',sans-serif;font-size:64px;line-height:1.1">{{ guessVal }}</div>
+        </div>
+        <input type="range" min="1" max="20" value="{{ guessVal }}" onChange="{{ onGuessSlide }}" disabled="{{ won }}" style="width:100%;margin-bottom:8px;accent-color:#fff">
+        <div style="display:flex;justify-content:space-between;font-size:13px;opacity:.8;font-weight:700;margin-bottom:20px"><span>1</span><span>20</span></div>
+        <div style="background:{{ fbBg }};border-radius:16px;padding:20px;text-align:center;margin-bottom:18px;transition:background .25s">
+          <div style="font-size:42px">{{ fbEmoji }}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:23px;margin-top:4px;color:{{ fbColor }}">{{ fbText }}</div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <button onClick="{{ onGuess }}" disabled="{{ won }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:#C2348A;background:#fff;border:none;padding:14px 34px;border-radius:16px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2);opacity:{{ guessBtnOpacity }}">Tekshir! 🎯</button>
+          <button onClick="{{ onNewGame }}" class="press" style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:#fff;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.5);padding:13px 30px;border-radius:16px;cursor:pointer">🔄 Yangi o'yin</button>
+        </div>
+        <div style="text-align:center;margin-top:16px;font-size:15px;font-weight:700;opacity:.9">Urinishlar: {{ tries }} 🔢</div>
+      </div>
+    </div>
+
+    <details style="background:#fff;border:2px solid #E8DBFA;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px">
+      <summary style="font-weight:800;font-size:18px;padding:18px 24px;background:#F3E9FC;color:#7B2FCB">📄 "Sonni top" o'yinining to'liq kodi — nusxalab brauzerda och</summary>
+      <div style="background:#282A4A">
+        <div style="display:flex;gap:7px;padding:12px 16px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">sonni-top.html</span></div>
+        <pre style="margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h1&gt;Sonni top! (1 dan 20 gacha)&lt;/h1&gt;
+  &lt;input id="taxmin" type="number"&gt;
+  &lt;button onclick="tekshir()"&gt;Tekshir&lt;/button&gt;
+  &lt;p id="xabar"&gt;&lt;/p&gt;
+
+  &lt;script&gt;
+    // 1) TASODIF: kompyuter 1-20 orasidan son yashiradi
+    let maxfiy = Math.floor(Math.random() * 20) + 1;
+    let urinish = 0;
+
+    function tekshir() {
+      // 2) foydalanuvchi yozgan sonni olamiz
+      let taxmin = Number(document.getElementById("taxmin").value);
+      let xabar = document.getElementById("xabar");
+      urinish = urinish + 1;   // O'ZGARUVCHI: urinishni sanaymiz
+
+      // 3) SHART: uch holatni tekshiramiz
+      if (taxmin === maxfiy) {
+        xabar.textContent = "TOPDING! 🎉 Urinish: " + urinish;
+      } else if (taxmin &lt; maxfiy) {
+        xabar.textContent = "Kattaroq son tanla! ⬆️";
+      } else {
+        xabar.textContent = "Kichikroq son tanla! ⬇️";
+      }
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+      <div style="padding:20px 24px;background:#FBF6FF;border-top:2px solid #E8D9F7">
+        <b style="font-size:15px;color:#7B2FCB;display:block;margin-bottom:12px">🔍 Bu darslikning HAMMA narsasi shu bitta o'yinda!</b>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.55;color:#4A4560">
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EDE2FB;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">Math.random … + 1</code><span><b>Tasodif (2-bo'lim):</b> kompyuter 1-20 orasidan bir sonni yashiradi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EDE2FB;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">let maxfiy / urinish</code><span><b>O'zgaruvchi:</b> yashirilgan son va urinishlar soni qutichalarda saqlanadi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EDE2FB;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">Number(...value)</code><span><b>Kirish:</b> yozilgan sonni matndan haqiqiy songa aylantiradi.</span></div>
+          <div style="display:flex;gap:10px"><code style="flex:none;font-family:'JetBrains Mono',monospace;background:#EDE2FB;color:#7B2FCB;padding:2px 8px;border-radius:6px;height:fit-content">if / else if / else</code><span><b>Shart (5-bo'lim):</b> teng — yutdi; kichik — "kattaroq"; katta — "kichikroq".</span></div>
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ UY VAZIFASI ============ -->
+    <div id="uyvazifasi" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:54px 0 20px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(232,76,160,.35)">📒</div>
+      <div>
+        <div style="font-weight:800;color:#E84CA0;font-size:15px;letter-spacing:1px">VAQTI KELDI — 6 VAZIFA</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#C2348A">Uy vazifasi</h2>
+      </div>
+    </div>
+    <p style="font-size:18px;line-height:1.6;margin:0 0 22px;color:#7A7088">Vazifalar <b>oson</b>dan <b>qiyin</b>ga qadar tartiblangan. Har biri uchun yangi <b>index.html</b> yasa, <code style="background:#FCE0EE;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">Math.random()</code> ishlat va brauzerda sina. Tiqilib qolsang — <b>💡 Maslahat</b>ni och! ⚡</p>
+
+    <!-- Vazifa 1 -->
+    <section style="background:#fff;border-radius:20px;padding:24px 28px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:8px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:46px;height:46px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">1</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h3 style="font-family:'Fredoka',sans-serif;font-size:21px;margin:0;color:#2B2540">🪙 Tanga tashlovchi</h3><span style="font-size:15px">⭐</span></div>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 10px">Tugma yasa. Bosilganda <b>alert</b> bilan "🦅 Burgut" yoki "🔢 Raqam" chiqsin (50/50).</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> <code style="font-family:'JetBrains Mono',monospace">Math.random() &lt; 0.5</code> + if/else. <b>Natija:</b> har bosishda ikki javobdan biri.</div>
+      </div>
+    </section>
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:14px 20px;margin-bottom:18px">
+      <summary style="font-weight:800;font-size:15px;color:#8A6D0F">💡 Maslahat — Vazifa 1</summary>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B5A2A"><code style="font-family:'JetBrains Mono',monospace">let s = Math.random();</code> qilib, keyin <code style="font-family:'JetBrains Mono',monospace">if (s &lt; 0.5) alert("🦅 Burgut"); else alert("🔢 Raqam");</code> yoz. Tamom!</p>
+    </details>
+
+    <!-- Vazifa 2 -->
+    <section style="background:#fff;border-radius:20px;padding:24px 28px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:8px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:46px;height:46px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">2</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h3 style="font-family:'Fredoka',sans-serif;font-size:21px;margin:0;color:#2B2540">🎲 Baxt zari</h3><span style="font-size:15px">⭐</span></div>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 10px">Tugma bosilganda <b>1 dan 6 gacha</b> tasodifiy son chiqsin va sahifada <b>katta</b> qilib ko'rsatilsin (alert emas, <code style="font-family:'JetBrains Mono',monospace">textContent</code>).</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> <code style="font-family:'JetBrains Mono',monospace">Math.floor(Math.random()*6)+1</code>. <b>Natija:</b> ekranda 1-6 orasida son.</div>
+      </div>
+    </section>
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:14px 20px;margin-bottom:18px">
+      <summary style="font-weight:800;font-size:15px;color:#8A6D0F">💡 Maslahat — Vazifa 2</summary>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B5A2A"><code style="font-family:'JetBrains Mono',monospace">&lt;h1 id="son"&gt;?&lt;/h1&gt;</code> qo'y, keyin funksiyada <code style="font-family:'JetBrains Mono',monospace">document.getElementById("son").textContent = Math.floor(Math.random()*6)+1;</code>. Xohlasang zar yuzlari massivini ham qo'shib qo'y!</p>
+    </details>
+
+    <!-- Vazifa 3 -->
+    <section style="background:#fff;border-radius:20px;padding:24px 28px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:8px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:46px;height:46px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">3</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h3 style="font-family:'Fredoka',sans-serif;font-size:21px;margin:0;color:#2B2540">🍕 Bugun nima yeymiz?</h3><span style="font-size:15px">⭐⭐</span></div>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 10px">5-6 ta taom nomini <b>massiv</b>ga sol. Tugma bosilganda JS tasodifan bittasini tanlab ekranga chiqarsin: "Bugun: 🍕 Pitsa!".</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> massiv + <code style="font-family:'JetBrains Mono',monospace">royxat[tasodifiy_orin]</code>. <b>Natija:</b> har bosishda boshqa taom.</div>
+      </div>
+    </section>
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:14px 20px;margin-bottom:18px">
+      <summary style="font-weight:800;font-size:15px;color:#8A6D0F">💡 Maslahat — Vazifa 3</summary>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B5A2A"><code style="font-family:'JetBrains Mono',monospace">let taomlar = ["🍕 Pitsa","🍔 Burger","🍜 Lag'mon","🥟 Chuchvara"];</code> yasang, so'ng <code style="font-family:'JetBrains Mono',monospace">let n = Math.floor(Math.random()*taomlar.length);</code> — <code style="font-family:'JetBrains Mono',monospace">taomlar[n]</code> ni ko'rsat.</p>
+    </details>
+
+    <!-- Vazifa 4 -->
+    <section style="background:#fff;border-radius:20px;padding:24px 28px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:8px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:46px;height:46px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">4</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h3 style="font-family:'Fredoka',sans-serif;font-size:21px;margin:0;color:#2B2540">🌈 Tasodifiy fon rangi</h3><span style="font-size:15px">⭐⭐</span></div>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 10px">Tugma bosilganda <b>butun sahifa foni</b> (<code style="font-family:'JetBrains Mono',monospace">document.body</code>) tasodifiy rangga bo'yalsin. Tayyor ranglar ro'yxatidan tanla.</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> massiv + <code style="font-family:'JetBrains Mono',monospace">document.body.style.background</code>. <b>Natija:</b> sahifa har bosishda yangi rang.</div>
+      </div>
+    </section>
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:14px 20px;margin-bottom:18px">
+      <summary style="font-weight:800;font-size:15px;color:#8A6D0F">💡 Maslahat — Vazifa 4</summary>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B5A2A">Meva misolidagi kabi, lekin <code style="font-family:'JetBrains Mono',monospace">.textContent</code> o'rniga <code style="font-family:'JetBrains Mono',monospace">document.body.style.background = ranglar[n];</code> yoz. Ranglar: <code style="font-family:'JetBrains Mono',monospace">["#FFD6E8","#D6F5E3","#D6E4FF","#FFF3C4"]</code> kabi och ranglar chiroyli chiqadi.</p>
+    </details>
+
+    <!-- Vazifa 5 -->
+    <section style="background:#fff;border-radius:20px;padding:24px 28px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:8px;border:2px solid #F3C8DD;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:46px;height:46px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);color:#fff;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">5</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h3 style="font-family:'Fredoka',sans-serif;font-size:21px;margin:0;color:#2B2540">🔮 Sehrli shar</h3><span style="font-size:15px">⭐⭐⭐</span></div>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 10px">Savolingga javob beruvchi <b>sehrli shar</b> yasa. 5-6 ta javobni massivga sol ("Ha 😄", "Yo'q 🙅", "Ehtimol 🤔"…). Tugma bosilganda tasodifan bittasini ko'rsatsin.</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> massiv + Math.random + textContent birga. <b>Natija:</b> har savolga tasodifiy javob.</div>
+      </div>
+    </section>
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:14px 20px;margin-bottom:18px">
+      <summary style="font-weight:800;font-size:15px;color:#8A6D0F">💡 Maslahat — Vazifa 5</summary>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B5A2A">Bu 3-bo'limdagi "maqtovchi" bilan bir xil! Faqat gaplarni javoblarga almashtir: <code style="font-family:'JetBrains Mono',monospace">let javoblar = ["Ha 😄","Yo'q 🙅","Ehtimol 🤔","Albatta! 🌟","Hozir emas ⏰"];</code></p>
+    </details>
+
+    <!-- Vazifa 6 -->
+    <section style="background:#fff;border-radius:20px;padding:24px 28px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:8px;border:2px solid #F3C8DD;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:46px;height:46px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);color:#fff;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">6</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><h3 style="font-family:'Fredoka',sans-serif;font-size:21px;margin:0;color:#2B2540">🎯 O'zingning "Sonni top" o'ying</h3><span style="font-size:15px">⭐⭐⭐</span></div>
+        <p style="font-size:16px;line-height:1.6;margin:0 0 10px">Darslikdagi <b>"Sonni top"</b> o'yinini o'zing noldan yoz. Kompyuter <b>1-10</b> orasidan son yashirsin, sen taxmin qil, JS "kattaroq/kichikroq/topding" desin. Urinishlarni ham sana!</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> random + o'zgaruvchi + if/else if/else — hammasi birga! <b>Natija:</b> ishlaydigan o'yin.</div>
+      </div>
+    </section>
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:14px 20px;margin-bottom:8px">
+      <summary style="font-weight:800;font-size:15px;color:#8A6D0F">💡 Maslahat — Vazifa 6</summary>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B5A2A">Yuqoridagi 📄 <b>"Sonni top" to'liq kodi</b>ni och, nusxalab ol va <code style="font-family:'JetBrains Mono',monospace">* 20</code> ni <code style="font-family:'JetBrains Mono',monospace">* 10</code> ga o'zgartir. Keyin o'zingga moslab bezab chiq. Bu — eng katta yutuq! 🏆</p>
+    </details>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:44px 20px 10px">
+      <p style="font-size:22px;font-family:'Fredoka',sans-serif;color:#E84CA0;margin:0 0 6px">🎲 Sen endi tasodif ustasisan!</p>
+      <p style="font-size:18px;color:#7A7088;margin:0;line-height:1.6">Sehrli son, zar, massivdan tanlash, rang, shart va o'yin — hammasini bilasan.<br>Endi <b>o'z o'yinlaringni</b> yasashga tayyorsan! 🚀</p>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    rawNum: "0.0000",
+    luck: 50,
+    coin: -1,
+    dice: 1,
+    fruitIdx: 0,
+    praiseIdx: -1,
+    palIdx: 0,
+    hexColor: "#A24CE8",
+    lucky: -1,
+    gameSon: 0,
+    guessVal: 10,
+    target: 7,
+    tries: 0,
+    feedback: "start",
+    won: false
+  };
+
+  fruits = ["🍎","🍌","🍇","🍓","🍊","🍑","🍉","🥝"];
+  praises = ["Zo'rsan! 🌟","Ajoyib ish! 👏","Sen dahosan! 🧠","Davom et! 🚀","Yasha! 💚"];
+  palColors = ["tomato","deeppink","seagreen","orange","mediumpurple","dodgerblue"];
+  diceFaces = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
+
+  componentDidMount() {
+    this.setState({ target: Math.floor(Math.random() * 20) + 1 });
+  }
+
+  randomHex() {
+    const h = "0123456789ABCDEF";
+    let c = "#";
+    for (let i = 0; i < 6; i++) c += h[Math.floor(Math.random() * 16)];
+    return c;
+  }
+
+  doGuess() {
+    if (this.state.won) return;
+    const g = this.state.guessVal;
+    const t = this.state.target;
+    const tries = this.state.tries + 1;
+    if (g === t) this.setState({ tries, feedback: "win", won: true });
+    else if (g < t) this.setState({ tries, feedback: "low" });
+    else this.setState({ tries, feedback: "high" });
+  }
+
+  newGame() {
+    this.setState({
+      target: Math.floor(Math.random() * 20) + 1,
+      guessVal: 10,
+      tries: 0,
+      feedback: "start",
+      won: false
+    });
+  }
+
+  renderVals() {
+    const s = this.state;
+
+    // coin
+    const coin = s.coin < 0
+      ? { emoji: "🪙", text: "Tashla!" }
+      : (s.coin === 0 ? { emoji: "🦅", text: "Burgut!" } : { emoji: "🔢", text: "Raqam!" });
+
+    // lucky (random + if)
+    const lucky = s.lucky < 0
+      ? { emoji: "🍀", text: "Omadingni sina!", color: "#B45309", bg: "#FFF8EE" }
+      : (s.lucky === 1
+          ? { emoji: "🍀", text: "Omading keldi!", color: "#15803D", bg: "#E9F9EF" }
+          : { emoji: "😅", text: "Keyingi safar!", color: "#B45309", bg: "#FFF8EE" });
+
+    // dice-6 game (random + if)
+    const game = s.gameSon === 0
+      ? { face: "🎲", text: "6 chiqarib ko'r!", color: "#B45309" }
+      : (s.gameSon === 6
+          ? { face: "🏆", text: s.gameSon + " — YUTDING!", color: "#15803D" }
+          : { face: this.diceFaces[s.gameSon], text: s.gameSon + " — yana urin!", color: "#B45309" });
+
+    // guess feedback
+    const fbMap = {
+      start: { text: "Taxminingni tanla 👇", emoji: "🤔", bg: "rgba(255,255,255,.18)", color: "#fff" },
+      low:   { text: "Kattaroq son tanla! ⬆️", emoji: "📉", bg: "rgba(255,255,255,.18)", color: "#fff" },
+      high:  { text: "Kichikroq son tanla! ⬇️", emoji: "📈", bg: "rgba(255,255,255,.18)", color: "#fff" },
+      win:   { text: "TOPDING! 🎉🎉", emoji: "🏆", bg: "#16A34A", color: "#fff" }
+    };
+    const fb = fbMap[s.feedback];
+
+    return {
+      // 1. basics
+      rawNum: s.rawNum,
+      onRaw: () => this.setState({ rawNum: Math.random().toFixed(4) }),
+      luck: s.luck,
+      luckWidth: s.luck + "%",
+      onLuck: () => this.setState({ luck: Math.floor(Math.random() * 101) }),
+
+      // 2. coin + dice
+      coinEmoji: coin.emoji,
+      coinText: coin.text,
+      onCoin: () => this.setState({ coin: Math.floor(Math.random() * 2) }),
+      dice: s.dice,
+      diceFace: this.diceFaces[s.dice],
+      onDice: () => this.setState({ dice: Math.floor(Math.random() * 6) + 1 }),
+
+      // 3. array pick
+      fruit: this.fruits[s.fruitIdx],
+      onFruit: () => this.setState({ fruitIdx: Math.floor(Math.random() * this.fruits.length) }),
+      praise: s.praiseIdx < 0 ? "Tugmani bos! 👇" : this.praises[s.praiseIdx],
+      onPraise: () => this.setState({ praiseIdx: Math.floor(Math.random() * this.praises.length) }),
+
+      // 4. color
+      palColor: this.palColors[s.palIdx],
+      onPal: () => this.setState({ palIdx: Math.floor(Math.random() * this.palColors.length) }),
+      hexColor: s.hexColor,
+      onHex: () => this.setState({ hexColor: this.randomHex() }),
+
+      // 5. random + if
+      luckyEmoji: lucky.emoji,
+      luckyText: lucky.text,
+      luckyColor: lucky.color,
+      luckyBg: lucky.bg,
+      onLucky: () => this.setState({ lucky: Math.random() < 0.5 ? 1 : 0 }),
+      gameFace: game.face,
+      gameText: game.text,
+      gameColor: game.color,
+      onGameRoll: () => this.setState({ gameSon: Math.floor(Math.random() * 6) + 1 }),
+
+      // 6. guess game
+      guessVal: s.guessVal,
+      onGuessSlide: (e) => this.setState({ guessVal: +e.target.value }),
+      onGuess: () => this.doGuess(),
+      onNewGame: () => this.newGame(),
+      tries: s.tries,
+      won: s.won,
+      guessBtnOpacity: s.won ? "0.5" : "1",
+      fbText: fb.text,
+      fbEmoji: fb.emoji,
+      fbBg: fb.bg,
+      fbColor: fb.color
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Nunito',sans-serif;background:#FFF1F7;color:#2B2540;-webkit-font-smoothing:antialiased}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes wiggle{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+  @keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  details>summary{cursor:pointer;list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  input[type=range]{accent-color:#E84CA0}
+  ::selection{background:#FFC8E4}
+  .demo-rotate{transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+  .demo-rotate:hover{transform:rotate(12deg) scale(1.08)}
+  .grow{transition:transform .25s,box-shadow .25s}
+  .grow:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 16px 32px rgba(232,76,160,.35)}
+  .color-swap{transition:background .3s,color .3s}
+  .color-swap:hover{background:#16A34A !important;color:#fff !important}
+</style>
+</helmet>
+
+<div style="overflow:hidden">
+
+  <!-- ===== HERO ===== -->
+  <header style="position:relative;background:linear-gradient(120deg,#E84CA0 0%,#A24CE8 50%,#4C7DE8 100%);background-size:200% 200%;animation:rainbow 8s ease infinite;padding:64px 24px 90px;text-align:center;color:#fff">
+    <div style="position:absolute;top:34px;left:9%;font-size:44px;animation:bounce 2.4s ease-in-out infinite">🎨</div>
+    <div style="position:absolute;top:80px;right:11%;font-size:38px;animation:spin 6s linear infinite">⭐</div>
+    <div style="position:absolute;bottom:48px;left:15%;font-size:36px;animation:wiggle 2s ease-in-out infinite">✨</div>
+    <div style="position:absolute;bottom:60px;right:14%;font-size:34px;animation:pulse 2s ease-in-out infinite">💖</div>
+    <div style="display:inline-block;background:rgba(255,255,255,.22);padding:8px 20px;border-radius:30px;font-weight:700;letter-spacing:.5px;font-size:16px;margin-bottom:18px">🪄 Sahifani jonlantiramiz!</div>
+    <h1 style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:62px;margin:0 0 14px;line-height:1.05;text-shadow:0 4px 16px rgba(0,0,0,.15)">CSS sehrlari</h1>
+    <p style="max-width:650px;margin:0 auto;font-size:21px;font-weight:600;opacity:.97;line-height:1.45">Gradientlar, soyalar, aylanishlar, animatsiyalar! CSS bilan sahifani sehrli va chiroyli qilamiz. Slayderlarni surib, o'zing sina! 🎉</p>
+  </header>
+
+  <!-- ===== STICKY NAV ===== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,241,247,.93);backdrop-filter:blur(10px);border-bottom:2px solid #FAD2E5;padding:12px 14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <a href="#gradient" style="text-decoration:none;background:#FCE0EE;color:#E84CA0;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F8C0DC">🌈 Gradient</a>
+    <a href="#burchak" style="text-decoration:none;background:#EDE2FB;color:#8B3FD9;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #DDC8F5">⬭ Burchak</a>
+    <a href="#soya" style="text-decoration:none;background:#E0EAFC;color:#3A6FD9;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5D8F5">🌑 Soya</a>
+    <a href="#hover" style="text-decoration:none;background:#E0F7EC;color:#16A34A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5EFD5">👆 Hover</a>
+    <a href="#aylantir" style="text-decoration:none;background:#FFF0DC;color:#D9730A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #FBDFB6">🔄 Aylantirish</a>
+    <a href="#animatsiya" style="text-decoration:none;background:#FCE0EE;color:#E84CA0;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F8C0DC">🎬 Animatsiya</a>
+    <a href="#flex" style="text-decoration:none;background:#E0EAFC;color:#3A6FD9;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #C5D8F5">📦 Flex</a>
+    <a href="#studiya" style="text-decoration:none;background:#FFE6B0;color:#B45309;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F5D58A">🎮 Studiya</a>
+    <a href="#uyvazifasi" style="text-decoration:none;background:#FCE0EE;color:#C2348A;font-weight:800;padding:8px 15px;border-radius:30px;font-size:14px;border:2px solid #F8C0DC">📒 Uy vazifasi</a>
+  </nav>
+
+  <main style="max-width:1080px;margin:0 auto;padding:40px 22px 80px">
+
+    <div style="background:#fff;border-radius:20px;padding:20px 26px;box-shadow:0 8px 24px rgba(232,76,160,.1);margin-bottom:36px;border:2px solid #FAD2E5;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <div style="font-size:34px">🧭</div>
+      <p style="margin:0;font-size:17px;line-height:1.55;flex:1;min-width:240px">Har bo'limda <b>jonli misol</b> bor — slayderni surib yoki tugmani bosib, CSS qanday o'zgarishini <b>o'z ko'zing bilan</b> ko'rasan. O'rganishning eng zo'r yo'li — sinab ko'rish! 👀</p>
+    </div>
+
+    <!-- ============ GRADIENT ============ -->
+    <div id="gradient" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:8px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(232,76,160,.35)">🌈</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#C2348A">Gradient — rang o'tishi</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FAD8E8">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 20px">Oddiy rang o'rniga ikkita rang <b>bir-biriga oqib o'tsa</b> — bu <b>gradient</b>! Osmon kabi chiroyli. <code style="background:#FCE0EE;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">linear-gradient</code> ishlatamiz.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7;color:#C9D7FF;overflow-x:auto">div {
+  background: linear-gradient(
+    to right, #E84CA0, #4C7DE8
+  );
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px;margin-bottom:8px">👀 NATIJA</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="height:54px;border-radius:12px;background:linear-gradient(to right,#E84CA0,#4C7DE8);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">to right ➜</div>
+            <div style="height:54px;border-radius:12px;background:linear-gradient(135deg,#F59E0B,#E84CA0);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">135deg ↘</div>
+            <div style="height:54px;border-radius:12px;background:linear-gradient(to right,#34D17C,#4C7DE8,#A24CE8);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">3 rang 🌈</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:18px;background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:16px 20px">
+        <b style="font-size:17px">🪄 Sinab ko'r:</b>
+        <p style="margin:8px 0 0;font-size:17px">Pastdagi <b>🎮 Studiya</b>da gradient ranglarni o'zgartirib ko'r. Quyosh botishiga o'xshash rang yarata olasanmi? 🌅</p>
+      </div>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .quti {
+      width: 300px;
+      height: 100px;
+      border-radius: 12px;
+      background: linear-gradient(to right, #E84CA0, #4C7DE8);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="quti"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ BORDER RADIUS ============ -->
+    <div id="burchak" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#8B3FD9,#B57AF0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(139,63,217,.35)">⬭</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#7B2FCB">Yumaloq burchaklar</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #E8DBFA">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 8px"><code style="background:#EDE2FB;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#7B2FCB">border-radius</code> burchaklarni yumaloq qiladi. Qiymat qancha katta bo'lsa, shuncha yumaloq! 50% bilan — to'liq doira. ⭕</p>
+      <div style="background:#F4EEFC;border-radius:16px;padding:22px;margin:20px 0">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+          <b style="font-size:17px;color:#7B2FCB">🎚️ Slayderni sur: border-radius = {{ radius }}px</b>
+          <input type="range" min="0" max="100" value="{{ radius }}" onChange="{{ onRadius }}" style="flex:1;min-width:200px;max-width:320px">
+        </div>
+        <div style="display:flex;justify-content:center">
+          <div style="width:150px;height:150px;background:linear-gradient(135deg,#8B3FD9,#E84CA0);border-radius:{{ radiusPx }};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 10px 24px rgba(139,63,217,.3);transition:border-radius .1s">{{ radius }}px</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+        <div style="text-align:center"><div style="width:80px;height:80px;background:#B57AF0;border-radius:0"></div><div style="margin-top:6px;font-size:13px;font-weight:700;color:#7B2FCB">0px</div></div>
+        <div style="text-align:center"><div style="width:80px;height:80px;background:#B57AF0;border-radius:16px"></div><div style="margin-top:6px;font-size:13px;font-weight:700;color:#7B2FCB">16px</div></div>
+        <div style="text-align:center"><div style="width:80px;height:80px;background:#B57AF0;border-radius:32px"></div><div style="margin-top:6px;font-size:13px;font-weight:700;color:#7B2FCB">32px</div></div>
+        <div style="text-align:center"><div style="width:80px;height:80px;background:#B57AF0;border-radius:50%"></div><div style="margin-top:6px;font-size:13px;font-weight:700;color:#7B2FCB">50% ⭕</div></div>
+      </div>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .quti {
+      width: 150px;
+      height: 150px;
+      background: #8B3FD9;
+      border-radius: 32px;   /* 50% = to'liq doira */
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="quti"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ BOX SHADOW ============ -->
+    <div id="soya" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#3A6FD9,#6FA0F0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(58,111,217,.35)">🌑</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#2E5DC0">Soya berish</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #D9E4FA">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 20px"><code style="background:#E0EAFC;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#2E5DC0">box-shadow</code> elementga soya beradi — go'yo u sahifadan <b>ko'tarilib turgandek</b>! Quyoshda turgan narsa kabi. ☀️</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">box-shadow:
+  0px   8px   20px   gray;
+/* gorizontal vertikal  
+   yoyilish   rang */</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:280px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;background:#F2F6FE;border-radius:16px;padding:28px 20px">
+          <div style="width:90px;height:90px;background:#fff;border-radius:14px;box-shadow:0 4px 8px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#2E5DC0">kichik</div>
+          <div style="width:90px;height:90px;background:#fff;border-radius:14px;box-shadow:0 12px 24px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#2E5DC0">o'rta</div>
+          <div style="width:90px;height:90px;background:#fff;border-radius:14px;box-shadow:0 22px 40px rgba(58,111,217,.45);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#2E5DC0">katta</div>
+        </div>
+      </div>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .quti {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 12px 24px gray;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="quti"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ HOVER ============ -->
+    <div id="hover" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#16A34A,#4ADE80);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(22,163,74,.35)">👆</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#15803D">Hover — sichqoncha sehri</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #CFEEDB">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 8px"><b>Hover</b> = sichqonchani element <b>ustiga olib borish</b>. <code style="background:#E0F7EC;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#15803D">:hover</code> bilan element ustiga kelganda o'zgaradi. 👇 <b>Quyidagilarning ustiga sichqonchani olib bor!</b></p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:22px">
+        <div class="grow" style="width:150px;height:120px;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(232,76,160,.25)"><div style="font-size:30px">🚀</div>Kattalashadi</div>
+        <div class="demo-rotate" style="width:150px;height:120px;background:linear-gradient(135deg,#F59E0B,#FBBF24);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;cursor:pointer"><div style="font-size:30px">🌀</div>Aylanadi</div>
+        <div class="color-swap" style="width:150px;height:120px;background:#E0EAFC;color:#2E5DC0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;cursor:pointer"><div style="font-size:30px">🎨</div>Rang o'zgaradi</div>
+      </div>
+      <div style="margin-top:22px;display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;overflow-x:auto">div:hover {
+  transform: scale(1.1);
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;background:#E9F9EE;border:2px solid #BFEBCD;border-radius:14px;padding:16px 20px;display:flex;gap:12px;align-items:center">
+          <div style="font-size:26px">💡</div>
+          <p style="margin:0;font-size:16px;line-height:1.55"><b>transition</b> qo'shsang, o'zgarish <b>silliq</b> (smooth) bo'ladi — birdaniga emas, asta-sekin!</p>
+        </div>
+      </div>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .tugma {
+      width: 150px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      background: #E84CA0;
+      border-radius: 14px;
+      transition: transform 0.3s;   /* silliq o'zgarish */
+    }
+    .tugma:hover {
+      transform: scale(1.1);        /* ustiga kelganda kattalashadi */
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="tugma"&gt;Ustimga kel!&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ TRANSFORM ============ -->
+    <div id="aylantir" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#D9730A,#FBBF24);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(217,115,10,.35)">🔄</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#B45309">Aylantirish va kattalashtirish</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FBE4C8">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 20px"><code style="background:#FFF0DC;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#B45309">transform</code> bilan elementni <b>aylantirish</b>, <b>kattalashtirish</b> yoki <b>siljitish</b> mumkin. Slayder bilan o'ynab ko'r! 👇</p>
+      <div style="background:#FFF8EE;border-radius:16px;padding:24px">
+        <div style="display:flex;flex-wrap:wrap;gap:18px;margin-bottom:24px">
+          <div style="flex:1;min-width:220px">
+            <b style="font-size:15px;color:#B45309;display:block;margin-bottom:6px">🔄 rotate: {{ angle }}deg</b>
+            <input type="range" min="0" max="360" value="{{ angle }}" onChange="{{ onAngle }}" style="width:100%">
+          </div>
+          <div style="flex:1;min-width:220px">
+            <b style="font-size:15px;color:#B45309;display:block;margin-bottom:6px">🔍 scale: {{ scaleLabel }}</b>
+            <input type="range" min="50" max="160" value="{{ scaleRaw }}" onChange="{{ onScale }}" style="width:100%">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;align-items:center;height:200px;background:#fff;border-radius:14px;overflow:hidden">
+          <div style="width:120px;height:120px;background:linear-gradient(135deg,#D9730A,#E84CA0);border-radius:20px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:34px;transform:rotate({{ angleDeg }}) scale({{ scaleVal }});transition:transform .12s;box-shadow:0 10px 24px rgba(217,115,10,.3)">🦊</div>
+        </div>
+      </div>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .quti {
+      width: 120px;
+      height: 120px;
+      background: #D9730A;
+      border-radius: 20px;
+      transform: rotate(20deg) scale(1.2);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="quti"&gt;🦊&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ ANIMATSIYA ============ -->
+    <div id="animatsiya" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(232,76,160,.35)">🎬</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#C2348A">Animatsiya — harakat!</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #FAD8E8">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 8px"><b>Animatsiya</b> — element o'z-o'zidan <b>harakatlanadi</b>! <code style="background:#FCE0EE;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">@keyframes</code> bilan harakat yasab, <code style="background:#FCE0EE;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">animation</code> bilan ulaymiz. Mana jonli misollar: 🎉</p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:24px 0">
+        <div style="text-align:center"><div style="width:90px;height:90px;background:linear-gradient(135deg,#E84CA0,#FBBF24);border-radius:50%;animation:bounce 1.2s ease-in-out infinite;display:flex;align-items:center;justify-content:center;font-size:38px">⚽</div><div style="margin-top:10px;font-weight:700;color:#C2348A">bounce 🏀</div></div>
+        <div style="text-align:center"><div style="width:90px;height:90px;background:linear-gradient(135deg,#4C7DE8,#A24CE8);border-radius:20px;animation:spin 3s linear infinite;display:flex;align-items:center;justify-content:center;font-size:38px">⭐</div><div style="margin-top:10px;font-weight:700;color:#C2348A">spin 🌀</div></div>
+        <div style="text-align:center"><div style="width:90px;height:90px;background:linear-gradient(135deg,#16A34A,#4ADE80);border-radius:50%;animation:pulse 1.3s ease-in-out infinite;display:flex;align-items:center;justify-content:center;font-size:38px">💚</div><div style="margin-top:10px;font-weight:700;color:#C2348A">pulse 💗</div></div>
+        <div style="text-align:center"><div style="width:90px;height:90px;background:linear-gradient(135deg,#D9730A,#FBBF24);border-radius:20px;animation:wiggle 0.7s ease-in-out infinite;display:flex;align-items:center;justify-content:center;font-size:38px">🐶</div><div style="margin-top:10px;font-weight:700;color:#C2348A">wiggle 🤪</div></div>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-weight:800;color:#9A8FA8;font-size:13px;letter-spacing:1px;margin-bottom:8px">📝 KOD — sakraydigan to'p</div>
+          <div style="background:#282A4A;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(40,42,74,.25)">
+            <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span></div>
+            <pre style="margin:0;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#C9D7FF;overflow-x:auto">@keyframes sakra {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-22px); }
+  100% { transform: translateY(0); }
+}
+
+div {
+  animation: sakra 1.2s infinite;
+}</pre>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;background:#FFF7E0;border:2px dashed #FFD873;border-radius:14px;padding:18px 20px">
+          <b style="font-size:17px">🎬 Sirini bilib ol:</b>
+          <p style="margin:8px 0 0;font-size:16px;line-height:1.55"><b>0%</b> — boshlanish, <b>50%</b> — o'rtasi, <b>100%</b> — oxiri. Element shu nuqtalar orasida silliq harakatlanadi. <b>infinite</b> = abadiy takrorlanadi! 🔁</p>
+        </div>
+      </div>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    @keyframes sakra {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-22px); }
+      100% { transform: translateY(0); }
+    }
+    .top {
+      width: 80px;
+      height: 80px;
+      background: #E84CA0;
+      border-radius: 50%;
+      animation: sakra 1.2s infinite;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="top"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ FLEXBOX ============ -->
+    <div id="flex" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:50px 0 28px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#3A6FD9,#6FA0F0);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(58,111,217,.35)">📦</div>
+      <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#2E5DC0">Flexbox — narsalarni joylash</h2>
+    </div>
+
+    <section style="background:#fff;border-radius:24px;padding:32px 36px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:28px;border:2px solid #D9E4FA">
+      <p style="font-size:18px;line-height:1.65;margin:0 0 20px"><code style="background:#E0EAFC;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#2E5DC0">display: flex</code> — bu elementlarni <b>qator qilib</b> joylashning sehrli usuli. <code style="background:#E0EAFC;padding:2px 6px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#2E5DC0">justify-content</code> bilan ularni chap, o'rta yoki o'ngga suramiz. Tugmalarni bos! 👇</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+        <sc-for list="{{ flexOptions }}" as="opt" hint-placeholder-count="4">
+          <button onClick="{{ opt.onTap }}" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;padding:10px 16px;border-radius:30px;cursor:pointer;border:2px solid {{ opt.border }};background:{{ opt.bg }};color:{{ opt.color }}">{{ opt.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:{{ justify }};gap:14px;background:#F2F6FE;border:2px dashed #B7CCF0;border-radius:16px;padding:22px;min-height:110px;align-items:center;transition:all .3s">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px">🍎</div>
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#F59E0B,#FBBF24);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px">🍌</div>
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#16A34A,#4ADE80);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px">🍏</div>
+      </div>
+      <p style="margin:16px 0 0;font-size:16px;text-align:center;font-family:'JetBrains Mono',monospace;color:#2E5DC0;background:#E0EAFC;padding:10px;border-radius:10px">justify-content: {{ justify }};</p>
+    
+      <details style="margin-top:18px;background:#FBF6FF;border:2px solid #E8D9F7;border-radius:16px;overflow:hidden">
+        <summary style="font-weight:800;font-size:17px;padding:16px 20px;background:#F3E9FC;color:#7B2FCB">📄 To'liq kod — nusxalab brauzerda och</summary>
+        <div style="background:#282A4A">
+          <div style="display:flex;gap:7px;padding:12px 14px;background:#1F2140;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840"></span><span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B93C7">index.html</span></div>
+          <pre style="margin:0;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .qator {
+      display: flex;
+      justify-content: center;   /* center, flex-start, flex-end, space-between */
+      gap: 14px;
+    }
+    .meva {
+      width: 60px;
+      height: 60px;
+      background: #E84CA0;
+      border-radius: 14px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="qator"&gt;
+    &lt;div class="meva"&gt;🍎&lt;/div&gt;
+    &lt;div class="meva"&gt;🍌&lt;/div&gt;
+    &lt;div class="meva"&gt;🍏&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ STUDIYA ============ -->
+    <div id="studiya" style="scroll-margin-top:64px;background:linear-gradient(135deg,#B45309,#F59E0B);border-radius:28px;padding:34px 38px;box-shadow:0 16px 40px rgba(180,83,9,.25);margin:54px 0 24px;color:#fff">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+        <div style="font-size:38px;animation:wiggle 2.5s ease-in-out infinite">🎮</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:32px;margin:0">Dizayn studiyasi — o'z kartangni yasa!</h2>
+      </div>
+      <p style="font-size:18px;line-height:1.55;margin:0 0 24px;opacity:.96">Slayder va tugmalar bilan o'z kartangni bezat. Pastda — CSS kodi <b>o'z-o'zidan yoziladi!</b> Yarat va do'stlaringga ko'rsat. 🌟</p>
+      <div style="display:flex;gap:22px;flex-wrap:wrap">
+        <!-- Controls -->
+        <div style="flex:1;min-width:280px;background:rgba(255,255,255,.16);border-radius:18px;padding:22px;backdrop-filter:blur(4px)">
+          <div style="margin-bottom:18px">
+            <b style="font-size:15px;display:block;margin-bottom:8px">🎨 Rang juftligi</b>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="4">
+                <button onClick="{{ pal.onTap }}" style="width:54px;height:38px;border-radius:10px;cursor:pointer;border:3px solid {{ pal.ring }};background:{{ pal.css }}"></button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="margin-bottom:18px">
+            <b style="font-size:15px;display:block;margin-bottom:6px">⬭ Yumaloqlik: {{ cardRadius }}px</b>
+            <input type="range" min="0" max="80" value="{{ cardRadius }}" onChange="{{ onCardRadius }}" style="width:100%">
+          </div>
+          <div style="margin-bottom:18px">
+            <b style="font-size:15px;display:block;margin-bottom:6px">🌑 Soya: {{ cardShadow }}px</b>
+            <input type="range" min="0" max="50" value="{{ cardShadow }}" onChange="{{ onCardShadow }}" style="width:100%">
+          </div>
+          <div>
+            <b style="font-size:15px;display:block;margin-bottom:6px">😀 Emoji tanla</b>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ emojis }}" as="em" hint-placeholder-count="6">
+                <button onClick="{{ em.onTap }}" style="width:44px;height:44px;font-size:22px;border-radius:10px;cursor:pointer;border:2px solid rgba(255,255,255,.5);background:{{ em.bg }}">{{ em.ch }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <!-- Preview + code -->
+        <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:14px">
+          <div style="background:#fff;border-radius:14px;padding:24px;display:flex;align-items:center;justify-content:center;min-height:180px">
+            <div style="width:200px;height:130px;background:{{ cardBg }};border-radius:{{ cardRadiusPx }};box-shadow:0 {{ cardShadowPx }} {{ cardShadowBlurPx }} rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:'Fredoka',sans-serif;transition:all .15s">
+              <div style="font-size:48px">{{ cardEmoji }}</div>
+              <div style="font-weight:600;font-size:18px;margin-top:4px">Mening kartam</div>
+            </div>
+          </div>
+          <div style="background:#1F2140;border-radius:14px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#C9D7FF;overflow-x:auto">.karta {<br>&nbsp;&nbsp;background: {{ cardBgShort }};<br>&nbsp;&nbsp;border-radius: {{ cardRadius }}px;<br>&nbsp;&nbsp;box-shadow: 0 {{ cardShadow }}px {{ cardShadowBlur }}px gray;<br>}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ UY VAZIFASI ============ -->
+    <div id="uyvazifasi" style="scroll-margin-top:64px;display:flex;align-items:center;gap:18px;margin:54px 0 26px">
+      <div style="width:60px;height:60px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 20px rgba(232,76,160,.35)">📒</div>
+      <div>
+        <div style="font-weight:800;color:#E84CA0;font-size:15px;letter-spacing:1px">VAQTI KELDI</div>
+        <h2 style="font-family:'Fredoka',sans-serif;font-size:36px;margin:0;color:#C2348A">Uy vazifasi</h2>
+      </div>
+    </div>
+    <p style="font-size:18px;line-height:1.6;margin:0 0 24px;color:#7A7088">Har bir vazifa uchun yangi <b>index.html</b> fayl yasa, <code style="background:#FCE0EE;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;color:#C2348A">&lt;style&gt;</code> ichida CSS yoz va brauzerda ochib natijani ko'r! 🎨</p>
+
+    <!-- Vazifa 1 -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:18px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">1</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2B2540">🌈 Gradientli quti</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Bitta <b>&lt;div&gt;</b> yasa va unga <b>linear-gradient</b> fon ber. Sevimli ikkita rangingni tanla — quyosh botishidek! 🌅</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> background: linear-gradient(...) ishlatish</div>
+      </div>
+    </section>
+
+    <!-- Vazifa 2 -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:18px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">2</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2B2540">⭕ Yumaloq tugma + soya</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Bir quti yasa: <b>border-radius</b> bilan yumaloq qil va <b>box-shadow</b> bilan soya ber — go'yo ko'tarilib turgandek!</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> border-radius + box-shadow birga</div>
+      </div>
+    </section>
+
+    <!-- Vazifa 3 -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:18px;border:2px solid #FAD8E8;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:#FCE0EE;color:#C2348A;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">3</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2B2540">👆 Sehrli hover tugma</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Tugma yasa. Sichqoncha ustiga kelganda (<b>:hover</b>) u <b>kattalashsin</b> yoki <b>rangini o'zgartirsin</b>. <b>transition</b> qo'shib silliq qil!</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> :hover + transform + transition</div>
+      </div>
+    </section>
+
+    <!-- Vazifa 4 (qiyinroq) -->
+    <section style="background:#fff;border-radius:20px;padding:26px 30px;box-shadow:0 10px 30px rgba(43,37,64,.06);margin-bottom:18px;border:2px solid #F3C8DD;display:flex;gap:18px;align-items:flex-start">
+      <div style="width:44px;height:44px;flex:none;background:linear-gradient(135deg,#E84CA0,#A24CE8);color:#fff;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;border-radius:12px;display:flex;align-items:center;justify-content:center">⭐</div>
+      <div style="flex:1">
+        <h3 style="font-family:'Fredoka',sans-serif;font-size:22px;margin:2px 0 8px;color:#2B2540">🎁 Qo'shimcha (qiyinroq!) — Jonli kartochka</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Hammasini birlashtir: gradient fonli, yumaloq, soyali kartochka yasa. Ichidagi emojini <b>@keyframes</b> bilan <b>sakratib</b> qo'y va kartani <b>flex</b> bilan o'rtaga joyla! 🎉</p>
+        <div style="background:#FBF2F7;border:1.5px dashed #F0A8CC;border-radius:10px;padding:10px 14px;font-size:15px;color:#A03A6E">🎯 <b>Maqsad:</b> gradient + radius + shadow + animation + flex — hammasi birga!</div>
+      </div>
+    </section>
+
+    <details style="background:#FFF7E0;border:2px dashed #FFD873;border-radius:16px;padding:18px 22px;margin-bottom:8px">
+      <summary style="font-weight:800;font-size:18px">💡 Yordam kerakmi? Vazifa 1 uchun namuna kodni ko'rish</summary>
+      <div style="background:#282A4A;border-radius:12px;padding:16px 18px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7;color:#C9D7FF;white-space:pre">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .quti {
+      width: 250px;
+      height: 120px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #F59E0B, #E84CA0);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="quti"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <p style="margin:12px 0 0;font-size:16px;color:#7A7088">Buni nusxalab, o'zingga moslab ranglarni o'zgartir va boshqa vazifalarni ham shu tarzda bajar!</p>
+    </details>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:40px 20px 10px">
+      <p style="font-size:22px;font-family:'Fredoka',sans-serif;color:#E84CA0;margin:0 0 6px">🎉 Sen endi CSS sehrgarisan!</p>
+      <p style="font-size:18px;color:#7A7088;margin:0;line-height:1.6">Gradient, soya, hover, animatsiya — hammasini bilasan.<br>Eng zo'r dizaynlar — <b>ko'p sinab ko'rishdan</b> tug'iladi! 🪄</p>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    radius: 24,
+    angle: 0,
+    scaleRaw: 100,
+    justify: "center",
+    cardPalette: 0,
+    cardRadius: 24,
+    cardShadow: 16,
+    cardEmoji: "🚀",
+    emojiIdx: 0
+  };
+
+  paletteDefs = [
+    { css: "linear-gradient(135deg,#E84CA0,#A24CE8)", short: "linear-gradient(135deg,#E84CA0,#A24CE8)" },
+    { css: "linear-gradient(135deg,#F59E0B,#E84CA0)", short: "linear-gradient(135deg,#F59E0B,#E84CA0)" },
+    { css: "linear-gradient(135deg,#16A34A,#4C7DE8)", short: "linear-gradient(135deg,#16A34A,#4C7DE8)" },
+    { css: "linear-gradient(135deg,#4C7DE8,#56C2E8)", short: "linear-gradient(135deg,#4C7DE8,#56C2E8)" }
+  ];
+
+  emojiList = ["🚀","🦊","🌈","⚽","🐱","🍕"];
+
+  renderVals() {
+    const scaleVal = (this.state.scaleRaw / 100).toFixed(2);
+
+    const flexDefs = [
+      { key: "flex-start", label: "chap" },
+      { key: "center", label: "o'rta" },
+      { key: "flex-end", label: "o'ng" },
+      { key: "space-between", label: "tarqoq" }
+    ];
+    const flexOptions = flexDefs.map(f => {
+      const active = this.state.justify === f.key;
+      return {
+        label: f.label,
+        onTap: () => this.setState({ justify: f.key }),
+        bg: active ? "#2E5DC0" : "#fff",
+        color: active ? "#fff" : "#2E5DC0",
+        border: active ? "#2E5DC0" : "#B7CCF0"
+      };
+    });
+
+    const palettes = this.paletteDefs.map((p, i) => ({
+      css: p.css,
+      ring: this.state.cardPalette === i ? "#fff" : "rgba(255,255,255,.35)",
+      onTap: () => this.setState({ cardPalette: i })
+    }));
+
+    const emojis = this.emojiList.map((ch, i) => ({
+      ch,
+      bg: this.state.emojiIdx === i ? "rgba(255,255,255,.4)" : "rgba(255,255,255,.12)",
+      onTap: () => this.setState({ emojiIdx: i, cardEmoji: ch })
+    }));
+
+    const cur = this.paletteDefs[this.state.cardPalette];
+
+    return {
+      radius: this.state.radius,
+      radiusPx: this.state.radius + "px",
+      onRadius: (e) => this.setState({ radius: +e.target.value }),
+
+      angle: this.state.angle,
+      angleDeg: this.state.angle + "deg",
+      onAngle: (e) => this.setState({ angle: +e.target.value }),
+      scaleRaw: this.state.scaleRaw,
+      scaleVal,
+      scaleLabel: scaleVal + "x",
+      onScale: (e) => this.setState({ scaleRaw: +e.target.value }),
+
+      flexOptions,
+      justify: this.state.justify,
+
+      palettes,
+      emojis,
+      cardBg: cur.css,
+      cardBgShort: cur.short,
+      cardRadius: this.state.cardRadius,
+      cardRadiusPx: this.state.cardRadius + "px",
+      onCardRadius: (e) => this.setState({ cardRadius: +e.target.value }),
+      cardShadow: this.state.cardShadow,
+      cardShadowPx: this.state.cardShadow + "px",
+      cardShadowBlur: this.state.cardShadow * 2,
+      cardShadowBlurPx: (this.state.cardShadow * 2) + "px",
+      onCardShadow: (e) => this.setState({ cardShadow: +e.target.value }),
+      cardEmoji: this.state.cardEmoji
+    };
+  }
+}
+</script>
+</body>
+</html>
